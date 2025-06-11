@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfólio | Belinelo</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Source+Code+Pro&display=swap"rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Source Code Pro', monospace;
+      background: #000000;
+      color: #f0f0f0;
+      position: relative;
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.6);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+    }
+
+    .navbar-brand {
+      font-size: 20px;
+      color: #00d8ff !important;
+    }
+
+    .nav-link {
+      color: #ccc !important;
+      transition: color 0.3s;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #00d8ff !important;
+    }
+
+    section {
+      padding: 100px 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 40px;
+      margin-bottom: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .glass:hover {
+      transform: scale(1.02);
+    }
+
+    h2 {
+      font-size: 32px;
+      color: #00d8ff;
+      margin-bottom: 30px;
+    }
+
+    .icon {
+      font-size: 40px;
+      color: #00d8ff;
+      margin-bottom: 10px;
+      transition: transform 0.3s;
+    }
+
+    .icon:hover {
+      transform: scale(1.2);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #aaa;
+    }
+
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .btn-outline-light {
+      border-color: #00d8ff;
+      color: #00d8ff;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline-light:hover {
+      background: #00d8ff;
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    .timeline-zigzag {
+      position: relative;
+      padding: 40px 0;
+    }
+
+    .timeline-zigzag::before {
+      content: '';
+      position: absolute;
+      width: 4px;
+      background: #00d8ff;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -2px;
+    }
+
+    .timeline-block {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+
+    .timeline-block.left {
+      left: 0;
+      text-align: right;
+    }
+
+    .timeline-block.right {
+      left: 50%;
+      text-align: left;
+    }
+
+    .timeline-content {
+      background: rgba(0, 0, 0, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 12px;
+      position: relative;
+      box-shadow: 0 0 20px rgba(0, 216, 255, 0.2);
+    }
+
+    .timeline-block.left .timeline-content::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      right: -8px;
+      border-width: 8px;
+      border-style: solid;
+      border-color: transparent transparent transparent rgba(0, 0, 0, 0.75);
+    }
+
+    .timeline-block.right .timeline-content::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: -8px;
+      border-width: 8px;
+      border-style: solid;
+      border-color: transparent rgba(0, 0, 0, 0.75) transparent transparent;
+    }
+
+    .timeline-icon {
+      font-size: 28px;
+      color: #00d8ff;
+      margin-bottom: 10px;
+    }
+
+    .timeline-content h5 {
+      color: #00d8ff;
+      margin-bottom: 10px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .timeline-zigzag::before {
+        left: 8px;
+      }
+
+      .timeline-block {
+        width: 100%;
+        padding-left: 40px;
+        padding-right: 20px;
+        margin-bottom: 40px;
+      }
+
+      .timeline-block.right {
+        left: 0;
+        text-align: left;
+      }
+
+      .timeline-block.left {
+        text-align: left;
+      }
+
+      .timeline-block.left .timeline-content::after,
+      .timeline-block.right .timeline-content::after {
+        left: -8px;
+        right: auto;
+        border-color: transparent rgba(0, 0, 0, 0.75) transparent transparent;
+      }
+    }
+  </style>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#menu" data-bs-offset="80" tabindex="0">
+
+  <div id="particles-js"></div>
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark container">
+      <a class="navbar-brand" href="#">Portfólio Pessoal</a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#inicio">Início</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
+          <li class="nav-item"><a class="nav-link" href="#cursos">Cursos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projetos">Projetos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#habilidades">Habilidades</a></li>
+          <li class="nav-item"><a class="nav-link" href="#timeline">Linha do Tempo</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <section id="inicio" class="container text-center" data-aos="fade-down">
+    <div class="glass">
+      <h1 class="display-4">Olá, eu sou <span style="color:#00d8ff">Guilherme Belinelo</span></h1>
+      <p class="lead">Desenvolvedor Web Full-Stack.</p>
+    </div>
+  </section>
+
+  <section id="sobre" class="container" data-aos="fade-right">
+    <div class="glass p-4">
+      <h2><i class="fas fa-user icon"></i> Sobre Mim</h2>
+      <p>Sou um desenvolvedor web full stack, atualmente atuando como estagiário na área de programação...
+      <br>18 anos <br> Araçatuba, São Paulo.</p>
+      <h4 class="text-info mt-3"><i class="fas fa-graduation-cap"></i> Formação & Experiência</h4>
+      <ul>
+        <li>Curso Técnico de ADS no Senai Duque de Caxias | 2023 - 2024</li>
+        <li>Curso Superior de ADS na Fatec Araçatuba | 2025 - 2027</li>
+        <li>Estágio de T.I na Colormaq Araçatuba | 2025 - 2027<br>
+        Trabalhei desenvolvendo aplicações web com PHP e SQL Server</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="cursos" class="container" data-aos="fade-left">
+    <div class="glass">
+      <h2><i class="fas fa-book icon"></i> Cursos</h2>
+      <ul>
+        <li>LÓGICA DE PROGRAMAÇÃO na Escola Senai "Duque de Caxias"</li>
+        <li>TECNOLOGIA DA INFORMAÇÃO E COMUNICAÇÃO na Escola Senai "Duque de Caxias"</li>
+        <li>DESVENDANDO A INDÚSTRIA 4.0 na Escola Senai "Duque de Caxias"</li>
+        <li>EXCEL BÁSICO na Escola Senai "Duque de Caxias"</li>
+        <li>MICROSOFT POWER BI na Escola Senai "Duque de Caxias"</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="projetos" class="container" data-aos="fade-up">
+    <div class="glass">
+      <h2><i class="fas fa-code icon"></i> Projetos</h2>
+      <ul>
+        <li><i class="fas fa-mobile-alt"></i> Aplicação Mobile para gerenciamento de EPI</li>
+        <li><i class="fas fa-mobile-alt"></i> Aplicativo para controle remoto de Ar Condicionado</li>
+        <li><i class="fas fa-shopping-cart"></i> Loja e-commerce virtual</li>
+        <li><i class="fas fa-file-code"></i> Portfólio Pessoal</li>
+        <li><i class="fas fa-cogs"></i> API Web com C#</li>
+        <li><i class="fas fa-video"></i> Plataforma de cursos em vídeo</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="habilidades" class="container" data-aos="zoom-in">
+    <div class="glass p-4">
+      <h2 class="text-center mb-4"><i class="fas fa-laptop-code icon"></i> Habilidades</h2>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <h5 class="text-info">Front-End</h5>
+          <ul class="list-unstyled">
+            <li>HTML5</li>
+            <li>CSS3</li>
+            <li>Bootstrap</li>
+            <li>TailWind</li>
+            <li>SASS</li>
+            <li>JavaScript</li>
+            <li>AOS</li>
+            <li>Figma</li>
+          </ul>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h5 class="text-info">Back-End</h5>
+          <ul class="list-unstyled">
+            <li>API com C#</li>
+            <li>ASP.NET Core</li>
+            <li>PHP</li>
+            <li>Python</li>
+          </ul>
+          <h5 class="text-info mt-3">Banco de Dados</h5>
+          <ul class="list-unstyled">
+            <li>MySQL</li>
+            <li>SQL Server</li>
+            <li>PostgreSQL</li>
+          </ul>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h5 class="text-info">Cibersegurança</h5>
+          <ul class="list-unstyled">
+            <li>Linux Básico</li>
+            <li>Kali Linux</li>
+            <li>Testes de Penetração (Pentest)</li>
+            <li>Engenharia Social</li>
+            <li>Simulações de Phishing</li>
+            <li>OSINT</li>
+            <li>HWID/IP/MAC Spoofing</li>
+          </ul>
+          <h5 class="text-info mt-3">Ferramentas & Metodologias</h5>
+          <ul class="list-unstyled">
+            <li>Git / GitHub</li>
+            <li>Postman</li>
+            <li>Scrum / Kanban / OKR</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="timeline" class="container" data-aos="fade-up">
+    <div class="glass">
+      <h2 class="text-center"><i class="fas fa-stream icon"></i> Linha do Tempo</h2>
+      <div class="timeline-zigzag">
+        <div class="timeline-block right">
+          <div class="timeline-content">
+            <div class="timeline-icon"><i class="fas fa-certificate"></i></div>
+            <h5>2020 - 2022</h5>
+            <p>Conhecimento prático e autodidata em Cibersegurança</p>
+          </div>
+        </div>
+        <div class="timeline-block left">
+          <div class="timeline-content">
+            <div class="timeline-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h5>2023</h5>
+            <p>Início do Curso Técnico em ADS – Senai <br> Desenvolvimento de Projetos pessoais</p>
+          </div>
+        </div>
+        <div class="timeline-block right">
+          <div class="timeline-content">
+            <div class="timeline-icon"><i class="fas fa-certificate"></i></div>
+            <h5>2024</h5>
+            <p>Conclusão de cursos complementares e do técnico em ADS</p>
+          </div>
+        </div>
+        <div class="timeline-block left">
+          <div class="timeline-content">
+            <div class="timeline-icon"><i class="fas fa-briefcase"></i></div>
+            <h5>2025</h5>
+            <p>Ingresso na faculdade de ADS - FATEC<br>Estágio em T.I – Colormaq</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato" class="container" data-aos="zoom-in">
+    <div class="glass text-center">
+      <h2><i class="fas fa-envelope icon"></i> Contato</h2>
+      <p>Email: <a href="mailto:guilhermebelinelo@outlook.com" class="text-light">guilhermebelinelo@outlook.com</a></p>
+      <p>GitHub: <a href="https://github.com/MrRobotS0" target="_blank" class="text-light">github.com/MrRobotS0</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Guilherme Belinelo. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    AOS.init();
+    particlesJS.load('particles-js', 'https://cdn.jsdelivr.net/gh/VincentGarreau/particles.js@master/demo/particles.json');
+  </script>
+</body>
+
+</html>
