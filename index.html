@@ -9,12 +9,12 @@
   <!-- Pré-conexões e fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <!-- Favicon e PWA manifest -->
   <link rel="icon" href="icon.png" type="image/png" />
   <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#000000">
+  <meta name="theme-color" content="#0b0f14">
 
   <!-- SEO e Open Graph -->
   <meta name="description" content="Portfólio de Guilherme Belinelo, Desenvolvedor Web Full-Stack Junior com experiência em PHP, C#, JavaScript, SQL Server e projetos acadêmicos." />
@@ -27,358 +27,268 @@
   <!-- JSON-LD para Person -->
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Guilherme Belinelo",
-    "url": "https://seu-dominio.com.br",
-    "sameAs": [
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Guilherme Belinelo",
+    "sameAs":[
       "https://github.com/MrRobotS0",
       "https://linkedin.com/in/seu-usuario",
       "https://instagram.com/seu-usuario"
     ],
-    "jobTitle": "Desenvolvedor Web Full-Stack Junior",
-    "knowsAbout": ["PHP", "C#", "JavaScript", "SQL Server", "React Native", "ASP.NET Core"]
+    "jobTitle":"Desenvolvedor Web Full-Stack Junior",
+    "knowsAbout":["PHP","C#","JavaScript","SQL Server","React Native","ASP.NET Core"]
   }
   </script>
 
-  <!-- Bootstrap CSS -->
+  <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-  <!-- FontAwesome para ícones -->
+  <!-- FontAwesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <!-- AOS (Animate On Scroll) -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <!-- Swiper (carrossel) -->
+  <link href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" rel="stylesheet" />
 
-  <!-- Vanta.js e Three.js para efeito de planeta -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
-
-  <!-- Styles -->
+  <!-- Styles modernos -->
   <style>
-    :root {
-      --color-primary: #00d8ff;
-      --color-primary-dark: #008bb5;
-      --color-bg-dark: #000000;
-      --color-bg-light: #f0f2f5;
-      --color-text-light: #f0f0f0;
-      --color-text-dark: #212529;
-      --spacing-unit: 1rem;
-      --font-sans: 'Roboto Condensed', sans-serif;
-      --font-mono: 'Source Code Pro', monospace;
-      --transition-speed: 0.3s;
+    :root{
+      --brand:#00d8ff;
+      --brand-2:#7cf8e9;
+      --bg:#0b0f14;
+      --bg-2:#0f1622;
+      --bg-light:#f5f7fb;
+      --text:#e9eef5;
+      --text-2:#bcd0e6;
+      --text-dark:#101318;
+      --glass:rgba(255,255,255,.06);
+      --radius:16px;
+      --shadow:0 10px 40px rgba(0,0,0,.35);
+      --mono:'JetBrains Mono', monospace;
+      --sans:'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial;
     }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: var(--font-mono);
-      background: var(--color-bg-dark);
-      color: var(--color-text-light);
-      line-height: 1.6;
-      position: relative;
-      transition: background var(--transition-speed), color var(--transition-speed);
+    html{scroll-behavior:smooth}
+    body{
+      /* base discreta */
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      color:var(--text);
+      font-family:var(--sans);
+      line-height:1.65;
+      overflow-x:hidden;
     }
-    /* Tema claro aprimorado */
-    body.light-mode {
-      background: var(--color-bg-light);
-      color: var(--color-text-dark);
+    /* grid entre seções (separação só com espaço) */
+    main{ display:grid; gap:clamp(32px, 6vw, 100px); }
+    main > section{ padding-block: clamp(16px, 3vw, 40px); }
+
+    body.light-mode{
+      background: linear-gradient(180deg, var(--bg-light) 0%, #ffffff 100%);
+      color:var(--text-dark);
     }
 
-    /* Fundo Vanta ocupa toda a tela */
-    #vanta-bg {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -1;
-      transition: opacity var(--transition-speed);
+    /* ===== Fundo aurora suave (substitui a "bola girando") ===== */
+    #soft-bg{
+      position: fixed; inset: 0; z-index: -2; pointer-events: none;
+      opacity: .55; filter: saturate(105%);
+      background:
+        radial-gradient(40% 60% at 10% 15%, rgba(0,216,255,.16), transparent 60%),
+        radial-gradient(50% 70% at 90% 10%, rgba(124,248,233,.14), transparent 65%),
+        radial-gradient(60% 60% at 20% 85%, rgba(0, 120, 160, .14), transparent 60%),
+        radial-gradient(70% 70% at 80% 75%, rgba(0, 216, 255, .10), transparent 60%);
+      transition: opacity .3s ease;
+      animation: drift 28s ease-in-out infinite alternate;
     }
-    /* Quando tema claro, esmaecer ou esconder fundo */
-    body.light-mode #vanta-bg {
-      opacity: 0; /* esconde o fundo animado no tema claro */
+    /* textura sutil para dar “profundidade” */
+    #soft-bg::after{
+      content:""; position:absolute; inset:0;
+      background:
+        radial-gradient(1200px 600px at 50% 0%, rgba(255,255,255,.03), transparent 60%),
+        repeating-linear-gradient( 90deg, rgba(255,255,255,.018), rgba(255,255,255,.018) 1px, transparent 1px, transparent 4px);
+      mix-blend-mode: soft-light; opacity:.35;
     }
-
-    /* Skip link para acessibilidade */
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: var(--color-primary);
-      color: #fff;
-      padding: 8px;
-      z-index: 1001;
-      transition: top 0.3s;
-    }
-    .skip-link:focus { top: 0; }
-
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      background: rgba(0, 0, 0, 0.6);
-      transition: background var(--transition-speed);
-    }
-    /* Header claro */
-    body.light-mode header { background: rgba(255, 255, 255, 0.9); }
-    header.scrolled { background: rgba(0, 0, 0, 0.85); }
-    body.light-mode header.scrolled { background: rgba(255, 255, 255, 0.95); }
-
-    .navbar-brand {
-      font-family: var(--font-sans);
-      font-weight: 700;
-      color: var(--color-primary) !important;
-      position: relative;
-    }
-    .nav-link {
-      font-family: var(--font-sans);
-      color: rgba(255,255,255,0.8) !important;
-      position: relative;
-      transition: color var(--transition-speed);
-    }
-    /* Links no tema claro */
-    body.light-mode .nav-link { color: rgba(0,0,0,0.7) !important; }
-    .nav-link:hover,
-    .nav-link.active { color: var(--color-primary) !important; }
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -4px;
-      left: 50%;
-      background: var(--color-primary);
-      transition: width var(--transition-speed), left var(--transition-speed);
-    }
-    .nav-link:hover::after,
-    .nav-link.active::after { width: 60%; left: 20%; }
-
-    /* Seções */
-    main { padding-top: 70px; position: relative; z-index: 0; }
-    section { position: relative; padding: calc(2 * var(--spacing-unit)) var(--spacing-unit); }
-
-    /* Glassmorphism refinado */
-    .glass {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border-radius: 12px;
-      padding: calc(2 * var(--spacing-unit));
-      margin-bottom: calc(2 * var(--spacing-unit));
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: transform var(--transition-speed), background var(--transition-speed), color var(--transition-speed);
-      position: relative;
-      z-index: 1;
-    }
-    /* Glass no tema claro */
-    body.light-mode .glass {
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      color: var(--color-text-dark);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    .glass:hover { transform: scale(1.02); }
-
-    h1, h2, h3, h4, h5 { font-family: var(--font-sans); margin-bottom: var(--spacing-unit); }
-    h1 { font-size: 2.5rem; font-weight: 700; }
-    h2 { font-size: 2rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
-    h3 { font-size: 1.75rem; font-weight: 600; }
-    .lead { font-size: 1.125rem; }
-    p, li { font-family: var(--font-mono); }
-
-    /* Botões */
-    .btn-primary-custom {
-      background: var(--color-primary);
-      border-color: var(--color-primary);
-      color: #000;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      transition: background var(--transition-speed), transform var(--transition-speed);
-      text-decoration: none;
-      display: inline-block;
-      font-family: var(--font-sans);
-    }
-    .btn-primary-custom:hover { background: var(--color-primary-dark); transform: translateY(-2px); }
-
-    /* Badge de tecnologias */
-    .tech-badge {
-      margin: 4px 4px 0 0;
-      font-size: 0.875rem;
-      background: var(--color-primary);
-      color: #000;
-      padding: 2px 6px;
-      border-radius: 4px;
-      display: inline-block;
-      transition: transform 0.2s;
-    }
-    .tech-badge:hover { transform: scale(1.1); }
-
-    /* Avatar */
-    .avatar { width: 50px; height: 50px; }
-
-    /* Projetos grid 2x2 */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: calc(2 * var(--spacing-unit));
-    }
-    .project-card {
-      background: rgba(0,0,0,0.75);
-      border-radius: 12px;
-      padding: var(--spacing-unit);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform var(--transition-speed), box-shadow var(--transition-speed), background var(--transition-speed), color var(--transition-speed);
-      position: relative;
-      z-index: 1;
-
-      /* Tilt 3D */
-      transform-style: preserve-3d;
-      perspective: 800px;
-      overflow: hidden;
-    }
-    .project-card::before{
-      content:'';
-      position:absolute; inset:-40%;
-      background: radial-gradient(closest-side, rgba(255,255,255,0.15), transparent 60%);
-      transform: translate3d(var(--mx,0), var(--my,0), 0);
-      transition: transform .08s linear;
-      pointer-events:none;
-    }
-    body.light-mode .project-card {
-      background: rgba(255,255,255,0.9);
-      color: var(--color-text-dark);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .project-card:hover { transform: translateY(-5px); box-shadow: 0 18px 40px rgba(0,0,0,.35); }
-
-    /* Habilidades */
-    .skills-list li { margin-bottom: 0.5rem; }
-
-    /* Timeline refinado */
-    .timeline-zigzag { position: relative; padding: calc(2 * var(--spacing-unit)) 0; }
-    .timeline-zigzag::before {
-      content: '';
-      position: absolute;
-      width: 4px;
-      background: var(--color-primary);
-      top: 0; bottom: 0;
-      left: 50%; transform: translateX(-50%);
-    }
-    .timeline-block { position: relative; width: 50%; padding: var(--spacing-unit) calc(2 * var(--spacing-unit)); box-sizing: border-box; }
-    .timeline-block.left { left: 0; text-align: right; }
-    .timeline-block.right { left: 50%; text-align: left; }
-    .timeline-content {
-      background: rgba(0,0,0,0.75);
-      border-radius: 8px;
-      padding: var(--spacing-unit);
-      position: relative;
-      box-shadow: 0 0 10px rgba(0,216,255,0.2);
-      transition: transform var(--transition-speed), background var(--transition-speed), color var(--transition-speed);
-      z-index: 1;
-    }
-    body.light-mode .timeline-content {
-      background: rgba(255,255,255,0.9);
-      color: var(--color-text-dark);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .timeline-content:hover { transform: scale(1.02); }
-    .timeline-icon { font-size: 1.5rem; color: var(--color-primary); margin-bottom: 0.5rem; }
-    @media (max-width: 768px) {
-      .timeline-zigzag::before { left: 8px; }
-      .timeline-block { width: 100%; padding-left: calc(3 * var(--spacing-unit)); padding-right: var(--spacing-unit); margin-bottom: calc(2 * var(--spacing-unit)); }
-      .timeline-block.right { left: 0; text-align: left; }
-      .timeline-block.left { text-align: left; }
+    body.light-mode #soft-bg{ opacity:.35; filter: saturate(100%); }
+    @keyframes drift{
+      0%   { transform: translate3d(0,0,0) scale(1);   }
+      100% { transform: translate3d(0px,-20px,0) scale(1.02); }
     }
 
-    /* Contato */
-    .contact-container { display: flex; align-items: center; gap: var(--spacing-unit); flex-wrap: wrap; }
-    .contact-photo {
-      flex: 0 0 150px;
-      width: 150px; height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--color-primary);
+    /* Nav glassy */
+    header{
+      position:sticky; top:0; z-index:1000;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(180deg, rgba(10,13,18,.75), rgba(10,13,18,.35));
+      border-bottom:1px solid rgba(255,255,255,.08);
     }
-    .contact-links { flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
-    .contact-links a { color: var(--color-text-light); transition: color var(--transition-speed), transform var(--transition-speed); display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
-    body.light-mode .contact-links a { color: var(--color-text-dark); }
-    .contact-links a:hover { color: var(--color-primary); transform: translateY(-2px); }
+    body.light-mode header{
+      background: rgba(255,255,255,.7);
+      border-color: rgba(0,0,0,.06);
+    }
+    .navbar-brand{ font-weight:700; letter-spacing:.4px; color:var(--brand)!important; display:flex; align-items:center; gap:.6rem; }
+    .avatar{width:40px;height:40px;border-radius:50%}
+    .nav-link{ color:rgba(255,255,255,.8)!important; position:relative; }
+    body.light-mode .nav-link{color:rgba(0,0,0,.7)!important}
+    .nav-link::after{
+      content:''; position:absolute; left:.4rem; right:.4rem; bottom:.2rem; height:2px;
+      background:linear-gradient(90deg, transparent, var(--brand), transparent);
+      transform:scaleX(0); transform-origin:center; transition:transform .25s;
+    }
+    .nav-link:hover::after,.nav-link.active::after{transform:scaleX(1)}
 
-    /* Skip focus */
-    a:focus { outline: 2px dashed var(--color-primary); outline-offset: 4px; }
+    /* Barra de progresso */
+    #scroll-progress{position:fixed; inset:0 auto auto 0; height:3px; width:0; background:linear-gradient(90deg,var(--brand),#4df0ff); z-index:1100}
 
-    /* Animações iniciais */
-    .animate-on-scroll { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-    .in-view { opacity: 1; transform: translateY(0); }
-
-    /* 1) Hero: gradiente animado + typewriter cursor */
-    .hero-name {
-      background: linear-gradient(90deg, #00d8ff, #7cf8e9, #00d8ff);
-      background-size: 200% 100%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+    /* Hero */
+    .hero-card{
+      border-radius: clamp(16px, 2vw, 24px);
+      padding: clamp(1.25rem, 1rem + 3vw, 3.5rem);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow);
+    }
+    body.light-mode .hero-card{
+      background: rgba(255,255,255,.9);
+      border-color: rgba(0,0,0,.06);
+      box-shadow: 0 12px 30px rgba(10,20,40,.08);
+    }
+    .hero-name{
+      background: linear-gradient(90deg, var(--brand), var(--brand-2), var(--brand));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      background-size: 220% 100%;
       animation: sweep 6s linear infinite;
     }
-    @keyframes sweep { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
-    .typewriter::after { content: '▌'; margin-left: 2px; animation: blink 1s steps(1) infinite; }
-    @keyframes blink { 50% { opacity: 0; } }
+    @keyframes sweep{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+    .typewriter::after{content:'▌'; margin-left:3px; animation:blink 1s steps(1,end) infinite}
+    @keyframes blink{50%{opacity:0}}
 
-    /* 5) Barra de progresso de scroll */
-    .scroll-progress {
-      position: fixed; top: 0; left: 0; height: 3px; width: 0;
-      background: var(--color-primary); z-index: 1100;
-      transition: width .08s linear;
+    /* Cards / tipografia */
+    .glass{
+      background: radial-gradient(120% 200% at 0% 0%, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      padding: clamp(1rem, .5rem + 2vw, 2rem);
+      box-shadow: var(--shadow);
     }
-
-    /* 8) Blur-up + lazy */
-    .blur-up { filter: blur(8px); transform: scale(1.02); }
-    .blur-up.loaded { filter: blur(0); transform: scale(1); transition: filter .4s ease, transform .4s ease; }
-
-    /* 10) Tipografia responsiva */
-    h1 { font-size: clamp(2rem, 1.2rem + 2.5vw, 3rem); }
-    h2 { font-size: clamp(1.4rem, 1rem + 1.5vw, 2.25rem); }
-    .lead { font-size: clamp(1rem, .9rem + .5vw, 1.25rem); }
-
-    /* 7) Motion-safe */
-    @media (prefers-reduced-motion: reduce) {
-      * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: 0ms !important; }
+    body.light-mode .glass{
+      background: rgba(255,255,255,.9);
+      border:1px solid rgba(0,0,0,.08);
+      box-shadow: 0 10px 28px rgba(10,20,40,.08);
     }
+    h1,h2,h3,h4{letter-spacing:.3px}
+    h1{font-size:clamp(2rem,1.2rem + 2.8vw,3.2rem); font-weight:700}
+    h2{font-size:clamp(1.4rem,1rem + 1.7vw,2.4rem); font-weight:700; text-transform:uppercase}
+
+    /* Buttons */
+    .btn-primary-custom{
+      --bs-btn-bg: var(--brand); --bs-btn-border-color: var(--brand); --bs-btn-color:#052129;
+      --bs-btn-hover-bg:#00b3d1; --bs-btn-hover-border-color:#00b3d1;
+      border-radius: 10px; padding:.65rem 1rem; font-weight:600;
+      box-shadow: 0 8px 24px rgba(0,216,255,.25);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .btn-primary-custom:hover{transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,216,255,.35)}
+    .btn-chip{
+      background:transparent; border:1px solid rgba(255,255,255,.2); color:var(--text-2);
+      border-radius:999px; padding:.35rem .75rem; font-weight:600;
+    }
+    .btn-chip.active, .btn-chip:hover{border-color:var(--brand); color:#0b2731; background:linear-gradient(90deg,#a5f3ff,#5ce9ff,#00d8ff)}
+
+    /* Badges */
+    .tech-badge{
+      display:inline-flex; align-items:center; gap:.35rem;
+      background: rgba(0,216,255,.12);
+      border:1px solid rgba(0,216,255,.35);
+      color:#bff6ff; padding:.25rem .5rem; border-radius:8px; font-size:.85rem;
+      margin:.2rem .25rem 0 0;
+    }
+    body.light-mode .tech-badge{color:#003a45; background:#dffbff; border-color:#94f0ff}
+
+    /* Projects */
+    .projects-grid{
+      display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(1rem, 1vw + .5rem, 1.6rem);
+    }
+    .project-card{
+      background: linear-gradient(180deg, rgba(10,20,28,.75), rgba(10,16,24,.5));
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:14px; padding:1rem 1rem 1.2rem; height:100%;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s;
+      position:relative; overflow:hidden;
+    }
+    .project-card::after{
+      content:''; position:absolute; inset:-50% -60% auto auto; width:70%; height:70%;
+      background: radial-gradient(closest-side, rgba(0,216,255,.18), transparent 60%);
+      transform: translate3d(var(--mx,0), var(--my,0), 0);
+      pointer-events:none;
+    }
+    .project-card:hover{transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0,0,0,.35); border-color: rgba(0,216,255,.35)}
+    body.light-mode .project-card{background: #ffffff; border-color: rgba(0,0,0,.08); box-shadow: 0 8px 26px rgba(10,20,40,.06)}
+    .project-title{font-weight:700; font-size:1.05rem}
+    .swiper{padding-top:.5rem}
+    .swiper-pagination-bullet{background:var(--brand) !important; opacity:.6}
+    .swiper-pagination-bullet-active{opacity:1}
+
+    /* Timeline */
+    .timeline{ position:relative; padding:1rem 0 0; }
+    .timeline::before{
+      content:''; position:absolute; left:50%; top:0; bottom:0; width:3px;
+      background: linear-gradient(180deg, transparent, var(--brand), transparent);
+      transform: translateX(-50%);
+    }
+    @media (max-width: 768px){ .timeline::before{left:20px; transform:none} }
+    .t-item{position:relative; width:50%; padding:0 2rem 2rem}
+    .t-item.right{margin-left:50%}
+    .t-dot{
+      position:absolute; top:.25rem; left:calc(50% - 7px); width:14px; height:14px;
+      border-radius:50%; background:var(--brand); box-shadow:0 0 0 6px rgba(0,216,255,.15)
+    }
+    @media (max-width:768px){
+      .t-item{width:100%; padding-left:3.2rem}
+      .t-item.right{margin-left:0}
+      .t-dot{left:13px}
+    }
+    .t-card{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); border-radius:12px; padding:1rem}
+    body.light-mode .t-card{background:#fff; border-color:rgba(0,0,0,.1)}
+
+    /* Contato */
+    .contact-photo{
+      width:150px; height:150px; border-radius:50%; object-fit:cover; border:3px solid var(--brand);
+      filter: blur(8px); transform: scale(1.02); transition: filter .4s ease, transform .4s ease;
+    }
+    .contact-photo.loaded{filter: blur(0); transform: scale(1)}
+
+    /* Footer */
+    footer{background: rgba(255,255,255,.06); color:#a6bacf}
+    body.light-mode footer{background:#f3f6fb; color:#44515f}
+
+    /* Acessibilidade */
+    a:focus{outline:2px dashed var(--brand); outline-offset:4px}
   </style>
 
-  <!-- Script para aplicar tema antes de CSS carregar -->
+  <!-- Aplica tema salvo antes do paint -->
   <script>
-    (function() {
-      try {
-        const theme = localStorage.getItem('theme');
-        if (theme === 'light') {
-          document.documentElement.classList.add('light-mode');
-          document.body.classList.add('light-mode');
-        } else if (!theme) {
-          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-            document.documentElement.classList.add('light-mode');
-            document.body.classList.add('light-mode');
-          }
-        }
-      } catch(e){}
-    })();
+    (()=>{ try{
+      const t = localStorage.getItem('theme');
+      if(t==='light'){ document.documentElement.classList.add('light-mode'); document.addEventListener('DOMContentLoaded',()=>document.body.classList.add('light-mode')); }
+      else if(!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches){
+        document.documentElement.classList.add('light-mode'); document.addEventListener('DOMContentLoaded',()=>document.body.classList.add('light-mode'));
+      }
+    }catch(_){} })();
   </script>
 </head>
-
 <body>
-  <!-- 5) Barra de progresso de scroll -->
-  <div class="scroll-progress" id="scroll-progress"></div>
+  <!-- Barra de progresso -->
+  <div id="scroll-progress"></div>
 
-  <!-- Fundo Vanta de planeta -->
-  <div id="vanta-bg"></div>
+  <!-- Fundo suave -->
+  <div id="soft-bg" aria-hidden="true"></div>
 
   <!-- Header -->
   <header id="header">
-    <nav class="navbar navbar-expand-lg navbar-dark container">
+    <nav class="navbar navbar-expand-lg container">
       <a class="navbar-brand" href="#">
         <img src="logo.png" alt="Logo" class="avatar" />
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
-              aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="menu">
         <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item"><a class="nav-link" href="#inicio">Início</a></li>
@@ -399,7 +309,7 @@
             </a>
           </li>
           <li class="nav-item ms-3">
-            <button id="theme-toggle" class="btn btn-link theme-toggle" aria-label="Alternar tema">🌓</button>
+            <button id="theme-toggle" class="btn btn-link nav-link p-0" aria-label="Alternar tema">🌓</button>
           </li>
         </ul>
       </div>
@@ -407,31 +317,24 @@
   </header>
 
   <main id="main">
-    <!-- Seção Início / Hero -->
-    <section id="inicio" class="container text-center">
-      <div class="glass animate-on-scroll">
+    <!-- HERO -->
+    <section id="inicio" class="container py-5 py-md-6">
+      <div class="hero-card text-center" data-aos="fade-up">
         <h1>Olá, eu sou <span class="hero-name">Guilherme Belinelo</span></h1>
-        <p class="lead typewriter" id="role-rotator">Desenvolvedor Web Full-Stack Junior.</p>
+        <p class="lead typewriter mt-2" id="role-rotator">Desenvolvedor Web Full-Stack Junior.</p>
         <a href="#projetos" class="btn btn-primary-custom mt-3">Ver meus projetos</a>
       </div>
     </section>
 
-    <!-- Separador onda -->
-    <div aria-hidden="true" style="line-height:0">
-      <svg viewBox="0 0 1440 90" preserveAspectRatio="none" style="display:block;width:100%;height:60px">
-        <path d="M0,60 C300,120 540,0 900,60 C1140,100 1320,50 1440,70 L1440,90 L0,90 Z" fill="rgba(255,255,255,0.06)"/>
-      </svg>
-    </div>
-
-    <!-- Seção Sobre -->
+    <!-- SOBRE -->
     <section id="sobre" class="container">
-      <div class="glass animate-on-scroll">
-        <h2><i class="fas fa-user icon"></i> Sobre Mim</h2>
+      <div class="glass" data-aos="fade-up">
+        <h2><i class="fas fa-user me-2"></i>Sobre Mim</h2>
         <p>Sou Desenvolvedor Web Full Stack com experiência em aplicações web utilizando PHP, SQL Server, C#, ASP.NET Core, JavaScript e bancos de dados relacionais. Proativo, com sólida base acadêmica e experiência prática em projetos próprios. Fascinado por tecnologia e sempre aprendendo novas ferramentas.</p>
         <p><strong>Localização:</strong> Araçatuba, São Paulo - Brasil</p>
         <p><strong>Idade:</strong> 18 anos</p>
-        <h4 class="text-info mt-3"><i class="fas fa-graduation-cap"></i> Formação & Experiência</h4>
-        <ul class="list-unstyled">
+        <h4 class="text-info mt-3"><i class="fas fa-graduation-cap me-2"></i>Formação & Experiência</h4>
+        <ul class="list-unstyled mb-0">
           <li><strong>Curso Técnico de ADS</strong> no Senai Duque de Caxias | 2023 - 2024</li>
           <li><strong>Curso Superior de ADS</strong> na Fatec Araçatuba | 2025 - 2027</li>
           <br>
@@ -441,131 +344,183 @@
       </div>
     </section>
 
-    <!-- Separador onda -->
-    <div aria-hidden="true" style="line-height:0">
-      <svg viewBox="0 0 1440 90" preserveAspectRatio="none" style="display:block;width:100%;height:60px">
-        <path d="M0,60 C300,120 540,0 900,60 C1140,100 1320,50 1440,70 L1440,90 L0,90 Z" fill="rgba(255,255,255,0.06)"/>
-      </svg>
-    </div>
-
-    <!-- Seção Cursos Complementares -->
+    <!-- CURSOS -->
     <section id="cursos" class="container">
-      <div class="glass animate-on-scroll">
-        <h2><i class="fas fa-book icon"></i> Cursos Complementares</h2>
-        <ul class="">
-          <li class=""><span style="color: var(--color-primary)">MICROSOFT POWER BI</span> na escola Senai Duque de Caxias</li>
-          <li class=""><span style="color: var(--color-primary)">FINANÇAS PESSOAIS</span> na escola Senai Duque de Caxias</li>
-          <li class=""><span style="color: var(--color-primary)">DESVENDANDO A INDÚSTRIA 4.0</span> na escola Senai Duque de Caxias</li>
-          <li class=""><span style="color: var(--color-primary)">PREPARAÇÃO PARA O MUNDO DO TRABALHO</span> na escola Senai Duque de Caxias</li>
-          <li class=""><span style="color: var(--color-primary)">WEB 3.0</span> na escola Senai Duque de Caxias</li>
-          <li class=""><span style="color: var(--color-primary)">DESVENDANDO O 5G</span> na escola Senai Duque de Caxias</li>
-          <li class=""><span style="color: var(--color-primary)">PRIVACIDADE E PROTEÇÃO DE DADOS (LGPD)</span> na escola Senai Duque de Caxias</li>
-          <li class=""><span style="color: var(--color-primary)">EXCEL BÁSICO</span> na escola Senai Duque de Caxias</li>
-          <li class=""><span style="color: var(--color-primary)">DESVENDANDO A BLOCKCHAIN</span> na escola Senai Duque de Caxias</li>
-          <li class=""><span style="color: var(--color-primary)">LÓGICA DE PROGRAMAÇÃO</span> na escola Senai Duque de Caxias</li>
-          <li class=""><span style="color: var(--color-primary)">TECNOLOGIA DA INFORMAÇÃO E COMUNICAÇÃO</span> na escola Senai Duque de Caxias</li>
+      <div class="glass" data-aos="fade-up">
+        <h2><i class="fas fa-book me-2"></i>Cursos Complementares</h2>
+        <ul class="mb-0">
+          <li><span style="color: var(--brand)">MICROSOFT POWER BI</span> na escola Senai Duque de Caxias</li>
+          <li><span style="color: var(--brand)">FINANÇAS PESSOAIS</span> na escola Senai Duque de Caxias</li>
+          <li><span style="color: var(--brand)">DESVENDANDO A INDÚSTRIA 4.0</span> na escola Senai Duque de Caxias</li>
+          <li><span style="color: var(--brand)">PREPARAÇÃO PARA O MUNDO DO TRABALHO</span> na escola Senai Duque de Caxias</li>
+          <li><span style="color: var(--brand)">WEB 3.0</span> na escola Senai Duque de Caxias</li>
+          <li><span style="color: var(--brand)">DESVENDANDO O 5G</span> na escola Senai Duque de Caxias</li>
+          <li><span style="color: var(--brand)">PRIVACIDADE E PROTEÇÃO DE DADOS (LGPD)</span> na escola Senai Duque de Caxias</li>
+          <li><span style="color: var(--brand)">EXCEL BÁSICO</span> na escola Senai Duque de Caxias</li>
+          <li><span style="color: var(--brand)">DESVENDANDO A BLOCKCHAIN</span> na escola Senai Duque de Caxias</li>
+          <li><span style="color: var(--brand)">LÓGICA DE PROGRAMAÇÃO</span> na escola Senai Duque de Caxias</li>
+          <li><span style="color: var(--brand)">TECNOLOGIA DA INFORMAÇÃO E COMUNICAÇÃO</span> na escola Senai Duque de Caxias</li>
         </ul>
       </div>
     </section>
 
-    <!-- Separador onda -->
-    <div aria-hidden="true" style="line-height:0">
-      <svg viewBox="0 0 1440 90" preserveAspectRatio="none" style="display:block;width:100%;height:60px">
-        <path d="M0,60 C300,120 540,0 900,60 C1140,100 1320,50 1440,70 L1440,90 L0,90 Z" fill="rgba(255,255,255,0.06)"/>
-      </svg>
-    </div>
-
-    <!-- Seção Projetos -->
+    <!-- PROJETOS -->
     <section id="projetos" class="container">
-      <div class="glass">
-        <h2 class="animate-on-scroll"><i class="fas fa-code icon"></i> Projetos</h2>
+      <div class="glass" data-aos="fade-up">
+        <h2><i class="fas fa-code me-2"></i>Projetos</h2>
 
-        <!-- 3) Filtro de projetos -->
+        <!-- Filtros -->
         <div class="d-flex gap-2 flex-wrap mb-3" id="project-filters">
-          <button class="btn btn-sm btn-primary-custom" data-filter="all">Todos</button>
-          <button class="btn btn-sm btn-outline-light" data-filter="dotnet">.NET</button>
-          <button class="btn btn-sm btn-outline-light" data-filter="php">PHP</button>
-          <button class="btn btn-sm btn-outline-light" data-filter="mobile">Mobile</button>
+          <button class="btn btn-chip active" data-filter="all">Todos</button>
+          <button class="btn btn-chip" data-filter="dotnet">.NET</button>
+          <button class="btn btn-chip" data-filter="php">PHP</button>
+          <button class="btn btn-chip" data-filter="mobile">Mobile</button>
         </div>
 
-        <div class="projects-grid">
-          <div class="project-card animate-on-scroll" data-tags="dotnet,api,postgres">
+        <!-- Grid + carrossel (mobile) -->
+        <div class="d-none d-md-grid projects-grid" id="projects-grid">
+          <article class="project-card" data-tags="dotnet,api,postgres">
             <div>
-              <h5>API para Aplicação mobile de Gerenciamento de EPI</h5>
-              <p>Backend de Aplicativo mobile para registrar uso de EPI</p>
+              <h5 class="project-title">API para Aplicação mobile de Gerenciamento de EPI</h5>
+              <p class="mb-2">Backend de Aplicativo mobile para registrar uso de EPI</p>
             </div>
             <div>
               <div class="mb-2"><strong>Tecnologias:</strong></div>
-              <span class="badge bg-info tech-badge">ASP.NET Core Web API</span>
-              <span class="badge bg-info tech-badge">C#</span>
-              <span class="badge bg-info tech-badge">PostgreSQL</span>
-              <span class="badge bg-info tech-badge">Swagger</span>
-              <span class="badge bg-info tech-badge">CORS</span>
+              <span class="tech-badge"><i class="fa-solid fa-server"></i> ASP.NET Core Web API</span>
+              <span class="tech-badge">C#</span>
+              <span class="tech-badge">PostgreSQL</span>
+              <span class="tech-badge">Swagger</span>
+              <span class="tech-badge">CORS</span>
             </div>
-          </div>
+          </article>
 
-          <div class="project-card animate-on-scroll" data-tags="dotnet,api,postgres,azure,mobile">
+          <article class="project-card" data-tags="dotnet,api,postgres,azure,mobile">
             <div>
-              <h5>Termosense</h5>
-              <p>Aplicativo desenvolvido para monitoramento de temperatura.</p>
+              <h5 class="project-title">Termosense</h5>
+              <p class="mb-2">Aplicativo desenvolvido para monitoramento de temperatura.</p>
             </div>
             <div>
               <div class="mb-2"><strong>Tecnologias:</strong></div>
-              <span class="badge bg-info tech-badge">ASP.NET Core Web API</span>
-              <span class="badge bg-info tech-badge">C#</span>
-              <span class="badge bg-info tech-badge">PostgreSQL</span>
-              <span class="badge bg-info tech-badge">Swagger</span>
-              <span class="badge bg-info tech-badge">Azure</span>
-              <span class="badge bg-info tech-badge">Flutter</span>
+              <span class="tech-badge">ASP.NET Core Web API</span>
+              <span class="tech-badge">C#</span>
+              <span class="tech-badge">PostgreSQL</span>
+              <span class="tech-badge">Swagger</span>
+              <span class="tech-badge">Azure</span>
+              <span class="tech-badge">Flutter</span>
             </div>
-          </div>
+          </article>
 
-          <div class="project-card animate-on-scroll" data-tags="php,mysql,frontend">
+          <article class="project-card" data-tags="php,mysql,frontend">
             <div>
-              <h5>Loja Durk</h5>
-              <p>Plataforma e-commerce virtual de roupas.</p>
+              <h5 class="project-title">Loja Durk</h5>
+              <p class="mb-2">Plataforma e-commerce virtual de roupas.</p>
             </div>
             <div>
               <div class="mb-2"><strong>Tecnologias:</strong></div>
-              <span class="badge bg-info tech-badge">PHP</span>
-              <span class="badge bg-info tech-badge">MySQL</span>
-              <span class="badge bg-info tech-badge">JavaScript</span>
-              <span class="badge bg-info tech-badge">Frameworks/Bibliotecas</span>
+              <span class="tech-badge">PHP</span>
+              <span class="tech-badge">MySQL</span>
+              <span class="tech-badge">JavaScript</span>
+              <span class="tech-badge">Frameworks/Bibliotecas</span>
             </div>
-          </div>
+          </article>
 
-          <div class="project-card animate-on-scroll" data-tags="php,sqlserver">
+          <article class="project-card" data-tags="php,sqlserver">
             <div>
-              <h5>Plataforma de cursos online</h5>
-              <p>Desenvolvimento de plataforma web para exibição de cursos em vídeo.</p>
+              <h5 class="project-title">Plataforma de cursos online</h5>
+              <p class="mb-2">Desenvolvimento de plataforma web para exibição de cursos em vídeo.</p>
             </div>
             <div>
               <div class="mb-2"><strong>Tecnologias:</strong></div>
-              <span class="badge bg-info tech-badge">PHP</span>
-              <span class="badge bg-info tech-badge">SQL Server</span>
-              <span class="badge bg-info tech-badge">JavaScript</span>
+              <span class="tech-badge">PHP</span>
+              <span class="tech-badge">SQL Server</span>
+              <span class="tech-badge">JavaScript</span>
             </div>
+          </article>
+        </div>
+
+        <!-- Carrossel Swiper para telas pequenas -->
+        <div class="d-md-none">
+          <div class="swiper" id="projects-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <article class="project-card" data-tags="dotnet,api,postgres">
+                  <div>
+                    <h5 class="project-title">API para Aplicação mobile de Gerenciamento de EPI</h5>
+                    <p class="mb-2">Backend de Aplicativo mobile para registrar uso de EPI</p>
+                  </div>
+                  <div>
+                    <div class="mb-2"><strong>Tecnologias:</strong></div>
+                    <span class="tech-badge">ASP.NET Core Web API</span>
+                    <span class="tech-badge">C#</span>
+                    <span class="tech-badge">PostgreSQL</span>
+                    <span class="tech-badge">Swagger</span>
+                    <span class="tech-badge">CORS</span>
+                  </div>
+                </article>
+              </div>
+              <div class="swiper-slide">
+                <article class="project-card" data-tags="dotnet,api,postgres,azure,mobile">
+                  <div>
+                    <h5 class="project-title">Termosense</h5>
+                    <p class="mb-2">Aplicativo desenvolvido para monitoramento de temperatura.</p>
+                  </div>
+                  <div>
+                    <div class="mb-2"><strong>Tecnologias:</strong></div>
+                    <span class="tech-badge">ASP.NET Core Web API</span>
+                    <span class="tech-badge">C#</span>
+                    <span class="tech-badge">PostgreSQL</span>
+                    <span class="tech-badge">Swagger</span>
+                    <span class="tech-badge">Azure</span>
+                    <span class="tech-badge">Flutter</span>
+                  </div>
+                </article>
+              </div>
+              <div class="swiper-slide">
+                <article class="project-card" data-tags="php,mysql,frontend">
+                  <div>
+                    <h5 class="project-title">Loja Durk</h5>
+                    <p class="mb-2">Plataforma e-commerce virtual de roupas.</p>
+                  </div>
+                  <div>
+                    <div class="mb-2"><strong>Tecnologias:</strong></div>
+                    <span class="tech-badge">PHP</span>
+                    <span class="tech-badge">MySQL</span>
+                    <span class="tech-badge">JavaScript</span>
+                    <span class="tech-badge">Frameworks/Bibliotecas</span>
+                  </div>
+                </article>
+              </div>
+              <div class="swiper-slide">
+                <article class="project-card" data-tags="php,sqlserver">
+                  <div>
+                    <h5 class="project-title">Plataforma de cursos online</h5>
+                    <p class="mb-2">Desenvolvimento de plataforma web para exibição de cursos em vídeo.</p>
+                  </div>
+                  <div>
+                    <div class="mb-2"><strong>Tecnologias:</strong></div>
+                    <span class="tech-badge">PHP</span>
+                    <span class="tech-badge">SQL Server</span>
+                    <span class="tech-badge">JavaScript</span>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- Separador onda -->
-    <div aria-hidden="true" style="line-height:0">
-      <svg viewBox="0 0 1440 90" preserveAspectRatio="none" style="display:block;width:100%;height:60px">
-        <path d="M0,60 C300,120 540,0 900,60 C1140,100 1320,50 1440,70 L1440,90 L0,90 Z" fill="rgba(255,255,255,0.06)"/>
-      </svg>
-    </div>
-
-    <!-- Seção Habilidades -->
+    <!-- HABILIDADES -->
     <section id="habilidades" class="container">
-      <div class="glass">
-        <h2 class="animate-on-scroll"><i class="fas fa-laptop-code icon"></i> Habilidades</h2>
-        <div class="row">
-          <div class="col-md-4 animate-on-scroll">
-            <div class="glass p-3">
+      <div class="glass" data-aos="fade-up">
+        <h2><i class="fas fa-laptop-code me-2"></i>Habilidades</h2>
+        <div class="row g-3">
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="50">
+            <div class="glass p-3 h-100">
               <h5 class="text-info">Front-End</h5>
-              <ul class="skills-list list-unstyled">
+              <ul class="list-unstyled mb-0">
                 <li>HTML5</li>
                 <li>CSS3</li>
                 <li>Frameworks/Bibliotecas visuais</li>
@@ -574,26 +529,26 @@
               </ul>
             </div>
           </div>
-          <div class="col-md-4 animate-on-scroll">
-            <div class="glass p-3">
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="glass p-3 h-100">
               <h5 class="text-info">Back-End</h5>
-              <ul class="skills-list list-unstyled">
+              <ul class="list-unstyled">
                 <li>PHP</li>
                 <li>C# / ASP.NET Core</li>
                 <li>Python</li>
               </ul>
               <h5 class="text-info mt-3">Banco de Dados</h5>
-              <ul class="skills-list list-unstyled">
+              <ul class="list-unstyled mb-0">
                 <li>MySQL</li>
                 <li>SQL Server</li>
                 <li>PostgreSQL</li>
               </ul>
             </div>
           </div>
-          <div class="col-md-4 animate-on-scroll">
-            <div class="glass p-3">
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="150">
+            <div class="glass p-3 h-100">
               <h5 class="text-info">Ferramentas & Metodologias</h5>
-              <ul class="skills-list list-unstyled">
+              <ul class="list-unstyled mb-0">
                 <li>Git / GitHub</li>
                 <li>Postman</li>
                 <li>Scrum / Kanban / OKR</li>
@@ -604,77 +559,64 @@
       </div>
     </section>
 
-    <!-- Separador onda -->
-    <div aria-hidden="true" style="line-height:0">
-      <svg viewBox="0 0 1440 90" preserveAspectRatio="none" style="display:block;width:100%;height:60px">
-        <path d="M0,60 C300,120 540,0 900,60 C1140,100 1320,50 1440,70 L1440,90 L0,90 Z" fill="rgba(255,255,255,0.06)"/>
-      </svg>
-    </div>
-
-    <!-- Seção Linha do Tempo -->
+    <!-- TIMELINE -->
     <section id="timeline" class="container">
-      <div class="glass">
-        <h2 class="animate-on-scroll"><i class="fas fa-stream icon"></i> Linha do Tempo</h2>
-        <div class="timeline-zigzag">
-          <div class="timeline-block right animate-on-scroll">
-            <div class="timeline-content">
-              <div class="timeline-icon"><i class="fas fa-shield-alt"></i></div>
-              <h5>2020 – 2022</h5>
-              <p>Conhecimento prático e autodidata em Cibersegurança: estudos, práticas e pequenos projetos pessoais.</p>
+      <div class="glass" data-aos="fade-up">
+        <h2><i class="fas fa-stream me-2"></i>Linha do Tempo</h2>
+        <div class="timeline mt-3">
+          <div class="t-item right" data-tags="" data-aos="fade-left">
+            <span class="t-dot"></span>
+            <div class="t-card">
+              <div class="mb-2"><i class="fas fa-shield-alt text-info me-2"></i><strong>2020 – 2022</strong></div>
+              <p class="mb-0">Conhecimento prático e autodidata em Cibersegurança: estudos, práticas e pequenos projetos pessoais.</p>
             </div>
           </div>
-          <div class="timeline-block left animate-on-scroll">
-            <div class="timeline-content">
-              <div class="timeline-icon"><i class="fas fa-graduation-cap"></i></div>
-              <h5>2023</h5>
-              <p>Início do Curso Técnico em ADS no Senai; desenvolvimento de projetos pessoais e aprendizados práticos.</p>
+
+          <div class="t-item" data-aos="fade-right">
+            <span class="t-dot"></span>
+            <div class="t-card">
+              <div class="mb-2"><i class="fas fa-graduation-cap text-info me-2"></i><strong>2023</strong></div>
+              <p class="mb-0">Início do Curso Técnico em ADS no Senai; desenvolvimento de projetos pessoais e aprendizados práticos.</p>
             </div>
           </div>
-          <div class="timeline-block right animate-on-scroll">
-            <div class="timeline-content">
-              <div class="timeline-icon"><i class="fas fa-certificate"></i></div>
-              <h5>2024</h5>
-              <p>Conclusão de cursos complementares e do Técnico em ADS; consolidação de conhecimentos em desenvolvimento web.</p>
+
+          <div class="t-item right" data-aos="fade-left">
+            <span class="t-dot"></span>
+            <div class="t-card">
+              <div class="mb-2"><i class="fas fa-certificate text-info me-2"></i><strong>2024</strong></div>
+              <p class="mb-0">Conclusão de cursos complementares e do Técnico em ADS; consolidação de conhecimentos em desenvolvimento web.</p>
             </div>
           </div>
-          <div class="timeline-block left animate-on-scroll">
-            <div class="timeline-content">
-              <div class="timeline-icon"><i class="fas fa-briefcase"></i></div>
-              <h5>2025</h5>
-              <p>Ingresso na Faculdade de ADS (Fatec Araçatuba) e início de Estágio em T.I na Colormaq Araçatuba.</p>
+
+          <div class="t-item" data-aos="fade-right">
+            <span class="t-dot"></span>
+            <div class="t-card">
+              <div class="mb-2"><i class="fas fa-briefcase text-info me-2"></i><strong>2025</strong></div>
+              <p class="mb-0">Ingresso na Faculdade de ADS (Fatec Araçatuba) e início de Estágio em T.I na Colormaq Araçatuba.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Separador onda -->
-    <div aria-hidden="true" style="line-height:0">
-      <svg viewBox="0 0 1440 90" preserveAspectRatio="none" style="display:block;width:100%;height:60px">
-        <path d="M0,60 C300,120 540,0 900,60 C1140,100 1320,50 1440,70 L1440,90 L0,90 Z" fill="rgba(255,255,255,0.06)"/>
-      </svg>
-    </div>
-
-    <!-- Seção Contato -->
-    <section id="contato" class="container contact-section">
-      <div class="glass animate-on-scroll">
-        <h2><i class="fas fa-envelope icon"></i> Contato</h2>
-        <div class="contact-container">
-          <!-- 8) Imagem com blur-up + lazy -->
-          <img src="perfil-150.jpg" data-src="perfil-1200.jpg" alt="Foto de perfil de Guilherme Belinelo"
-               class="contact-photo blur-up" loading="lazy" decoding="async" width="150" height="150">
-          <div class="contact-links">
+    <!-- CONTATO -->
+    <section id="contato" class="container">
+      <div class="glass" data-aos="fade-up">
+        <h2><i class="fas fa-envelope me-2"></i>Contato</h2>
+        <div class="d-flex align-items-center gap-3 flex-wrap">
+          <img src="eu.png" data-src="eu.png" alt="Foto de perfil de Guilherme Belinelo"
+               class="contact-photo" loading="lazy" decoding="async" width="150" height="150">
+          <div class="flex-grow-1 d-flex flex-column gap-2">
             <div class="d-flex align-items-center gap-2 flex-wrap">
-              <a href="mailto:guilhermebelinelo@outlook.com">
+              <a href="mailto:guilhermebelinelo@outlook.com" class="link-light link-underline-opacity-0 link-underline-opacity-75-hover">
                 <i class="fas fa-envelope"></i> guilhermebelinelo@outlook.com
               </a>
-              <!-- 9) Copiar e-mail -->
               <button class="btn btn-primary-custom btn-sm" id="copy-mail" type="button">Copiar e-mail</button>
             </div>
-            <a href="https://github.com/MrRobotS0" target="_blank">
+            <a href="https://github.com/MrRobotS0" target="_blank" class="link-light link-underline-opacity-0 link-underline-opacity-75-hover">
               <i class="fab fa-github"></i> github.com/MrRobotS0
             </a>
-            <a href="https://www.linkedin.com/in/guilherme-belinelo-7591b5307/" target="_blank">
+            <a href="https://www.linkedin.com/in/guilherme-belinelo-7591b5307/" target="_blank" class="link-light link-underline-opacity-0 link-underline-opacity-75-hover">
               <i class="fab fa-linkedin"></i> linkedin.com/in/guilherme-belinelo-7591b5307
             </a>
           </div>
@@ -683,11 +625,11 @@
     </section>
   </main>
 
-  <footer style="text-align:center; padding:1rem 0; background: rgba(0,0,0,0.6); color: #aaa; position: relative; z-index:1;">
+  <footer class="text-center py-3 mt-4">
     © 2025 Guilherme Belinelo. Todos os direitos reservados.
   </footer>
 
-  <!-- Toast para copiar e-mail -->
+  <!-- Toast copiar -->
   <div class="toast align-items-center text-bg-dark border-0 position-fixed bottom-0 end-0 m-3" id="copy-toast" role="status" aria-live="polite">
     <div class="d-flex">
       <div class="toast-body">E-mail copiado!</div>
@@ -695,25 +637,22 @@
     </div>
   </div>
 
-  <!-- Bootstrap JS -->
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
-  <!-- Script para header scrolled, theme toggle, animações, Vanta, filtros, tilt, scrollspy, etc -->
   <script>
-    let vantaEffect = null;
-
-    // 7) Motion-safe flag
     const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Header scrolled
-    function onScrollHeader() {
-      const header = document.getElementById('header');
-      if (window.scrollY > 50) header.classList.add('scrolled');
-      else header.classList.remove('scrolled');
-    }
-    document.addEventListener('scroll', onScrollHeader);
+    // Header visual ao rolar (barra de progresso)
+    document.addEventListener('scroll', ()=>{
+      const h = document.documentElement;
+      const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+      document.getElementById('scroll-progress').style.width = pct + '%';
+    });
 
-    // 1) Rotação de cargos no hero
+    // Rotação de cargos (mantém seu texto)
     const roles = [
       'Desenvolvedor Web Full-Stack Junior.',
       'ASP.NET Core • C# • PostgreSQL',
@@ -725,81 +664,100 @@
       const el = document.getElementById('role-rotator');
       if(!el) return;
       r = (r + 1) % roles.length;
-      el.animate([{opacity:1},{opacity:0}], {duration:250, fill:'forwards'}).onfinish = () => {
+      el.animate([{opacity:1},{opacity:0}], {duration:220, fill:'forwards'}).onfinish = () => {
         el.textContent = roles[r];
-        el.animate([{opacity:0},{opacity:1}], {duration:250, fill:'forwards'});
+        el.animate([{opacity:0},{opacity:1}], {duration:220, fill:'forwards'});
       };
     }
-    setInterval(rotateRole, 2600);
+    if(!prefersReduced) setInterval(rotateRole, 2400);
 
-    // Inicializa Vanta.GLOBE
-    function initVantaGlobe() {
-      // Se já existe, destruir antes
-      if (vantaEffect) {
-        vantaEffect.destroy();
-        vantaEffect = null;
-      }
-      if (prefersReduced) return; // respeita preferência de movimento
-      if (window.innerWidth < 768) return; // desativa em mobile
-      if (window.VANTA && VANTA.GLOBE) {
-        vantaEffect = VANTA.GLOBE({
-          el: "#vanta-bg",
-          mouseControls: false,
-          touchControls: false,
-          gyroControls: false,
-          backgroundColor: 0x000000,
-          globeColor: 0x111111,
-          color: 0x00d8ff,
-          size: 1.0,
-          scale: 1.0,
-          scaleMobile: 1.0,
-          backgroundAlpha: 1.0
-        });
-      }
-    }
+    // AOS
+    AOS.init({ duration: 700, once: true, easing: 'ease-out-cubic', disable: prefersReduced });
 
-    // Theme toggle
+    // Swiper mobile
+    new Swiper('#projects-swiper', {
+      slidesPerView: 1,
+      spaceBetween: 16,
+      pagination: { el: '.swiper-pagination', clickable: true }
+    });
+
+    // Tema (sem Vanta agora)
     const themeToggle = document.getElementById('theme-toggle');
-    if (themeToggle) {
-      themeToggle.addEventListener('click', () => {
-        const isLightNow = document.body.classList.toggle('light-mode');
+    if(themeToggle){
+      themeToggle.addEventListener('click', ()=>{
+        const isLight = document.body.classList.toggle('light-mode');
         document.documentElement.classList.toggle('light-mode');
-        // Ao alternar para tema claro, destruir Vanta
-        if (isLightNow) {
-          if (vantaEffect) {
-            vantaEffect.destroy();
-            vantaEffect = null;
-          }
-        } else {
-          // volta ao tema escuro: reinicializa Vanta
-          initVantaGlobe();
-        }
-        localStorage.setItem('theme', isLightNow ? 'light' : 'dark');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
       });
     }
 
-    // Intersection Observer para animações
-    document.addEventListener('DOMContentLoaded', () => {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
-            observer.unobserve(entry.target);
-          }
+    // Lazy foto contato (blur-up)
+    (function(){
+      const img = document.querySelector('img[data-src]');
+      if(!img) return;
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(!e.isIntersecting) return;
+          img.src = img.dataset.src;
+          img.onload = ()=> img.classList.add('loaded');
+          io.unobserve(img);
         });
-      }, { threshold: 0.2 });
-      document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-    });
+      }, {rootMargin:'200px'});
+      io.observe(img);
+    })();
 
-    // 5) Barra de progresso de scroll
-    const sp = document.getElementById('scroll-progress');
-    document.addEventListener('scroll', ()=>{
-      const h = document.documentElement;
-      const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
-      sp.style.width = pct + '%';
-    });
+    // Filtros de projeto (grid desktop)
+    (function(){
+      const wrap = document.getElementById('project-filters');
+      const btns = [...wrap.querySelectorAll('button')];
+      const cards = [...document.querySelectorAll('#projects-grid .project-card')];
+      wrap.addEventListener('click', (e)=>{
+        const b = e.target.closest('button'); if(!b) return;
+        btns.forEach(x=>x.classList.remove('active'));
+        b.classList.add('active');
+        const value = b.dataset.filter;
+        cards.forEach(card=>{
+          const tags = (card.dataset.tags || '').split(',');
+          const show = value==='all' || tags.includes(value);
+          card.style.display = show ? '' : 'none';
+        });
+      });
+    })();
 
-    // 6) Scrollspy manual com IntersectionObserver
+    // Tilt/shine suave nos cards
+    (function(){
+      if(prefersReduced) return;
+      document.querySelectorAll('.project-card').forEach(card=>{
+        const damp = 18;
+        card.addEventListener('mousemove', e=>{
+          const r = card.getBoundingClientRect();
+          const x = e.clientX - r.left, y = e.clientY - r.top;
+          const rx = ((y - r.height/2)/damp)*-1;
+          const ry = ((x - r.width/2)/damp);
+          card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateZ(0)`;
+          card.style.setProperty('--mx', `${(x - r.width/2)/6}px`);
+          card.style.setProperty('--my', `${(y - r.height/2)/6}px`);
+        });
+        card.addEventListener('mouseleave', ()=>{
+          card.style.transform=''; card.style.setProperty('--mx','0px'); card.style.setProperty('--my','0px');
+        });
+      });
+    })();
+
+    // Copiar e-mail + toast
+    (function(){
+      const btn = document.getElementById('copy-mail');
+      if(!btn) return;
+      btn.addEventListener('click', async ()=>{
+        try{
+          await navigator.clipboard.writeText('guilhermebelinelo@outlook.com');
+          const toastEl = document.getElementById('copy-toast');
+          if (toastEl) new bootstrap.Toast(toastEl).show();
+        }catch(err){ console.error('Falha ao copiar e-mail', err); }
+      });
+    })();
+
+    // Scrollspy simples
     (function(){
       const sections = [...document.querySelectorAll('main section[id]')];
       const links = [...document.querySelectorAll('a.nav-link[href^="#"]')];
@@ -814,91 +772,6 @@
       }, {rootMargin:'-45% 0px -50% 0px', threshold:0.01});
       sections.forEach(s=>spy.observe(s));
     })();
-
-    // 3) Filtro de projetos
-    (function(){
-      const filterWrap = document.getElementById('project-filters');
-      if(!filterWrap) return;
-      filterWrap.addEventListener('click', (e)=>{
-        const btn = e.target.closest('button'); if(!btn) return;
-        const value = btn.dataset.filter;
-        [...filterWrap.children].forEach(b=>b.classList.remove('btn-primary-custom'));
-        btn.classList.add('btn-primary-custom');
-        document.querySelectorAll('.project-card').forEach(card=>{
-          const tags = (card.dataset.tags || '').split(',');
-          const show = value==='all' || tags.includes(value);
-          card.style.display = show ? '' : 'none';
-        });
-      });
-    })();
-
-    // 2) Tilt 3D + shine em cartões
-    (function(){
-      document.querySelectorAll('.project-card').forEach(card=>{
-        const damp = 20;
-        card.addEventListener('mousemove', e=>{
-          const r = card.getBoundingClientRect();
-          const x = e.clientX - r.left, y = e.clientY - r.top;
-          const rx = ((y - r.height/2) / damp) * -1;
-          const ry = ((x - r.width/2) / damp);
-          card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateZ(0)`;
-          card.style.setProperty('--mx', `${(x - r.width/2)/6}px`);
-          card.style.setProperty('--my', `${(y - r.height/2)/6}px`);
-        });
-        card.addEventListener('mouseleave', ()=>{
-          card.style.transform = '';
-          card.style.setProperty('--mx','0px'); card.style.setProperty('--my','0px');
-        });
-      });
-    })();
-
-    // 8) Lazy-load + blur-up
-    (function(){
-      const lazyImgs = document.querySelectorAll('img[data-src]');
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(en=>{
-          if(!en.isIntersecting) return;
-          const img = en.target;
-          img.src = img.dataset.src;
-          img.onload = ()=> img.classList.add('loaded');
-          io.unobserve(img);
-        });
-      }, { rootMargin: '200px' });
-      lazyImgs.forEach(i=>io.observe(i));
-    })();
-
-    // 9) Copiar e-mail + toast
-    (function(){
-      const btnCopy = document.getElementById('copy-mail');
-      if(!btnCopy) return;
-      btnCopy.addEventListener('click', async ()=>{
-        try{
-          await navigator.clipboard.writeText('guilhermebelinelo@outlook.com');
-          const toastEl = document.getElementById('copy-toast');
-          if (toastEl) new bootstrap.Toast(toastEl).show();
-        }catch(err){ console.error('Falha ao copiar e-mail', err); }
-      });
-    })();
-
-    // Inicialização após carregar
-    window.addEventListener('load', () => {
-      // Checar tema salvo
-      const theme = localStorage.getItem('theme');
-      if (theme === 'light') {
-        document.body.classList.add('light-mode');
-        document.documentElement.classList.add('light-mode');
-      }
-      // Se não claro, inicia Vanta
-      if (!document.body.classList.contains('light-mode')) {
-        initVantaGlobe();
-      }
-    });
-    window.addEventListener('resize', () => {
-      // Se no tema escuro e desktop, reinicializa Vanta para ajustar tamanho
-      if (!document.body.classList.contains('light-mode')) {
-        initVantaGlobe();
-      }
-    });
   </script>
 
   <!-- FontAwesome JS -->
