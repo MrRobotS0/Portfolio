@@ -1,984 +1,657 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <!-- Metas básicas -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfólio | Belinelo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <title>Portfólio | Guilherme Belinelo</title>
 
-  <!-- Pré-conexões e fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Favicon e PWA manifest -->
   <link rel="icon" href="logo.png" type="image/png" />
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#0b0f14">
 
-  <!-- SEO e Open Graph -->
-  <meta name="description" content="Portfólio de Guilherme Belinelo, Desenvolvedor Web Full-Stack Junior com experiência em PHP, C#, JavaScript, SQL Server e projetos acadêmicos." />
-  <meta property="og:title" content="Guilherme Belinelo | Portfólio" />
-  <meta property="og:description" content="Conheça meus projetos, habilidades e experiência em desenvolvimento web." />
-  <meta property="og:image" content="URL_DA_IMAGEM_DE_PREVIEW" />
-  <meta property="og:url" content="https://seu-dominio.com.br" />
-  <link rel="canonical" href="https://seu-dominio.com.br" />
-
-  <!-- JSON-LD para Person -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Person",
-    "name":"Guilherme Belinelo",
-    "sameAs":[
-      "https://github.com/MrRobotS0",
-      "https://linkedin.com/in/seu-usuario",
-      "https://instagram.com/seu-usuario"
-    ],
-    "jobTitle":"Desenvolvedor Full-Stack Jr",
-    "knowsAbout":["PHP","C#","JavaScript","SQL Server","React Native","ASP.NET Core"]
-  }
-  </script>
-
-  <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <!-- FontAwesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
-  <!-- AOS (Animate On Scroll) -->
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-  <!-- Swiper (carrossel) -->
-  <link href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" rel="stylesheet" />
 
-  <!-- Styles modernos (visuais) -->
   <style>
-    :root{
-      --brand:#00d8ff;
-      --brand-2:#7cf8e9;
-      --bg:#0b0f14;
-      --bg-2:#0f1622;
-      --bg-light:#f5f7fb;
-      --text:#e9eef5;
-      --text-2:#bcd0e6;
-      --text-dark:#101318;
-      --glass:rgba(255,255,255,.06);
-      --radius:16px;
-      --shadow:0 10px 40px rgba(0,0,0,.35);
-      --mono:'JetBrains Mono', monospace;
-      --sans:'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial;
-    }
-    html{scroll-behavior:smooth}
-    body{
-      background:
-        radial-gradient(1200px 600px at 10% -10%, rgba(0,216,255,.06), transparent 60%),
-        radial-gradient(1000px 500px at 110% 10%, rgba(124,248,233,.05), transparent 60%),
-        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
-      color:var(--text);
-      font-family:var(--sans);
-      line-height:1.65;
-      overflow-x:hidden;
-      letter-spacing:.2px;
-    }
-    /* grid entre seções (respira melhor) */
-    main{ display:grid; gap:clamp(40px, 7vw, 120px); }
-    main > section{ padding-block: clamp(24px, 4vw, 60px); }
-
-    /* modo claro */
-    body.light-mode{
-      background:
-        radial-gradient(1200px 600px at 10% -10%, rgba(0,216,255,.06), transparent 60%),
-        radial-gradient(1000px 500px at 110% 10%, rgba(0,0,0,.04), transparent 60%),
-        linear-gradient(180deg, var(--bg-light) 0%, #ffffff 100%);
-      color:var(--text-dark);
+    :root {
+      --bg-body: #0a0c10;
+      --bg-gradient: radial-gradient(circle at 50% 0%, #161b22 0%, #0a0c10 100%);
+      
+      --text-main: #f0f6fc;
+      --text-muted: #8b949e;
+      
+      --brand-color: #00f2ff;
+      --brand-hover: #00c8d4;
+      
+      --card-bg: rgba(22, 27, 34, 0.7);
+      --card-border: rgba(240, 246, 252, 0.1);
+      --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      
+      --nav-bg: rgba(10, 12, 16, 0.95);
+      
+      --badge-bg: rgba(125, 125, 125, 0.1);
+      --badge-text: #8b949e;
     }
 
-    /* ===== Fundo aurora suave ===== */
-    #soft-bg{
-      position: fixed; inset: 0; z-index: -2; pointer-events: none;
-      opacity: .55; filter: saturate(105%);
-      background:
-        radial-gradient(40% 60% at 10% 15%, rgba(0,216,255,.16), transparent 60%),
-        radial-gradient(50% 70% at 90% 10%, rgba(124,248,233,.14), transparent 65%),
-        radial-gradient(60% 60% at 20% 85%, rgba(0, 120, 160, .14), transparent 60%),
-        radial-gradient(70% 70% at 80% 75%, rgba(0, 216, 255, .10), transparent 60%);
-      transition: opacity .3s ease;
-      animation: drift 28s ease-in-out infinite alternate;
-      mask-image: radial-gradient(1200px 700px at 50% -10%, #000 45%, transparent 70%);
-    }
-    /* textura sutil */
-    #soft-bg::after{
-      content:""; position:absolute; inset:0;
-      background:
-        radial-gradient(1200px 600px at 50% 0%, rgba(255,255,255,.03), transparent 60%),
-        repeating-linear-gradient( 90deg, rgba(255,255,255,.018), rgba(255,255,255,.018) 1px, transparent 1px, transparent 4px);
-      mix-blend-mode: soft-light; opacity:.35;
-    }
-    body.light-mode #soft-bg{ opacity:.35; filter: saturate(100%); }
-    @keyframes drift{
-      0%   { transform: translate3d(0,0,0) scale(1);   }
-      100% { transform: translate3d(0px,-24px,0) scale(1.02); }
+    body.light-mode {
+      --bg-body: #ffffff;
+      --bg-gradient: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+      
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      
+      --brand-color: #0077b6;
+      --brand-hover: #023e8a;
+      
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --card-border: rgba(0, 0, 0, 0.1);
+      --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      
+      --nav-bg: rgba(255, 255, 255, 0.95);
+      
+      --badge-bg: rgba(0, 0, 0, 0.05);
+      --badge-text: #334155;
     }
 
-    /* Divisória de seção */
-    .section-head{
-      display:flex; align-items:center; gap:.8rem; margin-bottom:1rem;
-      text-transform:uppercase; letter-spacing:.6px;
-    }
-    .section-head .line{
-      height:2px; flex:1;
-      background:linear-gradient(90deg, transparent, var(--brand), transparent);
-      filter: drop-shadow(0 0 6px rgba(0,216,255,.5));
-      opacity:.9;
-    }
-
-    /* Nav glassy + ícone toggler visível */
-    header{
-      position:sticky; top:0; z-index:1000;
-      backdrop-filter: blur(16px);
-      background: linear-gradient(180deg, rgba(10,13,18,.75), rgba(10,13,18,.35));
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
-    body.light-mode header{
-      background: rgba(255,255,255,.7);
-      border-color: rgba(0,0,0,.06);
-    }
-    .navbar{ padding-block: .35rem; }
-    .navbar-brand{ font-weight:700; letter-spacing:.4px; color:var(--brand)!important; display:flex; align-items:center; gap:.6rem; }
-    .avatar{width:40px;height:40px;border-radius:50%; box-shadow:0 6px 14px rgba(0,0,0,.25)}
-    .nav-link{ color:rgba(255,255,255,.85)!important; position:relative; font-weight:600 }
-    body.light-mode .nav-link{color:rgba(0,0,0,.75)!important}
-    .nav-link::after{
-      content:''; position:absolute; left:.4rem; right:.4rem; bottom:.25rem; height:2px;
-      background:linear-gradient(90deg, transparent, var(--brand), transparent);
-      transform:scaleX(0); transform-origin:center; transition:transform .25s;
-    }
-    .nav-link:hover::after,.nav-link.active::after{transform:scaleX(1)}
-    .navbar-dark .navbar-toggler{ border-color: rgba(255,255,255,.25); }
-    .navbar-dark .navbar-toggler-icon{ filter: drop-shadow(0 0 2px rgba(0,0,0,.6)); }
-
-    /* Barra de progresso */
-    #scroll-progress{position:fixed; inset:0 auto auto 0; height:3px; width:0; background:linear-gradient(90deg,var(--brand),#4df0ff); z-index:1100}
-
-    /* Hero */
-    .hero-card{
-      border-radius: clamp(16px, 2vw, 24px);
-      padding: clamp(1.25rem, 1rem + 3vw, 3.5rem);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
-        radial-gradient(1000px 200px at 50% -10%, rgba(0,216,255,.16), transparent 60%);
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow: var(--shadow);
-      position:relative;
-      overflow:hidden;
-    }
-    .hero-card::after{
-      content:''; position:absolute; inset:auto -30% -30% auto; width:55%; height:70%;
-      background: radial-gradient(closest-side, rgba(0,216,255,.2), transparent 60%);
-      transform: rotate(8deg);
-      opacity:.5; pointer-events:none;
-    }
-    body.light-mode .hero-card{
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.86)),
-        radial-gradient(1000px 200px at 50% -10%, rgba(0,216,255,.08), transparent 60%);
-      border-color: rgba(0,0,0,.06);
-      box-shadow: 0 12px 30px rgba(10,20,40,.08);
-    }
-    .hero-name{
-      background: linear-gradient(90deg, var(--brand), var(--brand-2), var(--brand));
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-      background-size: 220% 100%;
-      animation: sweep 6s linear infinite;
-    }
-    @keyframes sweep{0%{background-position:0% 50%}100%{background-position:200% 50%}}
-    .typewriter::after{content:'▌'; margin-left:3px; animation:blink 1s steps(1,end) infinite}
-    @keyframes blink{50%{opacity:0}}
-
-    /* Cards / tipografia */
-    .glass{
-      background: radial-gradient(120% 200% at 0% 0%, rgba(255,255,255,.08), rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.12);
-      border-radius: var(--radius);
-      padding: clamp(1rem, .5rem + 2vw, 2rem);
-      box-shadow: var(--shadow);
-    }
-    body.light-mode .glass{
-      background: rgba(255,255,255,.92);
-      border:1px solid rgba(0,0,0,.08);
-      box-shadow: 0 10px 28px rgba(10,20,40,.08);
-    }
-    h1,h2,h3,h4{letter-spacing:.3px}
-    h1{font-size:clamp(2rem,1.2rem + 2.8vw,3.2rem); font-weight:700}
-    h2{font-size:clamp(1.4rem,1rem + 1.7vw,2.4rem); font-weight:800; text-transform:uppercase}
-    .lead{color:var(--text-2)}
-
-    /* Buttons */
-    .btn-primary-custom{
-      --bs-btn-bg: var(--brand); --bs-btn-border-color: var(--brand); --bs-btn-color:#052129;
-      --bs-btn-hover-bg:#00b3d1; --bs-btn-hover-border-color:#00b3d1;
-      border-radius: 12px; padding:.65rem 1rem; font-weight:700;
-      box-shadow: 0 8px 24px rgba(0,216,255,.25);
-      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
-      backdrop-filter: blur(2px);
-    }
-    .btn-primary-custom:hover{transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,216,255,.35)}
-    .btn-outline-light{border-radius:12px; border:1px solid rgba(255,255,255,.35)!important; font-weight:700; padding: .65rem 1rem;}
-    body.light-mode .btn-outline-light{border-color: rgba(0,0,0,.15)!important; color:#0b0f14!important}
-
-    .btn-chip{
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.2); color:var(--text-2);
-      border-radius:999px; padding:.4rem .9rem; font-weight:700;
-      transition: all .18s ease;
-    }
-    .btn-chip.active, .btn-chip:hover{
-      border-color:var(--brand);
-      color:#052129;
-      background:linear-gradient(90deg,#a5f3ff,#5ce9ff,#00d8ff);
-      box-shadow:0 8px 22px rgba(0,216,255,.25);
-      transform: translateY(-1px);
+    html { scroll-behavior: smooth; }
+    
+    body {
+      background: var(--bg-body);
+      background-image: var(--bg-gradient);
+      color: var(--text-main);
+      font-family: 'Outfit', sans-serif;
+      overflow-x: hidden;
+      cursor: none; /* Custom Cursor Desktop */
+      transition: background 0.4s ease, color 0.4s ease;
     }
 
-    /* Badges */
-    .tech-badge{
-      display:inline-flex; align-items:center; gap:.35rem;
-      background: rgba(0,216,255,.12);
-      border:1px solid rgba(0,216,255,.35);
-      color:#bff6ff; padding:.25rem .6rem; border-radius:10px; font-size:.85rem;
-      margin:.22rem .3rem 0 0; font-weight:600;
-      box-shadow: inset 0 -2px 0 rgba(0,216,255,.15);
-    }
-    body.light-mode .tech-badge{color:#003a45; background:#dffbff; border-color:#94f0ff}
+    a, button, .hover-trigger { cursor: none; }
+    
+    h1, h2, h3, h4, h5, strong { color: var(--text-main); font-weight: 800; letter-spacing: -0.02em; }
+    p, li, span, small { color: var(--text-muted); line-height: 1.7; }
+    
+    .text-brand { color: var(--brand-color) !important; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
 
-    /* Projects */
-    .projects-grid{
-      display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(1rem, 1vw + .5rem, 1.6rem);
+    /* CUSTOM CURSOR (Apenas Desktop) */
+    #cursor {
+      position: fixed; width: 20px; height: 20px;
+      border: 1px solid var(--brand-color); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background 0.3s;
+      mix-blend-mode: difference;
     }
-    .project-card{
-      background: linear-gradient(180deg, rgba(10,20,28,.75), rgba(10,16,24,.5));
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:16px; padding:1rem 1rem 1.2rem; height:100%;
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s, filter .18s ease;
-      position:relative; overflow:hidden;
+    #cursor-dot {
+      position: fixed; width: 6px; height: 6px;
+      background: var(--brand-color); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
     }
-    .project-card::before{
-      content:''; position:absolute; inset:0; pointer-events:none;
-      background:
-        radial-gradient(400px 120px at 10% 0%, rgba(255,255,255,.06), transparent 60%),
-        radial-gradient(300px 100px at 100% 0%, rgba(0,216,255,.12), transparent 60%);
-      opacity:.8;
-    }
-    .project-card::after{
-      content:''; position:absolute; inset:-50% -60% auto auto; width:70%; height:70%;
-      background: radial-gradient(closest-side, rgba(0,216,255,.18), transparent 60%);
-      transform: translate3d(var(--mx,0), var(--my,0), 0);
-      pointer-events:none;
-    }
-    .project-card:hover{transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0,0,0,.35); border-color: rgba(0,216,255,.35); filter: saturate(110%)}
-    body.light-mode .project-card{background: #ffffff; border-color: rgba(0,0,0,.08); box-shadow: 0 8px 26px rgba(10,20,40,.06)}
-    .project-title{font-weight:800; font-size:1.08rem}
-    .swiper{padding-top:.5rem}
-    .swiper-pagination-bullet{background:var(--brand) !important; opacity:.6}
-    .swiper-pagination-bullet-active{opacity:1}
-
-    /* Timeline */
-    .timeline{ position:relative; padding:1rem 0 0; }
-    .timeline::before{
-      content:''; position:absolute; left:50%; top:0; bottom:0; width:3px;
-      background: linear-gradient(180deg, transparent, var(--brand), transparent);
-      transform: translateX(-50%);
-      filter: drop-shadow(0 0 8px rgba(0,216,255,.35));
-    }
-    @media (max-width: 768px){ .timeline::before{left:20px; transform:none} }
-    .t-item{position:relative; width:50%; padding:0 2rem 2rem}
-    .t-item.right{margin-left:50%}
-    .t-dot{
-      position:absolute; top:.25rem; left:calc(50% - 7px); width:14px; height:14px;
-      border-radius:50%; background:var(--brand); box-shadow:0 0 0 8px rgba(0,216,255,.12), 0 8px 22px rgba(0,216,255,.25)
-    }
-    @media (max-width:768px){
-      .t-item{width:100%; padding-left:3.2rem}
-      .t-item.right{margin-left:0}
-      .t-dot{left:13px}
-    }
-    .t-card{
-      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); border-radius:14px; padding:1rem;
-      box-shadow: inset 0 -1px 0 rgba(255,255,255,.06);
-    }
-    body.light-mode .t-card{background:#fff; border-color:rgba(0,0,0,.1)}
-
-    /* Habilidades — colunas com relevo sutil */
-    .skills-col .glass{ background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03)); border-radius:16px }
-    .skills-col h5{ font-weight:800; letter-spacing:.5px }
-
-    /* Contato */
-    .contact-photo{
-      width:150px; height:150px; border-radius:50%; object-fit:cover; border:3px solid var(--brand);
-      filter: blur(8px) saturate(90%); transform: scale(1.02); transition: filter .4s ease, transform .4s ease;
-      box-shadow: 0 8px 24px rgba(0,216,255,.18);
-    }
-    .contact-photo.loaded{filter: blur(0) saturate(105%); transform: scale(1)}
-
-    /* Footer */
-    footer{background: rgba(255,255,255,.06); color:#a6bacf}
-    body.light-mode footer{background:#f3f6fb; color:#44515f}
-
-    /* Acessibilidade */
-    a:focus{outline:2px dashed var(--brand); outline-offset:4px}
-
-    /* Botão Voltar ao Topo */
-    #to-top{
-      position:fixed; right:1rem; bottom:1rem; z-index:1200; display:none;
-      border-radius:999px; padding:.6rem .8rem; line-height:1; box-shadow:0 12px 28px rgba(0,0,0,.35);
+    body.hovering #cursor {
+      width: 50px; height: 50px; background: rgba(0, 242, 255, 0.2); border-color: transparent;
     }
 
-    /* Pequenas utilidades visuais */
-    .text-info{ color: var(--brand) !important; }
-    .shadow-soft{ box-shadow: 0 12px 30px rgba(0,0,0,.25); }
-    body.light-mode #contato a {
-  color: #0b0f14 !important;
-  text-decoration-color: rgba(0,0,0,.45);
-}
-body.light-mode #contato a:hover,
-body.light-mode #contato a:focus {
-  text-decoration-color: rgba(0,0,0,.65);
-}
+    /* DESATIVA CURSOR CUSTOM NO MOBILE */
+    @media (hover: none) { 
+      #cursor, #cursor-dot { display: none; } 
+      body { cursor: auto; } 
+      a, button, .hover-trigger { cursor: pointer; } 
+    }
 
-  </style>
+    /* NAVBAR */
+    .navbar {
+      background: var(--nav-bg); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--card-border); padding: 1rem 0;
+      transition: all 0.3s ease;
+    }
+    .nav-link { color: var(--text-muted) !important; font-weight: 600; transition: 0.3s; padding: 0.5rem 1rem; }
+    .nav-link:hover, .nav-link.active { color: var(--brand-color) !important; }
 
-  <!-- Aplica tema salvo antes do paint -->
-  <script>
-    (()=>{ try{
-      const t = localStorage.getItem('theme');
-      if(t==='light'){ document.documentElement.classList.add('light-mode'); document.addEventListener('DOMContentLoaded',()=>document.body.classList.add('light-mode')); }
-      else if(!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches){
-        document.documentElement.classList.add('light-mode'); document.addEventListener('DOMContentLoaded',()=>document.body.classList.add('light-mode'));
+    /* CARDS */
+    .glass-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px; padding: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      transform-style: preserve-3d;
+      transition: transform 0.1s;
+    }
+    
+    /* BOTÕES */
+    .btn-glow {
+      background: var(--brand-color); color: #fff;
+      padding: 0.8rem 2rem; border-radius: 50px; font-weight: 700; border: none;
+      box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+      transition: 0.3s;
+      display: inline-block;
+      text-align: center;
+    }
+    .btn-glow:hover { transform: translateY(-3px); box-shadow: 0 0 30px rgba(0, 242, 255, 0.5); color: #fff; }
+    
+    .btn-outline {
+      background: transparent; color: var(--text-main);
+      border: 2px solid var(--card-border); padding: 0.8rem 2rem;
+      border-radius: 50px; font-weight: 700; transition: 0.3s;
+      display: inline-block;
+      text-align: center;
+    }
+    .btn-outline:hover { border-color: var(--brand-color); color: var(--brand-color); }
+
+    /* ELEMENTOS */
+    .tech-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--badge-bg); border: 1px solid var(--card-border);
+      padding: 6px 12px; border-radius: 8px; font-size: 0.85rem;
+      color: var(--badge-text); font-weight: 600; margin-bottom: 8px; margin-right: 5px;
+      transition: 0.3s;
+    }
+    .tech-badge:hover { border-color: var(--brand-color); color: var(--brand-color); background: rgba(0,242,255,0.05); }
+
+    .timeline-item {
+      border-left: 2px solid var(--card-border); padding-left: 2rem;
+      padding-bottom: 2.5rem; position: relative;
+    }
+    .timeline-dot {
+      width: 16px; height: 16px; background: var(--brand-color);
+      border-radius: 50%; position: absolute; left: -9px; top: 0;
+      box-shadow: 0 0 0 4px var(--bg-body);
+    }
+    
+    .project-icon {
+      font-size: 1.8rem; color: var(--brand-color); margin-bottom: 1rem;
+      width: 50px; height: 50px; background: rgba(0,242,255,0.1);
+      display: flex; align-items: center; justify-content: center; border-radius: 12px;
+      transform: translateZ(20px);
+    }
+    body.light-mode .project-icon { background: rgba(0, 119, 182, 0.1); }
+    .card-content { transform: translateZ(20px); }
+
+    .cert-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem;
+    }
+    .cert-item {
+      background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-muted);
+      padding: 1rem; border-radius: 12px; font-size: 0.9rem;
+      display: flex; align-items: center; gap: 0.5rem;
+      transition: 0.3s;
+    }
+    .cert-item:hover { border-color: var(--brand-color); color: var(--brand-color); transform: translateX(5px); }
+    .cert-icon { color: var(--brand-color); }
+
+    /* =========================================
+       AJUSTES ESPECÍFICOS PARA MOBILE (RESPONSIVIDADE)
+       ========================================= */
+    @media (max-width: 991px) {
+      /* Navbar Background no Mobile */
+      .navbar-collapse {
+        background: var(--bg-body);
+        padding: 1rem;
+        border-radius: 0 0 16px 16px;
+        border: 1px solid var(--card-border);
+        border-top: none;
+        margin-top: 0.5rem;
       }
-    }catch(_){} })();
-  </script>
+      .nav-link { padding-left: 0; }
+    }
+
+    @media (max-width: 768px) {
+      /* Fontes */
+      h1 { font-size: 2.8rem !important; }
+      h2 { font-size: 2rem !important; }
+      
+      /* Layout Hero */
+      #inicio {
+        text-align: center;
+        padding-top: 100px; /* Compensa navbar fixa */
+      }
+      #inicio .d-flex {
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+      }
+      .btn-glow, .btn-outline {
+        width: 100%;
+      }
+      
+      /* Cards e Padding */
+      .glass-card { padding: 1.5rem; }
+      section { padding-top: 3rem !important; padding-bottom: 3rem !important; }
+      
+      /* Timeline */
+      .timeline-item { padding-left: 1.5rem; }
+      
+      /* Grid de Certificações */
+      .cert-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Barra de progresso -->
-  <div id="scroll-progress"></div>
 
-  <!-- Fundo suave -->
-  <div id="soft-bg" aria-hidden="true"></div>
+  <div id="cursor"></div>
+  <div id="cursor-dot"></div>
 
-  <!-- Header -->
-  <header id="header">
-    <nav class="navbar navbar-expand-lg container navbar-dark">
-      <a class="navbar-brand" href="#">
-        <img src="logo.png" alt="Logo" class="avatar" />
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <header class="fixed-top">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand hover-trigger" href="#">
+          <img src="logo.png" alt="GB" style="width:40px; height:40px; border-radius:10px;">
+        </a>
+        
+        <div class="d-flex align-items-center gap-3 order-lg-3">
+          <button class="btn btn-link text-decoration-none p-0 hover-trigger" id="theme-toggle" style="color:var(--text-main)" aria-label="Mudar Tema">
+            <i class="fas fa-moon fs-5"></i>
+          </button>
+          <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-label="Menu">
+            <i class="fas fa-bars text-brand fa-lg"></i>
+          </button>
+        </div>
 
-      <div class="collapse navbar-collapse" id="menu">
-        <ul class="navbar-nav ms-auto align-items-center">
-          <li class="nav-item"><a class="nav-link" href="#inicio">Início</a></li>
-          <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
-          <li class="nav-item"><a class="nav-link" href="#cursos">Cursos</a></li>
-          <li class="nav-item"><a class="nav-link" href="#projetos">Projetos</a></li>
-          <li class="nav-item"><a class="nav-link" href="#habilidades">Habilidades</a></li>
-          <li class="nav-item"><a class="nav-link" href="#timeline">Linha do Tempo</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
-          <li class="nav-item ms-3">
-            <a href="https://www.linkedin.com/in/guilherme-belinelo-7591b5307/" target="_blank" class="nav-link" aria-label="LinkedIn">
-              <i class="fab fa-linkedin"></i>
-            </a>
-          </li>
-          <li class="nav-item ms-2">
-            <a href="https://github.com/MrRobotS0" target="_blank" class="nav-link" aria-label="GitHub">
-              <i class="fab fa-github"></i>
-            </a>
-          </li>
-          <li class="nav-item ms-3">
-            <button id="theme-toggle" class="btn btn-link nav-link p-0" aria-label="Alternar tema" title="Alternar tema">🌓</button>
-          </li>
-        </ul>
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ms-auto me-4">
+            <li class="nav-item"><a class="nav-link hover-trigger" href="#inicio">Início</a></li>
+            <li class="nav-item"><a class="nav-link hover-trigger" href="#sobre">Sobre</a></li>
+            <li class="nav-item"><a class="nav-link hover-trigger" href="#formacao">Formação</a></li>
+            <li class="nav-item"><a class="nav-link hover-trigger" href="#projetos">Projetos</a></li>
+            <li class="nav-item"><a class="nav-link hover-trigger" href="#habilidades">Skills</a></li>
+            <li class="nav-item"><a class="nav-link hover-trigger" href="#timeline">Timeline</a></li>
+          </ul>
+        </div>
       </div>
     </nav>
   </header>
 
-  <main id="main">
-    <!-- HERO -->
-    <section id="inicio" class="container py-5 py-md-6">
-      <div class="hero-card text-center" data-aos="fade-up">
-        <h1>Olá, eu sou <span class="hero-name">Guilherme Belinelo</span></h1>
-        <p class="lead typewriter mt-2" id="role-rotator">Desenvolvedor Full-Stack Jr.</p>
-        <div class="d-flex gap-2 justify-content-center mt-3 flex-wrap">
-          <a href="#projetos" class="btn btn-primary-custom">Ver meus projetos</a>
-          <a href="mailto:guilhermebelinelo@outlook.com" class="btn btn-outline-light">Entrar em contato</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- SOBRE -->
-    <section id="sobre" class="container">
-      <div class="glass" data-aos="fade-up">
-        <div class="section-head">
-          <h2 class="m-0"><i class="fas fa-user me-2"></i>Sobre Mim</h2>
-          <span class="line"></span>
-        </div>
-        <p>Sou Desenvolvedor Full Stack com experiência em aplicações web/mobile utilizando PHP, React, Python, C#, ASP.NET Core, JavaScript e bancos de dados relacionais. Possuo uma sólida base acadêmica e experiência prática em projetos acadêmicos e empresariais. Fascinado por tecnologia e sempre aprendendo novas ferramentas.</p>
-        <p><strong>Localização:</strong> Araçatuba, São Paulo - Brasil</p>
-        <p><strong>Idade:</strong> 18 anos</p>
-        <h4 class="text-info mt-3"><i class="fas fa-graduation-cap me-2"></i>Formação & Experiência</h4>
-        <ul class="list-unstyled mb-0">
-          <li><strong>Curso Técnico de ADS</strong> no Senai Duque de Caxias | 2023 - 2024</li>
-          <li><strong>Curso Superior de ADS</strong> na Fatec Araçatuba | 2025 - 2027 (Previsão de Conclusão)</li>
-          <br>
-          <li><strong>Estágio de T.I na Colormaq Araçatuba</strong> | 04/2025</li>
-          <li>Desenvolvimento de aplicações web/mobile com PHP, React, Python, Node.js</li>
-          <li>Análise e modelagem de dados com SQL Server, MySQL, PostgreSQL</li>
-          <li>DevOps - Supabase</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- CURSOS -->
-    <section id="cursos" class="container">
-      <div class="glass" data-aos="fade-up">
-        <div class="section-head">
-          <h2 class="m-0"><i class="fas fa-book me-2"></i>Cursos Complementares</h2>
-          <span class="line"></span>
-        </div>
-        <ul class="mb-0">
-          <li><span style="color: var(--brand)">MICROSOFT POWER BI</span> na escola Senai Duque de Caxias</li>
-          <li><span style="color: var(--brand)">FINANÇAS PESSOAIS</span> na escola Senai Duque de Caxias</li>
-          <li><span style="color: var(--brand)">DESVENDANDO A INDÚSTRIA 4.0</span> na escola Senai Duque de Caxias</li>
-          <li><span style="color: var(--brand)">PREPARAÇÃO PARA O MUNDO DO TRABALHO</span> na escola Senai Duque de Caxias</li>
-          <li><span style="color: var(--brand)">WEB 3.0</span> na escola Senai Duque de Caxias</li>
-          <li><span style="color: var(--brand)">DESVENDANDO O 5G</span> na escola Senai Duque de Caxias</li>
-          <li><span style="color: var(--brand)">PRIVACIDADE E PROTEÇÃO DE DADOS (LGPD)</span> na escola Senai Duque de Caxias</li>
-          <li><span style="color: var(--brand)">EXCEL BÁSICO</span> na escola Senai Duque de Caxias</li>
-          <li><span style="color: var(--brand)">DESVENDANDO A BLOCKCHAIN</span> na escola Senai Duque de Caxias</li>
-          <li><span style="color: var(--brand)">LÓGICA DE PROGRAMAÇÃO</span> na escola Senai Duque de Caxias</li>
-          <li><span style="color: var(--brand)">TECNOLOGIA DA INFORMAÇÃO E COMUNICAÇÃO</span> na escola Senai Duque de Caxias</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- PROJETOS -->
-    <section id="projetos" class="container">
-      <div class="glass" data-aos="fade-up">
-        <div class="section-head">
-          <h2 class="m-0"><i class="fas fa-code me-2"></i>Projetos</h2>
-          <span class="line"></span>
-        </div>
-
-        <!-- Filtros -->
-        <div class="d-flex gap-2 flex-wrap mb-3" id="project-filters">
-          <button class="btn btn-chip active" data-filter="all">Todos</button>
-          <button class="btn btn-chip" data-filter="back">Back-End</button>
-          <button class="btn btn-chip" data-filter="full">Full-Stack</button>
-          <button class="btn btn-chip" data-filter="front">Front-End</button>
-        </div>
-
-        <!-- Grid + carrossel (mobile) -->
-        <div class="d-none d-md-grid projects-grid" id="projects-grid">
-          <article class="project-card" data-tags="back">
-            <div>
-              <h5 class="project-title">API para Aplicação mobile de Gerenciamento de EPI</h5>
-              <p class="mb-2">Backend de Aplicativo mobile para registrar uso de EPI</p>
-            </div>
-            <div>
-              <div class="mb-2"><strong>Tecnologias:</strong></div>
-              <span class="tech-badge"></i> ASP.NET Core Web API</span>
-              <span class="tech-badge">C#</span>
-              <span class="tech-badge">PostgreSQL</span>
-              <span class="tech-badge">Swagger</span>
-              <span class="tech-badge">CORS</span>
-            </div>
-          </article>
-
-          <article class="project-card" data-tags="front">
-            <div>
-              <h5 class="project-title">Termosense</h5>
-              <p class="mb-2">Aplicativo desenvolvido para monitoramento de temperatura.</p>
-            </div>
-            <div>
-              <div class="mb-2"><strong>Tecnologias:</strong></div>
-              <span class="tech-badge">ASP.NET Core Web API</span>
-              <span class="tech-badge">C#</span>
-              <span class="tech-badge">PostgreSQL</span>
-              <span class="tech-badge">Swagger</span>
-              <span class="tech-badge">Azure</span>
-              <span class="tech-badge">Flutter</span>
-            </div>
-          </article>
-
-          <article class="project-card" data-tags="full">
-            <div>
-              <h5 class="project-title">Loja Durk</h5>
-              <p class="mb-2">Plataforma e-commerce virtual de roupas.</p>
-            </div>
-            <div>
-              <div class="mb-2"><strong>Tecnologias:</strong></div>
-              <span class="tech-badge">PHP</span>
-              <span class="tech-badge">MySQL</span>
-              <span class="tech-badge">JavaScript</span>
-            </div>
-          </article>
-
-          <article class="project-card" data-tags="full">
-            <div>
-              <h5 class="project-title">Plataforma de cursos online</h5>
-              <p class="mb-2">Desenvolvimento de plataforma web para exibição de cursos em vídeo com progresso e emissão de certificados.</p>
-            </div>
-            <div>
-              <div class="mb-2"><strong>Tecnologias:</strong></div>
-              <span class="tech-badge">PHP</span>
-              <span class="tech-badge">SQL Server</span>
-              <span class="tech-badge">JavaScript</span>
-            </div>
-          </article>
-
-          <article class="project-card" data-tags="full">
-            <div>
-              <h5 class="project-title">Forecast</h5>
-              <p class="mb-2">Plataforma web para apontamento de Forecast</p>
-            </div>
-            <div>
-              <div class="mb-2"><strong>Tecnologias:</strong></div>
-              <span class="tech-badge">PHP</span>
-              <span class="tech-badge">SQL Server</span>
-              <span class="tech-badge">JavaScript</span>
-            </div>
-          </article>
-
-          <article class="project-card" data-tags="full">
-            <div>
-              <h5 class="project-title">Sistema de OKR</h5>
-              <p class="mb-2">Sistema web de apontamento de OKR (Objetivos e Resultados-Chave).</p>
-            </div>
-            <div>
-              <div class="mb-2"><strong>Tecnologias:</strong></div>
-              <span class="tech-badge">PHP</span>
-              <span class="tech-badge">SQL Server</span>
-              <span class="tech-badge">JavaScript</span>
-            </div>
-          </article>
-
-          <article class="project-card" data-tags="full">
-            <div>
-              <h5 class="project-title">Service Desk</h5>
-              <p class="mb-2">Contribuição no desenvolvimento da plataforma web para atendimento e gerenciamento de chamados</p>
-            </div>
-            <div>
-              <div class="mb-2"><strong>Tecnologias:</strong></div>
-              <span class="tech-badge">React</span>
-              <span class="tech-badge">PostgreSQL</span>
-              <span class="tech-badge">TypeScript</span>
-            </div>
-          </article>
-        </div>
-
-
-        <!-- Carrossel Swiper para telas pequenas -->
-        <div class="d-md-none">
-          <div class="swiper" id="projects-swiper">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <article class="project-card" data-tags="back">
-                  <div>
-                    <h5 class="project-title">API para Aplicação mobile de Gerenciamento de EPI</h5>
-                    <p class="mb-2">Backend de Aplicativo mobile para registrar uso de EPI</p>
-                  </div>
-                  <div>
-                    <div class="mb-2"><strong>Tecnologias:</strong></div>
-                    <span class="tech-badge">ASP.NET Core Web API</span>
-                    <span class="tech-badge">C#</span>
-                    <span class="tech-badge">PostgreSQL</span>
-                    <span class="tech-badge">Swagger</span>
-                    <span class="tech-badge">CORS</span>
-                  </div>
-                </article>
-              </div>
-              <div class="swiper-slide">
-                <article class="project-card" data-tags="front">
-                  <div>
-                    <h5 class="project-title">Termosense</h5>
-                    <p class="mb-2">Aplicativo desenvolvido para monitoramento de temperatura.</p>
-                  </div>
-                  <div>
-                    <div class="mb-2"><strong>Tecnologias:</strong></div>
-                    <span class="tech-badge">ASP.NET Core Web API</span>
-                    <span class="tech-badge">C#</span>
-                    <span class="tech-badge">PostgreSQL</span>
-                    <span class="tech-badge">Swagger</span>
-                    <span class="tech-badge">Azure</span>
-                    <span class="tech-badge">Flutter</span>
-                  </div>
-                </article>
-              </div>
-              <div class="swiper-slide">
-                <article class="project-card" data-tags="full">
-                  <div>
-                    <h5 class="project-title">Loja Durk</h5>
-                    <p class="mb-2">Plataforma e-commerce virtual de roupas.</p>
-                  </div>
-                  <div>
-                    <div class="mb-2"><strong>Tecnologias:</strong></div>
-                    <span class="tech-badge">PHP</span>
-                    <span class="tech-badge">MySQL</span>
-                    <span class="tech-badge">JavaScript</span>
-                    <span class="tech-badge">Frameworks/Bibliotecas</span>
-                  </div>
-                </article>
-              </div>
-              <div class="swiper-slide">
-                <article class="project-card" data-tags="full">
-                  <div>
-                    <h5 class="project-title">Plataforma de cursos online</h5>
-                    <p class="mb-2">Desenvolvimento de plataforma web para exibição de cursos em vídeo.</p>
-                  </div>
-                  <div>
-                    <div class="mb-2"><strong>Tecnologias:</strong></div>
-                    <span class="tech-badge">PHP</span>
-                    <span class="tech-badge">SQL Server</span>
-                    <span class="tech-badge">JavaScript</span>
-                  </div>
-                </article>
-                <article class="project-card" data-tags="full">
-                  <div>
-                    <h5 class="project-title">Forecast</h5>
-                    <p class="mb-2">Plataforma web para apontamento de Forecast</p>
-                  </div>
-                  <div>
-                    <div class="mb-2"><strong>Tecnologias:</strong></div>
-                    <span class="tech-badge">PHP</span>
-                    <span class="tech-badge">SQL Server</span>
-                    <span class="tech-badge">JavaScript</span>
-                  </div>
-                </article>
+  <main>
+    <section id="inicio" class="d-flex align-items-center min-vh-100 position-relative container">
+      <div style="position:absolute; width:500px; height:500px; background:var(--brand-color); opacity:0.1; filter:blur(100px); border-radius:50%; z-index:-1; top:10%; right:0;"></div>
       
-                <article class="project-card" data-tags="full">
-                  <div>
-                    <h5 class="project-title">Sistema de OKR</h5>
-                    <p class="mb-2">Sistema web de apontamento de OKR (Objetivos e Resultados-Chave).</p>
-                  </div>
-                  <div>
-                    <div class="mb-2"><strong>Tecnologias:</strong></div>
-                    <span class="tech-badge">PHP</span>
-                    <span class="tech-badge">SQL Server</span>
-                    <span class="tech-badge">JavaScript</span>
-                  </div>
-                </article>
-      
-                <article class="project-card" data-tags="full">
-                  <div>
-                    <h5 class="project-title">Service Desk</h5>
-                    <p class="mb-2">Contribuição no dev. da plataforma web para atendimento de chamados</p>
-                  </div>
-                  <div>
-                    <div class="mb-2"><strong>Tecnologias:</strong></div>
-                    <span class="tech-badge">React</span>
-                    <span class="tech-badge">PostgreSQL</span>
-                    <span class="tech-badge">TypeScript</span>
-                  </div>
-                </article>
+      <div class="row align-items-center w-100 m-0">
+        <div class="col-lg-8 p-0" data-aos="fade-up">
+          <p class="font-mono text-brand mb-2">Olá, eu sou</p>
+          <h1 style="font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.1;" class="mb-2">Guilherme Belinelo</h1>
+          <h2 class="mb-4 text-brand" style="font-size: clamp(1.2rem, 2vw, 2rem); min-height: 1.2em;">
+            <span id="typed-text"></span>
+          </h2>
+          <p class="lead mb-4" style="max-width: 650px;">
+            Desenvolvedor Full-Stack com experiência em aplicações web/mobile. 
+            Especialista em ecossistema .NET, PHP, React e Bancos de Dados Relacionais.
+          </p>
+          <div class="d-flex gap-3 flex-wrap">
+            <a href="#projetos" class="btn-glow hover-trigger text-decoration-none">Ver Projetos</a>
+            <a href="#contato" class="btn-outline hover-trigger text-decoration-none">Contato</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre" class="py-5 container">
+      <div class="row g-5">
+        <div class="col-lg-6" data-aos="fade-right">
+          <div class="glass-card h-100" data-tilt data-tilt-max="5">
+            <h3 class="mb-3"><i class="fas fa-user-circle me-2 text-brand"></i>Sobre Mim</h3>
+            <p>
+              Sou um desenvolvedor de 18 anos, residente em Araçatuba-SP. Possuo uma sólida base acadêmica e experiência prática em projetos corporativos e universitários.
+            </p>
+            <p>
+              Fascinado por tecnologia, comecei como autodidata em cibersegurança e hoje construo soluções completas. Atualmente focado no ecossistema Microsoft (C#, ASP.NET) e desenvolvimento Web Moderno.
+            </p>
+            <div class="row mt-4 pt-3 border-top" style="border-color: var(--card-border)!important">
+              <div class="col-6">
+                <strong>Idade:</strong> <span>18 Anos</span>
+              </div>
+              <div class="col-6">
+                <strong>Local:</strong> <span>Araçatuba, SP</span>
               </div>
             </div>
-            <div class="swiper-pagination"></div>
           </div>
         </div>
 
-      </div>
-    </section>
+        <div class="col-lg-6" id="formacao" data-aos="fade-left">
+          <div class="glass-card h-100" data-tilt data-tilt-max="5">
+            <h3 class="mb-4"><i class="fas fa-graduation-cap me-2 text-brand"></i>Formação & Experiência</h3>
+            
+            <div class="timeline-item pb-3">
+              <div class="timeline-dot"></div>
+              <span class="font-mono text-brand small">04/2025 - Atual</span>
+              <h5>Estágio de T.I</h5>
+              <p class="mb-0"><strong>Colormaq Araçatuba</strong></p>
+              <small>Dev Web/Mobile (PHP, React, Python), Banco de Dados, DevOps.</small>
+            </div>
 
-    <!-- HABILIDADES -->
-    <section id="habilidades" class="container">
-      <div class="glass" data-aos="fade-up">
-        <div class="section-head">
-          <h2 class="m-0"><i class="fas fa-laptop-code me-2"></i>Habilidades</h2>
-          <span class="line"></span>
-        </div>
-        <div class="row g-3">
-          <div class="col-md-4 skills-col" data-aos="fade-up" data-aos-delay="50">
-            <div class="glass p-3 h-100">
-              <h5 class="text-info">Front-End</h5>
-              <ul class="list-unstyled mb-0">
-                <li>HTML5</li>
-                <li>CSS3</li>
-                <li>Frameworks/Bibliotecas visuais</li>
-                <li>JavaScript</li>
-                <li>React</li>
-                <li>Figma (UI/UX)</li>
-              </ul>
+            <div class="timeline-item pb-3">
+              <div class="timeline-dot"></div>
+              <span class="font-mono text-brand small">2025 - 2027</span>
+              <h5>Superior em ADS</h5>
+              <p class="mb-0"><strong>Fatec Araçatuba</strong></p>
+              <small>Análise e Desenvolvimento de Sistemas.</small>
             </div>
-          </div>
-          <div class="col-md-4 skills-col" data-aos="fade-up" data-aos-delay="100">
-            <div class="glass p-3 h-100">
-              <h5 class="text-info">Back-End</h5>
-              <ul class="list-unstyled">
-                <li>PHP</li>
-                <li>C# / API REST com ASP.NET</li>
-                <li>Python</li>
-              </ul>
-              <h5 class="text-info mt-3">Banco de Dados</h5>
-              <ul class="list-unstyled mb-0">
-                <li>MySQL</li>
-                <li>SQL Server</li>
-                <li>PostgreSQL</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-4 skills-col" data-aos="fade-up" data-aos-delay="150">
-            <div class="glass p-3 h-100">
-              <h5 class="text-info">Ferramentas & Metodologias</h5>
-              <ul class="list-unstyled mb-0">
-                <li>Git / GitHub</li>
-                <li>Postman / PgAdmin</li>
-                <li>Scrum / Kanban / OKR</li>
-              </ul>
+
+            <div class="timeline-item border-0 pb-0">
+              <div class="timeline-dot"></div>
+              <span class="font-mono text-brand small">2023 - 2024</span>
+              <h5>Técnico em Desenvolvimento</h5>
+              <p class="mb-0"><strong>Senai Duque de Caxias</strong></p>
+              <small>Desenvolvimento de Sistemas Completo.</small>
             </div>
           </div>
         </div>
       </div>
+
+      <div class="mt-5" data-aos="fade-up">
+        <h4 class="mb-4"><i class="fas fa-certificate me-2 text-brand"></i>Cursos Complementares (Senai)</h4>
+        <div class="cert-grid">
+          <div class="cert-item hover-trigger"><i class="fas fa-check-circle cert-icon"></i> Microsoft Power BI</div>
+          <div class="cert-item hover-trigger"><i class="fas fa-check-circle cert-icon"></i> Lógica de Programação</div>
+          <div class="cert-item hover-trigger"><i class="fas fa-check-circle cert-icon"></i> Web 3.0</div>
+          <div class="cert-item hover-trigger"><i class="fas fa-check-circle cert-icon"></i> Desvendando a Blockchain</div>
+          <div class="cert-item hover-trigger"><i class="fas fa-check-circle cert-icon"></i> Desvendando o 5G</div>
+          <div class="cert-item hover-trigger"><i class="fas fa-check-circle cert-icon"></i> Indústria 4.0</div>
+          <div class="cert-item hover-trigger"><i class="fas fa-check-circle cert-icon"></i> Privacidade e LGPD</div>
+          <div class="cert-item hover-trigger"><i class="fas fa-check-circle cert-icon"></i> Tecnologia da Informação</div>
+          <div class="cert-item hover-trigger"><i class="fas fa-check-circle cert-icon"></i> Excel Básico</div>
+          <div class="cert-item hover-trigger"><i class="fas fa-check-circle cert-icon"></i> Finanças Pessoais</div>
+          <div class="cert-item hover-trigger"><i class="fas fa-check-circle cert-icon"></i> Mundo do Trabalho</div>
+        </div>
+      </div>
     </section>
 
-    <!-- TIMELINE -->
-    <section id="timeline" class="container">
-      <div class="glass" data-aos="fade-up">
-        <div class="section-head">
-          <h2 class="m-0"><i class="fas fa-stream me-2"></i>Linha do Tempo</h2>
-          <span class="line"></span>
+    <section id="projetos" class="py-5 container">
+      <div class="d-flex align-items-end justify-content-between mb-5" data-aos="fade-up">
+        <div>
+          <p class="text-brand font-mono mb-0">Portfólio</p>
+          <h2>Projetos Desenvolvidos</h2>
         </div>
-        <div class="timeline mt-3">
-          <div class="t-item right" data-tags="" data-aos="fade-left">
-            <span class="t-dot"></span>
-            <div class="t-card">
-              <div class="mb-2"><i class="fas fa-shield-alt text-info me-2"></i><strong>2020 – 2022</strong></div>
-              <p class="mb-0">Conhecimento prático e autodidata em Cibersegurança: estudos, práticas e pequenos projetos pessoais.</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-xl-4" data-aos="fade-up">
+          <div class="glass-card h-100 hover-trigger" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+            <div class="project-icon"><i class="fas fa-helmet-safety"></i></div>
+            <div class="card-content">
+              <h4>API Gestão de EPI</h4>
+              <p class="small">Backend para aplicação mobile de registro de uso de EPI.</p>
+              <div>
+                <span class="tech-badge">ASP.NET Core</span>
+                <span class="tech-badge">C#</span>
+                <span class="tech-badge">PostgreSQL</span>
+                <span class="tech-badge">Swagger</span>
+              </div>
             </div>
           </div>
+        </div>
 
-          <div class="t-item" data-aos="fade-right">
-            <span class="t-dot"></span>
-            <div class="t-card">
-              <div class="mb-2"><i class="fas fa-graduation-cap text-info me-2"></i><strong>2023</strong></div>
-              <p class="mb-0">Início do Curso Técnico em ADS no Senai; desenvolvimento de projetos pessoais e aprendizados práticos.</p>
+        <div class="col-md-6 col-xl-4" data-aos="fade-up" data-aos-delay="50">
+          <div class="glass-card h-100 hover-trigger" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+            <div class="project-icon"><i class="fas fa-temperature-low"></i></div>
+            <div class="card-content">
+              <h4>Termosense</h4>
+              <p class="small">App para monitoramento de temperatura IoT.</p>
+              <div>
+                <span class="tech-badge">Flutter</span>
+                <span class="tech-badge">Azure</span>
+                <span class="tech-badge">ASP.NET API</span>
+                <span class="tech-badge">C#</span>
+              </div>
             </div>
           </div>
+        </div>
 
-          <div class="t-item right" data-aos="fade-left">
-            <span class="t-dot"></span>
-            <div class="t-card">
-              <div class="mb-2"><i class="fas fa-certificate text-info me-2"></i><strong>2024</strong></div>
-              <p class="mb-0">Conclusão de cursos complementares e do Técnico em ADS; consolidação de conhecimentos em desenvolvimento web.</p>
+        <div class="col-md-6 col-xl-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="glass-card h-100 hover-trigger" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+            <div class="project-icon"><i class="fas fa-headset"></i></div>
+            <div class="card-content">
+              <h4>Service Desk</h4>
+              <p class="small">Plataforma web para gerenciamento e atendimento de chamados.</p>
+              <div>
+                <span class="tech-badge">React</span>
+                <span class="tech-badge">TypeScript</span>
+                <span class="tech-badge">PostgreSQL</span>
+              </div>
             </div>
           </div>
+        </div>
 
-          <div class="t-item" data-aos="fade-right">
-            <span class="t-dot"></span>
-            <div class="t-card">
-              <div class="mb-2"><i class="fas fa-briefcase text-info me-2"></i><strong>2025</strong></div>
-              <p class="mb-0">Ingresso na Faculdade de ADS (Fatec Araçatuba) e início de Estágio em T.I na Colormaq Araçatuba.</p>
+        <div class="col-md-6 col-xl-4" data-aos="fade-up">
+          <div class="glass-card h-100 hover-trigger" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+            <div class="project-icon"><i class="fas fa-shirt"></i></div>
+            <div class="card-content">
+              <h4>Loja Durk</h4>
+              <p class="small">E-commerce virtual completo para venda de roupas.</p>
+              <div>
+                <span class="tech-badge">PHP</span>
+                <span class="tech-badge">MySQL</span>
+                <span class="tech-badge">JavaScript</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-4" data-aos="fade-up" data-aos-delay="50">
+          <div class="glass-card h-100 hover-trigger" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+            <div class="project-icon"><i class="fas fa-video"></i></div>
+            <div class="card-content">
+              <h4>Plataforma E-Learning</h4>
+              <p class="small">Sistema web para cursos em vídeo com certificados.</p>
+              <div>
+                <span class="tech-badge">PHP</span>
+                <span class="tech-badge">SQL Server</span>
+                <span class="tech-badge">JavaScript</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="glass-card h-100 hover-trigger" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+            <div class="project-icon"><i class="fas fa-bullseye"></i></div>
+            <div class="card-content">
+              <h4>Sistema de OKR</h4>
+              <p class="small">Apontamento de Objetivos e Resultados-Chave corporativos.</p>
+              <div>
+                <span class="tech-badge">PHP</span>
+                <span class="tech-badge">SQL Server</span>
+                <span class="tech-badge">JS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-4" data-aos="fade-up">
+          <div class="glass-card h-100 hover-trigger" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+            <div class="project-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="card-content">
+              <h4>Sistema Forecast</h4>
+              <p class="small">Plataforma web para apontamento de previsões financeiras.</p>
+              <div>
+                <span class="tech-badge">PHP</span>
+                <span class="tech-badge">SQL Server</span>
+                <span class="tech-badge">JS</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CONTATO -->
-    <section id="contato" class="container">
-      <div class="glass" data-aos="fade-up">
-        <div class="section-head">
-          <h2 class="m-0"><i class="fas fa-envelope me-2"></i>Contato</h2>
-          <span class="line"></span>
-        </div>
-        <div class="d-flex align-items-center gap-3 flex-wrap">
-          <img src="eu.png" data-src="eu.png" alt="Foto de perfil de Guilherme Belinelo"
-               class="contact-photo" loading="lazy" decoding="async" width="150" height="150">
-          <div class="flex-grow-1 d-flex flex-column gap-2">
-            <div class="d-flex align-items-center gap-2 flex-wrap">
-              <a href="mailto:guilhermebelinelo@outlook.com" class="link-light link-underline-opacity-0 link-underline-opacity-75-hover">
-                <i class="fas fa-envelope"></i> guilhermebelinelo@outlook.com
-              </a>
-              <button class="btn btn-primary-custom btn-sm" id="copy-mail" type="button">Copiar e-mail</button>
-            </div>
-            <a href="https://github.com/MrRobotS0" target="_blank" class="link-light link-underline-opacity-0 link-underline-opacity-75-hover">
-              <i class="fab fa-github"></i> github.com/MrRobotS0
-            </a>
-            <a href="https://www.linkedin.com/in/guilherme-belinelo-7591b5307/" target="_blank" class="link-light link-underline-opacity-0 link-underline-opacity-75-hover">
-              <i class="fab fa-linkedin"></i> linkedin.com/in/guilherme-belinelo-7591b5307
-            </a>
+    <section id="habilidades" class="py-5 container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <p class="text-brand font-mono mb-0">Stack Tecnológico</p>
+        <h2>Habilidades & Ferramentas</h2>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4" data-aos="fade-up">
+          <div class="glass-card h-100" data-tilt data-tilt-scale="1.02">
+            <h4 class="text-brand mb-3"><i class="fas fa-code me-2"></i>Front-End</h4>
+            <ul class="list-unstyled">
+              <li><i class="fas fa-check me-2 text-brand"></i>HTML5 & CSS3</li>
+              <li><i class="fas fa-check me-2 text-brand"></i>JavaScript (ES6+)</li>
+              <li><i class="fas fa-check me-2 text-brand"></i>React.js / React Native</li>
+              <li><i class="fas fa-check me-2 text-brand"></i>Figma (UI/UX)</li>
+              <li><i class="fas fa-check me-2 text-brand"></i>Frameworks Visuais</li>
+            </ul>
           </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="glass-card h-100" data-tilt data-tilt-scale="1.02">
+            <h4 class="text-brand mb-3"><i class="fas fa-server me-2"></i>Back-End</h4>
+            <ul class="list-unstyled">
+              <li><i class="fas fa-check me-2 text-brand"></i>C# / .NET Core</li>
+              <li><i class="fas fa-check me-2 text-brand"></i>ASP.NET Web API</li>
+              <li><i class="fas fa-check me-2 text-brand"></i>PHP</li>
+              <li><i class="fas fa-check me-2 text-brand"></i>Python</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="glass-card h-100" data-tilt data-tilt-scale="1.02">
+            <h4 class="text-brand mb-3"><i class="fas fa-database me-2"></i>Dados & Tools</h4>
+            <ul class="list-unstyled">
+              <li><i class="fas fa-check me-2 text-brand"></i>SQL Server / MySQL</li>
+              <li><i class="fas fa-check me-2 text-brand"></i>PostgreSQL</li>
+              <li><i class="fas fa-check me-2 text-brand"></i>Git / GitHub</li>
+              <li><i class="fas fa-check me-2 text-brand"></i>Postman / PgAdmin</li>
+              <li><i class="fas fa-check me-2 text-brand"></i>Scrum / Kanban / OKR</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="timeline" class="py-5 container">
+      <div class="glass-card" data-aos="fade-up">
+        <h3 class="mb-4 text-center">Jornada Profissional</h3>
+        <div class="timeline ps-4 border-start border-secondary">
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <strong class="d-block text-brand">2025</strong>
+            <p class="mb-1"><strong>Ingresso na Faculdade & Estágio</strong></p>
+            <p class="small">Início do curso Superior em ADS na Fatec e início do Estágio em T.I na Colormaq.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <strong class="d-block text-brand">2024</strong>
+            <p class="mb-1"><strong>Conclusão Técnica</strong></p>
+            <p class="small">Conclusão do Técnico em ADS no Senai e realização de diversos cursos complementares (PowerBI, LGPD, etc).</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <strong class="d-block text-brand">2023</strong>
+            <p class="mb-1"><strong>Início da Formação Técnica</strong></p>
+            <p class="small">Início do Curso Técnico em Desenvolvimento de Sistemas no Senai. Foco em lógica e projetos.</p>
+          </div>
+
+          <div class="timeline-item pb-0 border-0">
+            <div class="timeline-dot"></div>
+            <strong class="d-block text-brand">2020 – 2022</strong>
+            <p class="mb-1"><strong>Autodidata</strong></p>
+            <p class="small">Estudos iniciais em Cibersegurança, Linux e lógica de programação.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="py-5 container mb-5">
+      <div class="glass-card text-center py-5" data-aos="zoom-in" data-tilt>
+        <img src="eu.png" alt="Guilherme" class="mb-4 hover-trigger" style="width:130px; height:130px; border-radius:50%; object-fit:cover; border:3px solid var(--brand-color);">
+        <h2 class="mb-3">Vamos Conectar?</h2>
+        <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+          <a href="https://linkedin.com/in/guilherme-belinelo-7591b5307/" target="_blank" class="btn-glow hover-trigger text-decoration-none">
+            <i class="fab fa-linkedin"></i> LinkedIn
+          </a>
+          <a href="https://github.com/MrRobotS0" target="_blank" class="btn-outline hover-trigger text-decoration-none">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+          <button id="btn-copy" class="btn-outline hover-trigger text-decoration-none">
+            <i class="fas fa-copy me-2"></i> Copiar E-mail
+          </button>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="text-center py-3 mt-4">
-    © 2025 Guilherme Belinelo. Todos os direitos reservados.
+  <footer class="text-center py-4 border-top" style="border-color: var(--card-border)!important;">
+    <small class="text-muted">&copy; 2025 Guilherme Belinelo. Todos os direitos reservados.</small>
   </footer>
 
-  <!-- Toast copiar -->
-  <div class="toast align-items-center text-bg-dark border-0 position-fixed bottom-0 end-0 m-3" id="copy-toast" role="status" aria-live="polite">
-    <div class="d-flex">
-      <div class="toast-body">E-mail copiado!</div>
-      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="copyToast" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">
+          <i class="fas fa-check-circle me-2"></i> E-mail copiado!
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
     </div>
   </div>
 
-  <!-- Botão voltar ao topo (visual) -->
-  <button id="to-top" class="btn btn-primary-custom" aria-label="Voltar ao topo">↑</button>
-
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
   <script>
-    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    AOS.init({ duration: 800, once: true });
 
-    // Header visual ao rolar (barra de progresso)
-    document.addEventListener('scroll', ()=>{
-      const h = document.documentElement;
-      const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
-      document.getElementById('scroll-progress').style.width = pct + '%';
+    new Typed('#typed-text', {
+      strings: ['Full-Stack Developer Jr.', 'C# & .NET Enthusiast', 'PHP & React Developer'],
+      typeSpeed: 50, backSpeed: 30, backDelay: 2000, loop: true
     });
 
-    // Rotação de cargos (efeito visual)
-    const roles = [
-      'Desenvolvedor Full-Stack Jr.',
-      'APIs REST com ASP.NET Core (C#)',
-      'PHP • Python • JavaScript • React',
-      'SQL Server • MySQL • PostgreSQL',
-    ];
-    let r = 0;
-    function rotateRole(){
-      const el = document.getElementById('role-rotator');
-      if(!el) return;
-      r = (r + 1) % roles.length;
-      el.animate([{opacity:1},{opacity:0}], {duration:220, fill:'forwards'}).onfinish = () => {
-        el.textContent = roles[r];
-        el.animate([{opacity:0},{opacity:1}], {duration:220, fill:'forwards'});
-      };
+    const cursor = document.getElementById("cursor");
+    const cursorDot = document.getElementById("cursor-dot");
+    
+    window.addEventListener("mousemove", (e) => {
+      cursorDot.style.left = `${e.clientX}px`;
+      cursorDot.style.top = `${e.clientY}px`;
+      cursor.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
+    });
+
+    document.querySelectorAll('.hover-trigger, a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+    });
+
+    const themeBtn = document.getElementById('theme-toggle');
+    const themeIcon = themeBtn.querySelector('i');
+
+    function setTheme(mode) {
+      if (mode === 'light') {
+        document.body.classList.add('light-mode');
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.body.classList.remove('light-mode');
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'dark');
+      }
     }
-    if(!prefersReduced) setInterval(rotateRole, 2400);
+    
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    setTheme(savedTheme);
 
-    // AOS
-    AOS.init({ duration: 750, once: true, easing: 'ease-out-cubic', disable: prefersReduced });
-
-    // Swiper mobile
-    new Swiper('#projects-swiper', {
-      slidesPerView: 1,
-      spaceBetween: 16,
-      pagination: { el: '.swiper-pagination', clickable: true }
+    themeBtn.addEventListener('click', () => {
+      setTheme(document.body.classList.contains('light-mode') ? 'dark' : 'light');
     });
 
-    // Tema (melhoria visual com título/aria)
-    (function(){
-      const btn = document.getElementById('theme-toggle');
-      const setTheme = (mode)=>{
-        document.documentElement.classList.toggle('light-mode', mode==='light');
-        document.body.classList.toggle('light-mode', mode==='light');
-        localStorage.setItem('theme', mode);
-        btn.setAttribute('aria-pressed', mode==='light');
-        btn.title = mode==='light' ? 'Usar tema escuro' : 'Usar tema claro';
-      };
-      const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light':'dark');
-      setTheme(saved);
-      btn?.addEventListener('click', ()=> setTheme(document.body.classList.contains('light-mode') ? 'dark' : 'light'));
-    })();
+    const copyBtn = document.getElementById('btn-copy');
+    const toastEl = document.getElementById('copyToast');
+    const toast = new bootstrap.Toast(toastEl);
 
-    // Lazy foto contato (blur-up)
-    (function(){
-      const img = document.querySelector('img[data-src]');
-      if(!img) return;
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{
-          if(!e.isIntersecting) return;
-          img.src = img.dataset.src;
-          img.onload = ()=> img.classList.add('loaded');
-          io.unobserve(img);
+    copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText('guilhermebelinelo@outlook.com').then(() => {
+            toast.show();
         });
-      }, {rootMargin:'200px'});
-      io.observe(img);
-    })();
-
-    // Filtros de projeto (grid desktop)
-    (function(){
-      const wrap = document.getElementById('project-filters');
-      const btns = [...wrap.querySelectorAll('button')];
-      const cards = [...document.querySelectorAll('#projects-grid .project-card')];
-      wrap.addEventListener('click', (e)=>{
-        const b = e.target.closest('button'); if(!b) return;
-        btns.forEach(x=>x.classList.remove('active'));
-        b.classList.add('active');
-        const value = b.dataset.filter;
-        cards.forEach(card=>{
-          const tags = (card.dataset.tags || '').split(',');
-          const show = value==='all' || tags.includes(value);
-          card.style.display = show ? '' : 'none';
-        });
-      });
-    })();
-
-    // Tilt/shine suave nos cards (visual)
-    (function(){
-      if(prefersReduced) return;
-      document.querySelectorAll('.project-card').forEach(card=>{
-        const damp = 18;
-        card.addEventListener('mousemove', e=>{
-          const r = card.getBoundingClientRect();
-          const x = e.clientX - r.left, y = e.clientY - r.top;
-          const rx = ((y - r.height/2)/damp)*-1;
-          const ry = ((x - r.width/2)/damp);
-          card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateZ(0)`;
-          card.style.setProperty('--mx', `${(x - r.width/2)/6}px`);
-          card.style.setProperty('--my', `${(y - r.height/2)/6}px`);
-        });
-        card.addEventListener('mouseleave', ()=>{
-          card.style.transform=''; card.style.setProperty('--mx','0px'); card.style.setProperty('--my','0px');
-        });
-      });
-    })();
-
-    // Copiar e-mail + toast
-    (function(){
-      const btn = document.getElementById('copy-mail');
-      if(!btn) return;
-      btn.addEventListener('click', async ()=>{
-        try{
-          await navigator.clipboard.writeText('guilhermebelinelo@outlook.com');
-          const toastEl = document.getElementById('copy-toast');
-          if (toastEl) new bootstrap.Toast(toastEl).show();
-        }catch(err){ console.error('Falha ao copiar e-mail', err); }
-      });
-    })();
-
-    // Scrollspy simples
-    (function(){
-      const sections = [...document.querySelectorAll('main section[id]')];
-      const links = [...document.querySelectorAll('a.nav-link[href^="#"]')];
-      const map = Object.fromEntries(links.map(a=>[a.getAttribute('href').slice(1), a]));
-      const spy = new IntersectionObserver((entries)=>{
-        entries.forEach(en=>{
-          if(en.isIntersecting){
-            links.forEach(l=>l.classList.remove('active'));
-            const a = map[en.target.id]; if(a) a.classList.add('active');
-          }
-        });
-      }, {rootMargin:'-45% 0px -50% 0px', threshold:0.01});
-      sections.forEach(s=>spy.observe(s));
-    })();
-
-    // Voltar ao topo (visual)
-    (function(){
-      const btn = document.getElementById('to-top');
-      const onScroll = ()=>{
-        btn.style.display = window.scrollY > 600 ? 'inline-flex' : 'none';
-      };
-      document.addEventListener('scroll', onScroll);
-      btn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
-      onScroll();
-    })();
+    });
   </script>
-
-  <!-- FontAwesome JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
 </body>
 </html>
