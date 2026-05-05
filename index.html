@@ -160,6 +160,26 @@
       border-radius: 50%; position: absolute; left: -9px; top: 0;
       box-shadow: 0 0 0 4px var(--bg-body);
     }
+
+    /* Badge "Atual" para destacar o cargo atual */
+    .current-badge {
+      display: inline-block;
+      background: var(--brand-color);
+      color: #0a0c10;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: 8px;
+      vertical-align: middle;
+      animation: pulse-badge 2s infinite;
+    }
+    body.light-mode .current-badge { color: #fff; }
+    @keyframes pulse-badge {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
     
     .project-icon {
       font-size: 1.8rem; color: var(--brand-color); margin-bottom: 1rem;
@@ -254,10 +274,10 @@
           <ul class="navbar-nav ms-auto me-4">
             <li class="nav-item"><a class="nav-link hover-trigger" href="#inicio">Início</a></li>
             <li class="nav-item"><a class="nav-link hover-trigger" href="#sobre">Sobre</a></li>
+            <li class="nav-item"><a class="nav-link hover-trigger" href="#experiencia">Experiência</a></li>
             <li class="nav-item"><a class="nav-link hover-trigger" href="#formacao">Formação</a></li>
             <li class="nav-item"><a class="nav-link hover-trigger" href="#projetos">Projetos</a></li>
             <li class="nav-item"><a class="nav-link hover-trigger" href="#habilidades">Skills</a></li>
-            <li class="nav-item"><a class="nav-link hover-trigger" href="#timeline">Timeline</a></li>
           </ul>
         </div>
       </div>
@@ -289,42 +309,63 @@
 
     <section id="sobre" class="py-5 container">
       <div class="row g-5">
-        <div class="col-lg-6" data-aos="fade-right">
+        <div class="col-lg-12" data-aos="fade-right">
           <div class="glass-card h-100" data-tilt data-tilt-max="5">
             <h3 class="mb-3"><i class="fas fa-user-circle me-2 text-brand"></i>Sobre Mim</h3>
             <p>
-              Sou um desenvolvedor de 18 anos, residente em Araçatuba-SP. Possuo uma sólida base acadêmica e experiência prática em projetos corporativos e universitários.
+              Sou um desenvolvedor de 19 anos, residente em Araçatuba-SP. Atuo como <strong class="text-brand">Analista de Sistemas Júnior</strong> na Colormaq, com sólida base acadêmica e experiência prática em projetos corporativos e universitários.
             </p>
             <p>
               Fascinado por tecnologia, comecei como autodidata em cibersegurança e hoje construo soluções completas. Atualmente focado no ecossistema Microsoft (C#, ASP.NET) e desenvolvimento Web Moderno.
             </p>
             <div class="row mt-4 pt-3 border-top" style="border-color: var(--card-border)!important">
-              <div class="col-6">
-                <strong>Idade:</strong> <span>18 Anos</span>
+              <div class="col-md-4 col-6">
+                <strong>Idade:</strong> <span>19 Anos</span>
               </div>
-              <div class="col-6">
+              <div class="col-md-4 col-6">
                 <strong>Local:</strong> <span>Araçatuba, SP</span>
+              </div>
+              <div class="col-md-4 col-12 mt-3 mt-md-0">
+                <strong>Cargo:</strong> <span>Analista de Sistemas Jr.</span>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="col-lg-6" id="formacao" data-aos="fade-left">
+      <div class="row g-5 mt-1">
+        <!-- EXPERIÊNCIA -->
+        <div class="col-lg-6" id="experiencia" data-aos="fade-right">
           <div class="glass-card h-100" data-tilt data-tilt-max="5">
-            <h3 class="mb-4"><i class="fas fa-graduation-cap me-2 text-brand"></i>Formação & Experiência</h3>
+            <h3 class="mb-4"><i class="fas fa-briefcase me-2 text-brand"></i>Experiência Profissional</h3>
             
             <div class="timeline-item pb-3">
               <div class="timeline-dot"></div>
-              <span class="font-mono text-brand small">04/2025 - Atual</span>
-              <h5>Estágio de T.I</h5>
+              <span class="font-mono text-brand small">05/2026 - Atual</span>
+              <h5>Analista de Sistemas Júnior <span class="current-badge">ATUAL</span></h5>
               <p class="mb-0"><strong>Colormaq Araçatuba</strong></p>
-              <small>Dev Web/Mobile (PHP, React, Python), Banco de Dados, DevOps.</small>
+              <small>Análise, desenvolvimento e manutenção de sistemas corporativos. Atuação Full-Stack com C#/.NET, PHP e React.</small>
             </div>
 
+            <div class="timeline-item border-0 pb-0">
+              <div class="timeline-dot"></div>
+              <span class="font-mono text-brand small">04/2025 - 04/2026</span>
+              <h5>Estágio em T.I</h5>
+              <p class="mb-0"><strong>Colormaq Araçatuba</strong></p>
+              <small>Desenvolvimento Web/Mobile (PHP, React, Python), Banco de Dados e DevOps. 1 ano de experiência efetivada como Analista Jr.</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- FORMAÇÃO -->
+        <div class="col-lg-6" id="formacao" data-aos="fade-left">
+          <div class="glass-card h-100" data-tilt data-tilt-max="5">
+            <h3 class="mb-4"><i class="fas fa-graduation-cap me-2 text-brand"></i>Formação Acadêmica</h3>
+            
             <div class="timeline-item pb-3">
               <div class="timeline-dot"></div>
               <span class="font-mono text-brand small">2025 - 2027</span>
-              <h5>Superior em ADS</h5>
+              <h5>Superior em ADS <span class="current-badge">CURSANDO</span></h5>
               <p class="mb-0"><strong>Fatec Araçatuba</strong></p>
               <small>Análise e Desenvolvimento de Sistemas.</small>
             </div>
@@ -487,11 +528,12 @@
           <div class="glass-card h-100" data-tilt data-tilt-scale="1.02">
             <h4 class="text-brand mb-3"><i class="fas fa-code me-2"></i>Front-End</h4>
             <ul class="list-unstyled">
-              <li><i class="fas fa-check me-2 text-brand"></i>HTML5 & CSS3</li>
+              <li><i class="fas fa-check me-2 text-brand"></i>HTML5 & CSS</li>
               <li><i class="fas fa-check me-2 text-brand"></i>JavaScript (ES6+)</li>
+              <li><i class="fas fa-check me-2 text-brand"></i>TypeScript</li>
               <li><i class="fas fa-check me-2 text-brand"></i>React.js / React Native</li>
+              <li><i class="fas fa-check me-2 text-brand"></i>Next.js</li>
               <li><i class="fas fa-check me-2 text-brand"></i>Figma (UI/UX)</li>
-              <li><i class="fas fa-check me-2 text-brand"></i>Frameworks Visuais</li>
             </ul>
           </div>
         </div>
@@ -502,6 +544,8 @@
             <ul class="list-unstyled">
               <li><i class="fas fa-check me-2 text-brand"></i>C# / .NET Core</li>
               <li><i class="fas fa-check me-2 text-brand"></i>ASP.NET Web API</li>
+              <li><i class="fas fa-check me-2 text-brand"></i>Node.js</li>
+              <li><i class="fas fa-check me-2 text-brand"></i>NestJS</li>
               <li><i class="fas fa-check me-2 text-brand"></i>PHP</li>
               <li><i class="fas fa-check me-2 text-brand"></i>Python</li>
             </ul>
@@ -510,52 +554,17 @@
 
         <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
           <div class="glass-card h-100" data-tilt data-tilt-scale="1.02">
-            <h4 class="text-brand mb-3"><i class="fas fa-database me-2"></i>Dados & Tools</h4>
+            <h4 class="text-brand mb-3"><i class="fas fa-database me-2"></i>Dados & DevOps</h4>
             <ul class="list-unstyled">
               <li><i class="fas fa-check me-2 text-brand"></i>SQL Server / MySQL</li>
               <li><i class="fas fa-check me-2 text-brand"></i>PostgreSQL</li>
+              <li><i class="fas fa-check me-2 text-brand"></i>Docker</li>
+              <li><i class="fas fa-check me-2 text-brand"></i>Linux</li>
               <li><i class="fas fa-check me-2 text-brand"></i>Git / GitHub</li>
               <li><i class="fas fa-check me-2 text-brand"></i>Postman / PgAdmin</li>
               <li><i class="fas fa-check me-2 text-brand"></i>Scrum / Kanban / OKR</li>
             </ul>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="timeline" class="py-5 container">
-      <div class="glass-card" data-aos="fade-up">
-        <h3 class="mb-4 text-center">Jornada Profissional</h3>
-        <div class="timeline ps-4 border-start border-secondary">
-          
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <strong class="d-block text-brand">2025</strong>
-            <p class="mb-1"><strong>Ingresso na Faculdade & Estágio</strong></p>
-            <p class="small">Início do curso Superior em ADS na Fatec e início do Estágio em T.I na Colormaq.</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <strong class="d-block text-brand">2024</strong>
-            <p class="mb-1"><strong>Conclusão Técnica</strong></p>
-            <p class="small">Conclusão do Técnico em ADS no Senai e realização de diversos cursos complementares (PowerBI, LGPD, etc).</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <strong class="d-block text-brand">2023</strong>
-            <p class="mb-1"><strong>Início da Formação Técnica</strong></p>
-            <p class="small">Início do Curso Técnico em Desenvolvimento de Sistemas no Senai. Foco em lógica e projetos.</p>
-          </div>
-
-          <div class="timeline-item pb-0 border-0">
-            <div class="timeline-dot"></div>
-            <strong class="d-block text-brand">2020 – 2022</strong>
-            <p class="mb-1"><strong>Autodidata</strong></p>
-            <p class="small">Estudos iniciais em Cibersegurança, Linux e lógica de programação.</p>
-          </div>
-
         </div>
       </div>
     </section>
@@ -580,7 +589,7 @@
   </main>
 
   <footer class="text-center py-4 border-top" style="border-color: var(--card-border)!important;">
-    <small class="text-muted">&copy; 2025 Guilherme Belinelo. Todos os direitos reservados.</small>
+    <small class="text-muted">&copy; 2026 Guilherme Belinelo. Todos os direitos reservados.</small>
   </footer>
 
   <div class="toast-container position-fixed bottom-0 end-0 p-3">
@@ -603,7 +612,7 @@
     AOS.init({ duration: 800, once: true });
 
     new Typed('#typed-text', {
-      strings: ['Full-Stack Developer Jr.', 'C# & .NET Enthusiast', 'PHP & React Developer'],
+      strings: ['Analista de Sistemas Jr.', 'Full-Stack Developer', 'C# & .NET Enthusiast', 'PHP & React Developer'],
       typeSpeed: 50, backSpeed: 30, backDelay: 2000, loop: true
     });
 
