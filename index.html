@@ -7,7 +7,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <link rel="icon" href="logo.png" type="image/png" />
 
@@ -17,235 +17,670 @@
 
   <style>
     :root {
-      --bg-body: #0a0c10;
-      --bg-gradient: radial-gradient(circle at 50% 0%, #161b22 0%, #0a0c10 100%);
-      
-      --text-main: #f0f6fc;
-      --text-muted: #8b949e;
-      
-      --brand-color: #00f2ff;
-      --brand-hover: #00c8d4;
-      
-      --card-bg: rgba(22, 27, 34, 0.7);
-      --card-border: rgba(240, 246, 252, 0.1);
-      --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-      
-      --nav-bg: rgba(10, 12, 16, 0.95);
-      
-      --badge-bg: rgba(125, 125, 125, 0.1);
-      --badge-text: #8b949e;
+      /* PALETA REFINADA DARK */
+      --bg-body: #07080c;
+      --bg-surface: #0d0f15;
+      --bg-elevated: #12151d;
+
+      --text-main: #e6edf3;
+      --text-soft: #c9d1d9;
+      --text-muted: #7d8590;
+      --text-dim: #484f58;
+
+      --brand-primary: #00d9ff;
+      --brand-secondary: #7c5cff;
+      --brand-accent: #00ffa3;
+      --brand-gradient: linear-gradient(135deg, #00d9ff 0%, #7c5cff 100%);
+      --brand-glow: 0 0 40px rgba(0, 217, 255, 0.25);
+
+      --card-bg: rgba(18, 21, 29, 0.6);
+      --card-border: rgba(240, 246, 252, 0.08);
+      --card-border-hover: rgba(0, 217, 255, 0.3);
+      --card-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+
+      --nav-bg: rgba(7, 8, 12, 0.72);
+
+      --badge-bg: rgba(125, 133, 144, 0.08);
+      --badge-text: #c9d1d9;
+
+      --grid-color: rgba(125, 133, 144, 0.06);
     }
 
     body.light-mode {
-      --bg-body: #ffffff;
-      --bg-gradient: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-      
+      --bg-body: #f6f8fb;
+      --bg-surface: #ffffff;
+      --bg-elevated: #ffffff;
+
       --text-main: #0f172a;
+      --text-soft: #1e293b;
       --text-muted: #475569;
-      
-      --brand-color: #0077b6;
-      --brand-hover: #023e8a;
-      
-      --card-bg: rgba(255, 255, 255, 0.9);
-      --card-border: rgba(0, 0, 0, 0.1);
-      --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-      
-      --nav-bg: rgba(255, 255, 255, 0.95);
-      
-      --badge-bg: rgba(0, 0, 0, 0.05);
+      --text-dim: #94a3b8;
+
+      --brand-primary: #0284c7;
+      --brand-secondary: #7c3aed;
+      --brand-accent: #059669;
+      --brand-gradient: linear-gradient(135deg, #0284c7 0%, #7c3aed 100%);
+      --brand-glow: 0 0 40px rgba(2, 132, 199, 0.18);
+
+      --card-bg: rgba(255, 255, 255, 0.7);
+      --card-border: rgba(15, 23, 42, 0.08);
+      --card-border-hover: rgba(2, 132, 199, 0.35);
+      --card-shadow: 0 20px 50px -20px rgba(15, 23, 42, 0.15);
+
+      --nav-bg: rgba(246, 248, 251, 0.78);
+
+      --badge-bg: rgba(15, 23, 42, 0.04);
       --badge-text: #334155;
+
+      --grid-color: rgba(15, 23, 42, 0.04);
     }
 
+    * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
     html { scroll-behavior: smooth; }
-    
+
     body {
       background: var(--bg-body);
-      background-image: var(--bg-gradient);
       color: var(--text-main);
-      font-family: 'Outfit', sans-serif;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
       overflow-x: hidden;
-      cursor: none; /* Custom Cursor Desktop */
+      cursor: none;
+      position: relative;
       transition: background 0.4s ease, color 0.4s ease;
     }
 
-    a, button, .hover-trigger { cursor: none; }
-    
-    h1, h2, h3, h4, h5, strong { color: var(--text-main); font-weight: 800; letter-spacing: -0.02em; }
-    p, li, span, small { color: var(--text-muted); line-height: 1.7; }
-    
-    .text-brand { color: var(--brand-color) !important; }
-    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    /* GRID PATTERN DE FUNDO */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 70%);
+      pointer-events: none;
+      z-index: -2;
+    }
 
-    /* CUSTOM CURSOR (Apenas Desktop) */
+    /* ORBES GRADIENTE DE FUNDO */
+    .bg-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: -1;
+      animation: float-orb 18s ease-in-out infinite;
+    }
+    .bg-orb-1 { width: 600px; height: 600px; background: var(--brand-primary); top: -10%; right: -10%; }
+    .bg-orb-2 { width: 500px; height: 500px; background: var(--brand-secondary); bottom: 20%; left: -10%; animation-delay: -6s; opacity: 0.25; }
+    .bg-orb-3 { width: 400px; height: 400px; background: var(--brand-accent); top: 50%; right: 30%; animation-delay: -12s; opacity: 0.15; }
+    body.light-mode .bg-orb { opacity: 0.15; }
+    body.light-mode .bg-orb-1, body.light-mode .bg-orb-2 { opacity: 0.18; }
+    body.light-mode .bg-orb-3 { opacity: 0.10; }
+
+    @keyframes float-orb {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(60px, -40px) scale(1.08); }
+      66% { transform: translate(-40px, 60px) scale(0.95); }
+    }
+
+    a, button, .hover-trigger { cursor: none; }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--text-main);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+    }
+    h1 { font-weight: 700; }
+    strong { color: var(--text-main); font-weight: 600; }
+    p, li, span, small { color: var(--text-muted); line-height: 1.7; font-weight: 400; }
+
+    .text-brand { color: var(--brand-primary) !important; }
+    .text-gradient {
+      background: var(--brand-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+    .font-mono { font-family: 'JetBrains Mono', monospace; font-weight: 500; }
+
+    /* CUSTOM CURSOR */
     #cursor {
-      position: fixed; width: 20px; height: 20px;
-      border: 1px solid var(--brand-color); border-radius: 50%;
+      position: fixed; width: 28px; height: 28px;
+      border: 1.5px solid var(--brand-primary); border-radius: 50%;
       pointer-events: none; z-index: 9999;
-      transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background 0.3s;
+      transform: translate(-50%, -50%);
+      transition: width 0.25s, height 0.25s, background 0.25s, border-color 0.25s;
       mix-blend-mode: difference;
     }
     #cursor-dot {
-      position: fixed; width: 6px; height: 6px;
-      background: var(--brand-color); border-radius: 50%;
+      position: fixed; width: 5px; height: 5px;
+      background: var(--brand-primary); border-radius: 50%;
       pointer-events: none; z-index: 9999;
       transform: translate(-50%, -50%);
     }
     body.hovering #cursor {
-      width: 50px; height: 50px; background: rgba(0, 242, 255, 0.2); border-color: transparent;
+      width: 60px; height: 60px; background: rgba(0, 217, 255, 0.15); border-color: transparent;
     }
 
-    /* DESATIVA CURSOR CUSTOM NO MOBILE */
-    @media (hover: none) { 
-      #cursor, #cursor-dot { display: none; } 
-      body { cursor: auto; } 
-      a, button, .hover-trigger { cursor: pointer; } 
+    @media (hover: none) {
+      #cursor, #cursor-dot { display: none; }
+      body { cursor: auto; }
+      a, button, .hover-trigger { cursor: pointer; }
     }
 
     /* NAVBAR */
     .navbar {
-      background: var(--nav-bg); backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--card-border); padding: 1rem 0;
+      background: var(--nav-bg);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 0.85rem 0;
       transition: all 0.3s ease;
     }
-    .nav-link { color: var(--text-muted) !important; font-weight: 600; transition: 0.3s; padding: 0.5rem 1rem; }
-    .nav-link:hover, .nav-link.active { color: var(--brand-color) !important; }
+    .nav-link {
+      color: var(--text-muted) !important;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 500;
+      font-size: 0.92rem;
+      transition: 0.3s;
+      padding: 0.5rem 1rem !important;
+      position: relative;
+    }
+    .nav-link::before {
+      content: attr(data-num);
+      color: var(--brand-primary);
+      margin-right: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      opacity: 0.7;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--text-main) !important; }
+    .nav-link:hover::before, .nav-link.active::before { opacity: 1; }
+
+    .navbar-brand {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .navbar-brand img {
+      width: 38px; height: 38px; border-radius: 10px;
+      box-shadow: 0 0 0 1px var(--card-border), 0 8px 24px -8px rgba(0,217,255,0.3);
+    }
 
     /* CARDS */
     .glass-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 20px; padding: 2rem;
+      border-radius: 20px;
+      padding: 2rem;
       box-shadow: var(--card-shadow);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       transform-style: preserve-3d;
-      transition: transform 0.1s;
+      transition: border-color 0.4s, transform 0.1s, box-shadow 0.4s;
+      position: relative;
+      overflow: hidden;
     }
-    
+    .glass-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: 20px;
+      padding: 1px;
+      background: linear-gradient(135deg, transparent 0%, transparent 40%, rgba(0, 217, 255, 0.25) 80%, rgba(124, 92, 255, 0.25) 100%);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s;
+      pointer-events: none;
+    }
+    .glass-card:hover::before { opacity: 1; }
+    .glass-card:hover { border-color: var(--card-border-hover); }
+
     /* BOTÕES */
     .btn-glow {
-      background: var(--brand-color); color: #fff;
-      padding: 0.8rem 2rem; border-radius: 50px; font-weight: 700; border: none;
-      box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+      background: var(--brand-gradient);
+      color: #07080c;
+      padding: 0.85rem 1.8rem;
+      border-radius: 12px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: none;
+      box-shadow: var(--brand-glow);
       transition: 0.3s;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-    .btn-glow:hover { transform: translateY(-3px); box-shadow: 0 0 30px rgba(0, 242, 255, 0.5); color: #fff; }
-    
-    .btn-outline {
-      background: transparent; color: var(--text-main);
-      border: 2px solid var(--card-border); padding: 0.8rem 2rem;
-      border-radius: 50px; font-weight: 700; transition: 0.3s;
-      display: inline-block;
-      text-align: center;
+    .btn-glow::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent 50%);
+      opacity: 0; transition: opacity 0.3s;
     }
-    .btn-outline:hover { border-color: var(--brand-color); color: var(--brand-color); }
+    .btn-glow:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0, 217, 255, 0.4); color: #07080c; }
+    .btn-glow:hover::after { opacity: 1; }
+    body.light-mode .btn-glow { color: #fff; }
+    body.light-mode .btn-glow:hover { color: #fff; }
 
-    /* ELEMENTOS */
+    .btn-outline {
+      background: transparent;
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+      padding: 0.85rem 1.8rem;
+      border-radius: 12px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-align: center;
+    }
+    .btn-outline:hover { border-color: var(--brand-primary); color: var(--brand-primary); background: rgba(0,217,255,0.04); }
+
+    /* SEÇÕES */
+    .section-label {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--brand-primary);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .section-label::before {
+      content: '';
+      width: 30px; height: 1px;
+      background: var(--brand-primary);
+      display: inline-block;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      margin-bottom: 0;
+    }
+
+    /* TECH BADGE */
     .tech-badge {
       display: inline-flex; align-items: center; gap: 6px;
-      background: var(--badge-bg); border: 1px solid var(--card-border);
-      padding: 6px 12px; border-radius: 8px; font-size: 0.85rem;
-      color: var(--badge-text); font-weight: 600; margin-bottom: 8px; margin-right: 5px;
-      transition: 0.3s;
-    }
-    .tech-badge:hover { border-color: var(--brand-color); color: var(--brand-color); background: rgba(0,242,255,0.05); }
-
-    .timeline-item {
-      border-left: 2px solid var(--card-border); padding-left: 2rem;
-      padding-bottom: 2.5rem; position: relative;
-    }
-    .timeline-dot {
-      width: 16px; height: 16px; background: var(--brand-color);
-      border-radius: 50%; position: absolute; left: -9px; top: 0;
-      box-shadow: 0 0 0 4px var(--bg-body);
-    }
-
-    /* Badge "Atual" para destacar o cargo atual */
-    .current-badge {
-      display: inline-block;
-      background: var(--brand-color);
-      color: #0a0c10;
+      background: var(--badge-bg);
+      border: 1px solid var(--card-border);
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      font-weight: 700;
+      color: var(--badge-text);
+      font-weight: 500;
+      margin-bottom: 6px; margin-right: 4px;
+      transition: 0.25s;
+    }
+    .tech-badge:hover { border-color: var(--brand-primary); color: var(--brand-primary); background: rgba(0,217,255,0.05); transform: translateY(-1px); }
+
+    /* TIMELINE */
+    .timeline-item {
+      border-left: 1px solid var(--card-border);
+      padding-left: 1.75rem;
+      padding-bottom: 2rem;
+      position: relative;
+    }
+    .timeline-item:last-child { padding-bottom: 0; border-left-color: transparent; }
+    .timeline-dot {
+      width: 12px; height: 12px;
+      background: var(--brand-primary);
+      border-radius: 50%;
+      position: absolute;
+      left: -6.5px; top: 4px;
+      box-shadow: 0 0 0 4px var(--bg-body), 0 0 16px var(--brand-primary);
+    }
+    .timeline-item h5 {
+      font-size: 1.05rem;
+      margin-top: 0.4rem;
+      margin-bottom: 0.3rem;
+    }
+    .timeline-item .company {
+      color: var(--text-soft);
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin-bottom: 0.4rem;
+    }
+    .timeline-item .description {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* BADGE ATUAL */
+    .current-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: rgba(0, 255, 163, 0.1);
+      border: 1px solid rgba(0, 255, 163, 0.3);
+      color: var(--brand-accent);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
       padding: 2px 8px;
-      border-radius: 4px;
+      border-radius: 999px;
       margin-left: 8px;
       vertical-align: middle;
-      animation: pulse-badge 2s infinite;
     }
-    body.light-mode .current-badge { color: #fff; }
-    @keyframes pulse-badge {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.6; }
+    .current-badge::before {
+      content: '';
+      width: 5px; height: 5px;
+      background: var(--brand-accent);
+      border-radius: 50%;
+      animation: pulse-dot 1.8s ease-in-out infinite;
+      box-shadow: 0 0 8px var(--brand-accent);
     }
-    
-    .project-icon {
-      font-size: 1.8rem; color: var(--brand-color); margin-bottom: 1rem;
-      width: 50px; height: 50px; background: rgba(0,242,255,0.1);
-      display: flex; align-items: center; justify-content: center; border-radius: 12px;
-      transform: translateZ(20px);
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
     }
-    body.light-mode .project-icon { background: rgba(0, 119, 182, 0.1); }
-    .card-content { transform: translateZ(20px); }
 
-    .cert-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem;
-    }
-    .cert-item {
-      background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-muted);
-      padding: 1rem; border-radius: 12px; font-size: 0.9rem;
-      display: flex; align-items: center; gap: 0.5rem;
+    /* PROJECT CARD */
+    .project-card { height: 100%; }
+    .project-icon {
+      font-size: 1.35rem;
+      color: var(--brand-primary);
+      margin-bottom: 1.2rem;
+      width: 48px; height: 48px;
+      background: rgba(0, 217, 255, 0.08);
+      border: 1px solid rgba(0, 217, 255, 0.15);
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 12px;
+      transform: translateZ(20px);
       transition: 0.3s;
     }
-    .cert-item:hover { border-color: var(--brand-color); color: var(--brand-color); transform: translateX(5px); }
-    .cert-icon { color: var(--brand-color); }
+    body.light-mode .project-icon { background: rgba(2, 132, 199, 0.08); border-color: rgba(2, 132, 199, 0.18); }
+    .glass-card:hover .project-icon {
+      background: var(--brand-gradient);
+      color: #07080c;
+      border-color: transparent;
+    }
+    .card-content { transform: translateZ(20px); }
+    .card-content h4 {
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+    }
+    .card-content > p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
 
-    /* =========================================
-       AJUSTES ESPECÍFICOS PARA MOBILE (RESPONSIVIDADE)
-       ========================================= */
+    /* CERTIFICAÇÕES */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 0.85rem;
+    }
+    .cert-item {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-soft);
+      padding: 0.9rem 1.1rem;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      display: flex; align-items: center; gap: 0.7rem;
+      transition: 0.3s;
+      backdrop-filter: blur(10px);
+      min-height: 52px;
+    }
+    .cert-item span { line-height: 1.3; }
+    .cert-item:hover {
+      border-color: var(--brand-primary);
+      color: var(--brand-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px -10px rgba(0, 217, 255, 0.2);
+    }
+    .cert-icon {
+      color: var(--brand-primary);
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    /* HERO */
+    .hero-status {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 6px 14px;
+      background: rgba(0, 255, 163, 0.06);
+      border: 1px solid rgba(0, 255, 163, 0.2);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--brand-accent);
+      margin-bottom: 1.5rem;
+    }
+    .hero-status::before {
+      content: '';
+      width: 7px; height: 7px;
+      background: var(--brand-accent);
+      border-radius: 50%;
+      animation: pulse-dot 1.8s ease-in-out infinite;
+      box-shadow: 0 0 10px var(--brand-accent);
+    }
+    .hero-name {
+      font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 0.6rem;
+    }
+    .hero-role {
+      font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 500;
+      color: var(--text-soft);
+      min-height: 1.4em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-role .text-gradient {
+      font-weight: 600;
+    }
+    .hero-description {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+    .hero-greeting {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--brand-primary);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* SOCIAL RAIL */
+    .social-rail {
+      position: fixed;
+      left: 2rem;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      z-index: 10;
+      align-items: center;
+    }
+    .social-rail::after {
+      content: '';
+      width: 1px; height: 90px;
+      background: linear-gradient(180deg, var(--text-dim), transparent);
+      margin-top: 0.5rem;
+    }
+    .social-rail a {
+      color: var(--text-muted);
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+    .social-rail a:hover { color: var(--brand-primary); transform: translateY(-3px); }
+
+    /* INFO ROW */
+    .info-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      padding-top: 1.5rem;
+      margin-top: 1.5rem;
+      border-top: 1px solid var(--card-border);
+    }
+    .info-item .label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.3rem;
+    }
+    .info-item .value {
+      color: var(--text-main);
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    /* SKILL LIST */
+    .skill-list { list-style: none; padding: 0; margin: 0; }
+    .skill-list li {
+      padding: 0.55rem 0;
+      display: flex; align-items: center; gap: 0.65rem;
+      color: var(--text-soft);
+      font-size: 0.92rem;
+      border-bottom: 1px solid var(--card-border);
+      transition: 0.25s;
+    }
+    .skill-list li:last-child { border-bottom: none; }
+    .skill-list li:hover { color: var(--brand-primary); padding-left: 0.3rem; }
+    .skill-list li i { color: var(--brand-primary); font-size: 0.7rem; }
+
+    .skill-card-header {
+      display: flex; align-items: center; gap: 0.7rem;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .skill-card-header i {
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0, 217, 255, 0.08);
+      border: 1px solid rgba(0, 217, 255, 0.15);
+      border-radius: 10px;
+      color: var(--brand-primary);
+      font-size: 1rem;
+    }
+    body.light-mode .skill-card-header i { background: rgba(2, 132, 199, 0.08); border-color: rgba(2, 132, 199, 0.18); }
+    .skill-card-header h4 {
+      margin: 0;
+      font-size: 1.05rem;
+      color: var(--text-main);
+    }
+
+    /* CONTACT */
+    .contact-card {
+      text-align: center;
+      padding: 4rem 2rem !important;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-card::after {
+      content: '';
+      position: absolute;
+      width: 80%; height: 200px;
+      background: var(--brand-gradient);
+      filter: blur(100px);
+      opacity: 0.15;
+      bottom: -100px; left: 10%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .contact-card > * { position: relative; z-index: 1; }
+    .contact-card img {
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      padding: 3px;
+      background: var(--brand-gradient);
+      box-shadow: 0 20px 40px -10px rgba(0, 217, 255, 0.3);
+      margin-bottom: 1.5rem;
+    }
+    .contact-card h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      margin-bottom: 0.5rem;
+    }
+    .contact-card .subtitle {
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto 2rem;
+      font-size: 1rem;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 2rem 0;
+      margin-top: 4rem;
+    }
+    footer small {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-dim);
+      font-size: 0.82rem;
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: var(--bg-body); }
+    ::-webkit-scrollbar-thumb { background: var(--bg-elevated); border-radius: 999px; border: 2px solid var(--bg-body); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--brand-primary); }
+
+    /* SELEÇÃO */
+    ::selection { background: var(--brand-primary); color: #07080c; }
+
+    /* SECTION SPACING */
+    section { padding: 6rem 0; }
+
+    /* RESPONSIVIDADE */
+    @media (max-width: 1200px) {
+      .social-rail { display: none; }
+    }
+
     @media (max-width: 991px) {
-      /* Navbar Background no Mobile */
       .navbar-collapse {
-        background: var(--bg-body);
+        background: var(--bg-elevated);
         padding: 1rem;
         border-radius: 0 0 16px 16px;
         border: 1px solid var(--card-border);
         border-top: none;
         margin-top: 0.5rem;
       }
-      .nav-link { padding-left: 0; }
+      .nav-link { padding-left: 0 !important; }
     }
 
     @media (max-width: 768px) {
-      /* Fontes */
-      h1 { font-size: 2.8rem !important; }
-      h2 { font-size: 2rem !important; }
-      
-      /* Layout Hero */
-      #inicio {
-        text-align: center;
-        padding-top: 100px; /* Compensa navbar fixa */
-      }
-      #inicio .d-flex {
-        justify-content: center;
-        flex-direction: column;
-        width: 100%;
-      }
-      .btn-glow, .btn-outline {
-        width: 100%;
-      }
-      
-      /* Cards e Padding */
+      section { padding: 4rem 0; }
+      .hero-name { font-size: clamp(2.4rem, 9vw, 3.5rem); }
+      h2 { font-size: 1.7rem !important; }
+
+      #inicio { text-align: left; padding-top: 100px; }
+      #inicio .d-flex { justify-content: flex-start; flex-direction: column; width: 100%; }
+      .btn-glow, .btn-outline { width: 100%; justify-content: center; }
+
       .glass-card { padding: 1.5rem; }
-      section { padding-top: 3rem !important; padding-bottom: 3rem !important; }
-      
-      /* Timeline */
       .timeline-item { padding-left: 1.5rem; }
-      
-      /* Grid de Certificações */
       .cert-grid { grid-template-columns: 1fr; }
+      .info-row { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -254,30 +689,40 @@
   <div id="cursor"></div>
   <div id="cursor-dot"></div>
 
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-orb bg-orb-3"></div>
+
+  <aside class="social-rail">
+    <a href="https://linkedin.com/in/guilherme-belinelo-7591b5307/" target="_blank" class="hover-trigger" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    <a href="https://github.com/MrRobotS0" target="_blank" class="hover-trigger" aria-label="GitHub"><i class="fab fa-github"></i></a>
+    <a href="mailto:guilhermebelinelo@outlook.com" class="hover-trigger" aria-label="Email"><i class="fas fa-envelope"></i></a>
+  </aside>
+
   <header class="fixed-top">
     <nav class="navbar navbar-expand-lg">
       <div class="container">
         <a class="navbar-brand hover-trigger" href="#">
-          <img src="logo.png" alt="GB" style="width:40px; height:40px; border-radius:10px;">
+          <img src="logo.png" alt="GB">
         </a>
-        
+
         <div class="d-flex align-items-center gap-3 order-lg-3">
           <button class="btn btn-link text-decoration-none p-0 hover-trigger" id="theme-toggle" style="color:var(--text-main)" aria-label="Mudar Tema">
-            <i class="fas fa-moon fs-5"></i>
+            <i class="fas fa-moon"></i>
           </button>
-          <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-label="Menu">
-            <i class="fas fa-bars text-brand fa-lg"></i>
+          <button class="navbar-toggler border-0 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-label="Menu">
+            <i class="fas fa-bars text-brand"></i>
           </button>
         </div>
 
         <div class="collapse navbar-collapse" id="menu">
-          <ul class="navbar-nav ms-auto me-4">
-            <li class="nav-item"><a class="nav-link hover-trigger" href="#inicio">Início</a></li>
-            <li class="nav-item"><a class="nav-link hover-trigger" href="#sobre">Sobre</a></li>
-            <li class="nav-item"><a class="nav-link hover-trigger" href="#experiencia">Experiência</a></li>
-            <li class="nav-item"><a class="nav-link hover-trigger" href="#formacao">Formação</a></li>
-            <li class="nav-item"><a class="nav-link hover-trigger" href="#projetos">Projetos</a></li>
-            <li class="nav-item"><a class="nav-link hover-trigger" href="#habilidades">Skills</a></li>
+          <ul class="navbar-nav ms-auto me-3">
+            <li class="nav-item"><a class="nav-link hover-trigger" href="#inicio" data-num="01.">Início</a></li>
+            <li class="nav-item"><a class="nav-link hover-trigger" href="#sobre" data-num="02.">Sobre</a></li>
+            <li class="nav-item"><a class="nav-link hover-trigger" href="#experiencia" data-num="03.">Experiência</a></li>
+            <li class="nav-item"><a class="nav-link hover-trigger" href="#formacao" data-num="04.">Formação</a></li>
+            <li class="nav-item"><a class="nav-link hover-trigger" href="#projetos" data-num="05.">Projetos</a></li>
+            <li class="nav-item"><a class="nav-link hover-trigger" href="#habilidades" data-num="06.">Skills</a></li>
           </ul>
         </div>
       </div>
@@ -285,135 +730,148 @@
   </header>
 
   <main>
-    <section id="inicio" class="d-flex align-items-center min-vh-100 position-relative container">
-      <div style="position:absolute; width:500px; height:500px; background:var(--brand-color); opacity:0.1; filter:blur(100px); border-radius:50%; z-index:-1; top:10%; right:0;"></div>
-      
+    <!-- HERO -->
+    <section id="inicio" class="container d-flex align-items-center min-vh-100">
       <div class="row align-items-center w-100 m-0">
-        <div class="col-lg-8 p-0" data-aos="fade-up">
-          <p class="font-mono text-brand mb-2">Olá, eu sou</p>
-          <h1 style="font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.1;" class="mb-2">Guilherme Belinelo</h1>
-          <h2 class="mb-4 text-brand" style="font-size: clamp(1.2rem, 2vw, 2rem); min-height: 1.2em;">
+        <div class="col-lg-9 p-0" data-aos="fade-up">
+          <p class="hero-greeting">// olá, eu sou</p>
+          <h1 class="hero-name">Guilherme <span class="text-gradient">Belinelo</span>.</h1>
+          <h2 class="hero-role">
             <span id="typed-text"></span>
           </h2>
-          <p class="lead mb-4" style="max-width: 650px;">
-            Desenvolvedor Full-Stack com experiência em aplicações web/mobile. 
+          <p class="hero-description">
+            Desenvolvedor Full-Stack com experiência em aplicações web/mobile.
             Especialista em ecossistema .NET, PHP, React e Bancos de Dados Relacionais.
           </p>
           <div class="d-flex gap-3 flex-wrap">
-            <a href="#projetos" class="btn-glow hover-trigger text-decoration-none">Ver Projetos</a>
-            <a href="#contato" class="btn-outline hover-trigger text-decoration-none">Contato</a>
+            <a href="#projetos" class="btn-glow hover-trigger text-decoration-none">Ver Projetos <i class="fas fa-arrow-right"></i></a>
+            <a href="#contato" class="btn-outline hover-trigger text-decoration-none">Contato <i class="fas fa-paper-plane"></i></a>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="sobre" class="py-5 container">
-      <div class="row g-5">
-        <div class="col-lg-12" data-aos="fade-right">
-          <div class="glass-card h-100" data-tilt data-tilt-max="5">
-            <h3 class="mb-3"><i class="fas fa-user-circle me-2 text-brand"></i>Sobre Mim</h3>
-            <p>
+    <!-- SOBRE -->
+    <section id="sobre" class="container">
+      <div data-aos="fade-up" class="mb-5">
+        <span class="section-label">01. Sobre</span>
+        <h2 class="section-title">Quem sou eu</h2>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-12" data-aos="fade-up">
+          <div class="glass-card" data-tilt data-tilt-max="3">
+            <p style="font-size: 1.02rem; color: var(--text-soft);">
               Sou um desenvolvedor de 19 anos, residente em Araçatuba-SP. Atuo como <strong class="text-brand">Analista de Sistemas Júnior</strong> na Colormaq, com sólida base acadêmica e experiência prática em projetos corporativos e universitários.
             </p>
             <p>
               Fascinado por tecnologia, comecei como autodidata em cibersegurança e hoje construo soluções completas. Atualmente focado no ecossistema Microsoft (C#, ASP.NET) e desenvolvimento Web Moderno.
             </p>
-            <div class="row mt-4 pt-3 border-top" style="border-color: var(--card-border)!important">
-              <div class="col-md-4 col-6">
-                <strong>Idade:</strong> <span>19 Anos</span>
+            <div class="info-row">
+              <div class="info-item">
+                <span class="label">Idade</span>
+                <span class="value">19 Anos</span>
               </div>
-              <div class="col-md-4 col-6">
-                <strong>Local:</strong> <span>Araçatuba, SP</span>
+              <div class="info-item">
+                <span class="label">Local</span>
+                <span class="value">Araçatuba, SP</span>
               </div>
-              <div class="col-md-4 col-12 mt-3 mt-md-0">
-                <strong>Cargo:</strong> <span>Analista de Sistemas Jr.</span>
+              <div class="info-item">
+                <span class="label">Cargo</span>
+                <span class="value">Analista de Sistemas Jr.</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="row g-5 mt-1">
-        <!-- EXPERIÊNCIA -->
+      <!-- EXPERIÊNCIA + FORMAÇÃO -->
+      <div class="row g-4 mt-2">
         <div class="col-lg-6" id="experiencia" data-aos="fade-right">
-          <div class="glass-card h-100" data-tilt data-tilt-max="5">
-            <h3 class="mb-4"><i class="fas fa-briefcase me-2 text-brand"></i>Experiência Profissional</h3>
-            
-            <div class="timeline-item pb-3">
+          <div data-aos="fade-up" class="mb-4">
+            <span class="section-label">02. Experiência</span>
+            <h2 class="section-title">Trajetória</h2>
+          </div>
+          <div class="glass-card h-100" data-tilt data-tilt-max="3">
+            <div class="timeline-item">
               <div class="timeline-dot"></div>
-              <span class="font-mono text-brand small">05/2026 - Atual</span>
+              <span class="font-mono text-brand" style="font-size: 0.78rem;">05/2026 — ATUAL</span>
               <h5>Analista de Sistemas Júnior <span class="current-badge">ATUAL</span></h5>
-              <p class="mb-0"><strong>Colormaq Araçatuba</strong></p>
-              <small>Análise, desenvolvimento e manutenção de sistemas corporativos. Atuação Full-Stack com C#/.NET, PHP e React.</small>
+              <p class="company"><i class="fas fa-building me-2" style="color:var(--text-dim); font-size:0.8rem;"></i>Colormaq Araçatuba</p>
+              <p class="description">Análise, desenvolvimento e manutenção de sistemas corporativos. Atuação Full-Stack com C#/.NET, PHP e React.</p>
             </div>
 
-            <div class="timeline-item border-0 pb-0">
-              <div class="timeline-dot"></div>
-              <span class="font-mono text-brand small">04/2025 - 04/2026</span>
+            <div class="timeline-item">
+              <div class="timeline-dot" style="background: var(--text-muted); box-shadow: 0 0 0 4px var(--bg-body);"></div>
+              <span class="font-mono" style="color: var(--text-muted); font-size: 0.78rem;">04/2025 — 04/2026</span>
               <h5>Estágio em T.I</h5>
-              <p class="mb-0"><strong>Colormaq Araçatuba</strong></p>
-              <small>Desenvolvimento Web/Mobile (PHP, React, Python), Banco de Dados e DevOps. 1 ano de experiência efetivada como Analista Jr.</small>
+              <p class="company"><i class="fas fa-building me-2" style="color:var(--text-dim); font-size:0.8rem;"></i>Colormaq Araçatuba</p>
+              <p class="description">Desenvolvimento Web/Mobile (PHP, React, Python), Banco de Dados e DevOps. 1 ano de experiência efetivada como Analista Jr.</p>
             </div>
           </div>
         </div>
 
-        <!-- FORMAÇÃO -->
         <div class="col-lg-6" id="formacao" data-aos="fade-left">
-          <div class="glass-card h-100" data-tilt data-tilt-max="5">
-            <h3 class="mb-4"><i class="fas fa-graduation-cap me-2 text-brand"></i>Formação Acadêmica</h3>
-            
-            <div class="timeline-item pb-3">
+          <div data-aos="fade-up" class="mb-4">
+            <span class="section-label">03. Formação</span>
+            <h2 class="section-title">Acadêmica</h2>
+          </div>
+          <div class="glass-card h-100" data-tilt data-tilt-max="3">
+            <div class="timeline-item">
               <div class="timeline-dot"></div>
-              <span class="font-mono text-brand small">2025 - 2027</span>
+              <span class="font-mono text-brand" style="font-size: 0.78rem;">2025 — 2027</span>
               <h5>Superior em ADS <span class="current-badge">CURSANDO</span></h5>
-              <p class="mb-0"><strong>Fatec Araçatuba</strong></p>
-              <small>Análise e Desenvolvimento de Sistemas.</small>
+              <p class="company"><i class="fas fa-graduation-cap me-2" style="color:var(--text-dim); font-size:0.8rem;"></i>Fatec Araçatuba</p>
+              <p class="description">Análise e Desenvolvimento de Sistemas.</p>
             </div>
 
-            <div class="timeline-item border-0 pb-0">
-              <div class="timeline-dot"></div>
-              <span class="font-mono text-brand small">2023 - 2024</span>
+            <div class="timeline-item">
+              <div class="timeline-dot" style="background: var(--text-muted); box-shadow: 0 0 0 4px var(--bg-body);"></div>
+              <span class="font-mono" style="color: var(--text-muted); font-size: 0.78rem;">2023 — 2024</span>
               <h5>Técnico em Desenvolvimento</h5>
-              <p class="mb-0"><strong>Senai Duque de Caxias</strong></p>
-              <small>Desenvolvimento de Sistemas Completo.</small>
+              <p class="company"><i class="fas fa-graduation-cap me-2" style="color:var(--text-dim); font-size:0.8rem;"></i>Senai Duque de Caxias</p>
+              <p class="description">Desenvolvimento de Sistemas Completo.</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="mt-5" data-aos="fade-up">
-        <h4 class="mb-4"><i class="fas fa-certificate me-2 text-brand"></i>Cursos Complementares (Senai)</h4>
+      <!-- CURSOS -->
+      <div class="pt-4" style="margin-top: 6rem;" data-aos="fade-up">
+        <div class="text-center mb-5">
+          <span class="section-label" style="justify-content: center;">04. Certificações</span>
+          <h2 class="section-title">Cursos Complementares <span style="color: var(--text-dim); font-weight: 400; font-size: 0.7em;">/ Senai</span></h2>
+        </div>
         <div class="cert-grid">
-          <div class="cert-item hover-trigger"><i class="fas fa-check-circle cert-icon"></i> Microsoft Power BI</div>
-          <div class="cert-item hover-trigger"><i class="fas fa-check-circle cert-icon"></i> Lógica de Programação</div>
-          <div class="cert-item hover-trigger"><i class="fas fa-check-circle cert-icon"></i> Web 3.0</div>
-          <div class="cert-item hover-trigger"><i class="fas fa-check-circle cert-icon"></i> Desvendando a Blockchain</div>
-          <div class="cert-item hover-trigger"><i class="fas fa-check-circle cert-icon"></i> Desvendando o 5G</div>
-          <div class="cert-item hover-trigger"><i class="fas fa-check-circle cert-icon"></i> Indústria 4.0</div>
-          <div class="cert-item hover-trigger"><i class="fas fa-check-circle cert-icon"></i> Privacidade e LGPD</div>
-          <div class="cert-item hover-trigger"><i class="fas fa-check-circle cert-icon"></i> Tecnologia da Informação</div>
-          <div class="cert-item hover-trigger"><i class="fas fa-check-circle cert-icon"></i> Excel Básico</div>
-          <div class="cert-item hover-trigger"><i class="fas fa-check-circle cert-icon"></i> Finanças Pessoais</div>
-          <div class="cert-item hover-trigger"><i class="fas fa-check-circle cert-icon"></i> Mundo do Trabalho</div>
+          <div class="cert-item hover-trigger"><i class="fas fa-circle-check cert-icon"></i><span>Microsoft Power BI</span></div>
+          <div class="cert-item hover-trigger"><i class="fas fa-circle-check cert-icon"></i><span>Lógica de Programação</span></div>
+          <div class="cert-item hover-trigger"><i class="fas fa-circle-check cert-icon"></i><span>Web 3.0</span></div>
+          <div class="cert-item hover-trigger"><i class="fas fa-circle-check cert-icon"></i><span>Desvendando a Blockchain</span></div>
+          <div class="cert-item hover-trigger"><i class="fas fa-circle-check cert-icon"></i><span>Desvendando o 5G</span></div>
+          <div class="cert-item hover-trigger"><i class="fas fa-circle-check cert-icon"></i><span>Indústria 4.0</span></div>
+          <div class="cert-item hover-trigger"><i class="fas fa-circle-check cert-icon"></i><span>Privacidade e LGPD</span></div>
+          <div class="cert-item hover-trigger"><i class="fas fa-circle-check cert-icon"></i><span>Tecnologia da Informação</span></div>
+          <div class="cert-item hover-trigger"><i class="fas fa-circle-check cert-icon"></i><span>Excel Básico</span></div>
+          <div class="cert-item hover-trigger"><i class="fas fa-circle-check cert-icon"></i><span>Finanças Pessoais</span></div>
+          <div class="cert-item hover-trigger"><i class="fas fa-circle-check cert-icon"></i><span>Mundo do Trabalho</span></div>
         </div>
       </div>
     </section>
 
-    <section id="projetos" class="py-5 container">
-      <div class="d-flex align-items-end justify-content-between mb-5" data-aos="fade-up">
-        <div>
-          <p class="text-brand font-mono mb-0">Portfólio</p>
-          <h2>Projetos Desenvolvidos</h2>
-        </div>
+    <!-- PROJETOS -->
+    <section id="projetos" class="container">
+      <div class="mb-5" data-aos="fade-up">
+        <span class="section-label">05. Portfólio</span>
+        <h2 class="section-title">Projetos Desenvolvidos</h2>
       </div>
 
       <div class="row g-4">
         <div class="col-md-6 col-xl-4" data-aos="fade-up">
-          <div class="glass-card h-100 hover-trigger" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+          <div class="glass-card project-card hover-trigger" data-tilt data-tilt-glare data-tilt-max-glare="0.15">
             <div class="project-icon"><i class="fas fa-helmet-safety"></i></div>
             <div class="card-content">
               <h4>API Gestão de EPI</h4>
-              <p class="small">Backend para aplicação mobile de registro de uso de EPI.</p>
+              <p>Backend para aplicação mobile de registro de uso de EPI.</p>
               <div>
                 <span class="tech-badge">ASP.NET Core</span>
                 <span class="tech-badge">C#</span>
@@ -425,11 +883,11 @@
         </div>
 
         <div class="col-md-6 col-xl-4" data-aos="fade-up" data-aos-delay="50">
-          <div class="glass-card h-100 hover-trigger" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+          <div class="glass-card project-card hover-trigger" data-tilt data-tilt-glare data-tilt-max-glare="0.15">
             <div class="project-icon"><i class="fas fa-temperature-low"></i></div>
             <div class="card-content">
               <h4>Termosense</h4>
-              <p class="small">App para monitoramento de temperatura IoT.</p>
+              <p>App para monitoramento de temperatura IoT.</p>
               <div>
                 <span class="tech-badge">Flutter</span>
                 <span class="tech-badge">Azure</span>
@@ -441,11 +899,11 @@
         </div>
 
         <div class="col-md-6 col-xl-4" data-aos="fade-up" data-aos-delay="100">
-          <div class="glass-card h-100 hover-trigger" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+          <div class="glass-card project-card hover-trigger" data-tilt data-tilt-glare data-tilt-max-glare="0.15">
             <div class="project-icon"><i class="fas fa-headset"></i></div>
             <div class="card-content">
               <h4>Service Desk</h4>
-              <p class="small">Plataforma web para gerenciamento e atendimento de chamados.</p>
+              <p>Plataforma web para gerenciamento e atendimento de chamados.</p>
               <div>
                 <span class="tech-badge">React</span>
                 <span class="tech-badge">TypeScript</span>
@@ -456,11 +914,11 @@
         </div>
 
         <div class="col-md-6 col-xl-4" data-aos="fade-up">
-          <div class="glass-card h-100 hover-trigger" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+          <div class="glass-card project-card hover-trigger" data-tilt data-tilt-glare data-tilt-max-glare="0.15">
             <div class="project-icon"><i class="fas fa-shirt"></i></div>
             <div class="card-content">
               <h4>Loja Durk</h4>
-              <p class="small">E-commerce virtual completo para venda de roupas.</p>
+              <p>E-commerce virtual completo para venda de roupas.</p>
               <div>
                 <span class="tech-badge">PHP</span>
                 <span class="tech-badge">MySQL</span>
@@ -471,11 +929,11 @@
         </div>
 
         <div class="col-md-6 col-xl-4" data-aos="fade-up" data-aos-delay="50">
-          <div class="glass-card h-100 hover-trigger" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+          <div class="glass-card project-card hover-trigger" data-tilt data-tilt-glare data-tilt-max-glare="0.15">
             <div class="project-icon"><i class="fas fa-video"></i></div>
             <div class="card-content">
               <h4>Plataforma E-Learning</h4>
-              <p class="small">Sistema web para cursos em vídeo com certificados.</p>
+              <p>Sistema web para cursos em vídeo com certificados.</p>
               <div>
                 <span class="tech-badge">PHP</span>
                 <span class="tech-badge">SQL Server</span>
@@ -486,11 +944,11 @@
         </div>
 
         <div class="col-md-6 col-xl-4" data-aos="fade-up" data-aos-delay="100">
-          <div class="glass-card h-100 hover-trigger" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+          <div class="glass-card project-card hover-trigger" data-tilt data-tilt-glare data-tilt-max-glare="0.15">
             <div class="project-icon"><i class="fas fa-bullseye"></i></div>
             <div class="card-content">
               <h4>Sistema de OKR</h4>
-              <p class="small">Apontamento de Objetivos e Resultados-Chave corporativos.</p>
+              <p>Apontamento de Objetivos e Resultados-Chave corporativos.</p>
               <div>
                 <span class="tech-badge">PHP</span>
                 <span class="tech-badge">SQL Server</span>
@@ -501,11 +959,11 @@
         </div>
 
         <div class="col-md-6 col-xl-4" data-aos="fade-up">
-          <div class="glass-card h-100 hover-trigger" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+          <div class="glass-card project-card hover-trigger" data-tilt data-tilt-glare data-tilt-max-glare="0.15">
             <div class="project-icon"><i class="fas fa-chart-line"></i></div>
             <div class="card-content">
               <h4>Sistema Forecast</h4>
-              <p class="small">Plataforma web para apontamento de previsões financeiras.</p>
+              <p>Plataforma web para apontamento de previsões financeiras.</p>
               <div>
                 <span class="tech-badge">PHP</span>
                 <span class="tech-badge">SQL Server</span>
@@ -517,86 +975,101 @@
       </div>
     </section>
 
-    <section id="habilidades" class="py-5 container">
+    <!-- HABILIDADES -->
+    <section id="habilidades" class="container">
       <div class="text-center mb-5" data-aos="fade-up">
-        <p class="text-brand font-mono mb-0">Stack Tecnológico</p>
-        <h2>Habilidades & Ferramentas</h2>
+        <span class="section-label" style="justify-content: center;">06. Stack Tecnológico</span>
+        <h2 class="section-title">Habilidades & Ferramentas</h2>
       </div>
 
       <div class="row g-4">
         <div class="col-md-4" data-aos="fade-up">
           <div class="glass-card h-100" data-tilt data-tilt-scale="1.02">
-            <h4 class="text-brand mb-3"><i class="fas fa-code me-2"></i>Front-End</h4>
-            <ul class="list-unstyled">
-              <li><i class="fas fa-check me-2 text-brand"></i>HTML5 & CSS</li>
-              <li><i class="fas fa-check me-2 text-brand"></i>JavaScript (ES6+)</li>
-              <li><i class="fas fa-check me-2 text-brand"></i>TypeScript</li>
-              <li><i class="fas fa-check me-2 text-brand"></i>React.js / React Native</li>
-              <li><i class="fas fa-check me-2 text-brand"></i>Next.js</li>
-              <li><i class="fas fa-check me-2 text-brand"></i>Figma (UI/UX)</li>
+            <div class="skill-card-header">
+              <i class="fas fa-code"></i>
+              <h4>Front-End</h4>
+            </div>
+            <ul class="skill-list">
+              <li><i class="fas fa-circle"></i>HTML5 & CSS</li>
+              <li><i class="fas fa-circle"></i>JavaScript (ES6+)</li>
+              <li><i class="fas fa-circle"></i>TypeScript</li>
+              <li><i class="fas fa-circle"></i>React.js / React Native</li>
+              <li><i class="fas fa-circle"></i>Next.js</li>
+              <li><i class="fas fa-circle"></i>Figma (UI/UX)</li>
             </ul>
           </div>
         </div>
 
         <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
           <div class="glass-card h-100" data-tilt data-tilt-scale="1.02">
-            <h4 class="text-brand mb-3"><i class="fas fa-server me-2"></i>Back-End</h4>
-            <ul class="list-unstyled">
-              <li><i class="fas fa-check me-2 text-brand"></i>C# / .NET Core</li>
-              <li><i class="fas fa-check me-2 text-brand"></i>ASP.NET Web API</li>
-              <li><i class="fas fa-check me-2 text-brand"></i>Node.js</li>
-              <li><i class="fas fa-check me-2 text-brand"></i>NestJS</li>
-              <li><i class="fas fa-check me-2 text-brand"></i>PHP</li>
-              <li><i class="fas fa-check me-2 text-brand"></i>Python</li>
+            <div class="skill-card-header">
+              <i class="fas fa-server"></i>
+              <h4>Back-End</h4>
+            </div>
+            <ul class="skill-list">
+              <li><i class="fas fa-circle"></i>C# / .NET Core</li>
+              <li><i class="fas fa-circle"></i>ASP.NET Web API</li>
+              <li><i class="fas fa-circle"></i>Node.js</li>
+              <li><i class="fas fa-circle"></i>NestJS</li>
+              <li><i class="fas fa-circle"></i>PHP</li>
+              <li><i class="fas fa-circle"></i>Python</li>
             </ul>
           </div>
         </div>
 
         <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
           <div class="glass-card h-100" data-tilt data-tilt-scale="1.02">
-            <h4 class="text-brand mb-3"><i class="fas fa-database me-2"></i>Dados & DevOps</h4>
-            <ul class="list-unstyled">
-              <li><i class="fas fa-check me-2 text-brand"></i>SQL Server / MySQL</li>
-              <li><i class="fas fa-check me-2 text-brand"></i>PostgreSQL</li>
-              <li><i class="fas fa-check me-2 text-brand"></i>Docker</li>
-              <li><i class="fas fa-check me-2 text-brand"></i>Linux</li>
-              <li><i class="fas fa-check me-2 text-brand"></i>Git / GitHub</li>
-              <li><i class="fas fa-check me-2 text-brand"></i>Postman / PgAdmin</li>
-              <li><i class="fas fa-check me-2 text-brand"></i>Scrum / Kanban / OKR</li>
+            <div class="skill-card-header">
+              <i class="fas fa-database"></i>
+              <h4>Dados & DevOps</h4>
+            </div>
+            <ul class="skill-list">
+              <li><i class="fas fa-circle"></i>SQL Server / MySQL</li>
+              <li><i class="fas fa-circle"></i>PostgreSQL</li>
+              <li><i class="fas fa-circle"></i>Docker</li>
+              <li><i class="fas fa-circle"></i>Linux</li>
+              <li><i class="fas fa-circle"></i>Git / GitHub</li>
+              <li><i class="fas fa-circle"></i>Postman / PgAdmin</li>
+              <li><i class="fas fa-circle"></i>Scrum / Kanban / OKR</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="contato" class="py-5 container mb-5">
-      <div class="glass-card text-center py-5" data-aos="zoom-in" data-tilt>
-        <img src="eu.png" alt="Guilherme" class="mb-4 hover-trigger" style="width:130px; height:130px; border-radius:50%; object-fit:cover; border:3px solid var(--brand-color);">
-        <h2 class="mb-3">Vamos Conectar?</h2>
-        <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+    <!-- CONTATO -->
+    <section id="contato" class="container">
+      <div class="glass-card contact-card" data-aos="zoom-in" data-tilt data-tilt-max="2">
+        <img src="eu.png" alt="Guilherme" class="hover-trigger">
+        <span class="section-label" style="justify-content: center;">07. Contato</span>
+        <h2>Vamos <span class="text-gradient">conectar</span>?</h2>
+        <p class="subtitle">Estou sempre aberto a novas oportunidades, colaborações e bate-papos sobre tecnologia. Sinta-se à vontade para entrar em contato.</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
           <a href="https://linkedin.com/in/guilherme-belinelo-7591b5307/" target="_blank" class="btn-glow hover-trigger text-decoration-none">
             <i class="fab fa-linkedin"></i> LinkedIn
           </a>
           <a href="https://github.com/MrRobotS0" target="_blank" class="btn-outline hover-trigger text-decoration-none">
             <i class="fab fa-github"></i> GitHub
           </a>
-          <button id="btn-copy" class="btn-outline hover-trigger text-decoration-none">
-            <i class="fas fa-copy me-2"></i> Copiar E-mail
+          <button id="btn-copy" class="btn-outline hover-trigger">
+            <i class="fas fa-copy"></i> Copiar E-mail
           </button>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="text-center py-4 border-top" style="border-color: var(--card-border)!important;">
-    <small class="text-muted">&copy; 2026 Guilherme Belinelo. Todos os direitos reservados.</small>
+  <footer class="text-center">
+    <div class="container">
+      <small>&copy; 2026 Guilherme Belinelo · Desenvolvido com <span style="color:var(--brand-primary)">&lt;/&gt;</span> e café</small>
+    </div>
   </footer>
 
   <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="copyToast" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div id="copyToast" class="toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true" style="background: var(--bg-elevated); border: 1px solid var(--brand-primary) !important; color: var(--text-main);">
       <div class="d-flex">
         <div class="toast-body">
-          <i class="fas fa-check-circle me-2"></i> E-mail copiado!
+          <i class="fas fa-check-circle me-2" style="color:var(--brand-accent)"></i> E-mail copiado!
         </div>
         <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
@@ -609,16 +1082,21 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
   <script>
-    AOS.init({ duration: 800, once: true });
+    AOS.init({ duration: 800, once: true, offset: 80 });
 
     new Typed('#typed-text', {
-      strings: ['Analista de Sistemas Jr.', 'Full-Stack Developer', 'C# & .NET Enthusiast', 'PHP & React Developer'],
-      typeSpeed: 50, backSpeed: 30, backDelay: 2000, loop: true
+      strings: [
+        '<span class="text-gradient">Analista de Sistemas Jr.</span>',
+        '<span class="text-gradient">Full-Stack Developer</span>',
+        '<span class="text-gradient">C# &amp; .NET Enthusiast</span>',
+        '<span class="text-gradient">PHP &amp; React Developer</span>'
+      ],
+      typeSpeed: 55, backSpeed: 30, backDelay: 2000, loop: true
     });
 
     const cursor = document.getElementById("cursor");
     const cursorDot = document.getElementById("cursor-dot");
-    
+
     window.addEventListener("mousemove", (e) => {
       cursorDot.style.left = `${e.clientX}px`;
       cursorDot.style.top = `${e.clientY}px`;
@@ -644,7 +1122,7 @@
         localStorage.setItem('theme', 'dark');
       }
     }
-    
+
     const savedTheme = localStorage.getItem('theme') || 'dark';
     setTheme(savedTheme);
 
@@ -657,9 +1135,21 @@
     const toast = new bootstrap.Toast(toastEl);
 
     copyBtn.addEventListener('click', () => {
-        navigator.clipboard.writeText('guilhermebelinelo@outlook.com').then(() => {
-            toast.show();
-        });
+      navigator.clipboard.writeText('guilhermebelinelo@outlook.com').then(() => toast.show());
+    });
+
+    // Scroll spy para nav ativo
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        const top = s.offsetTop - 120;
+        if (scrollY >= top) current = s.id;
+      });
+      navLinks.forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === `#${current}`);
+      });
     });
   </script>
 </body>
