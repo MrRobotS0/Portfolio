@@ -205,6 +205,13 @@
     font-size: .88rem; color: var(--txt-soft); transition: border-color .2s var(--ease), color .2s; }
   .cert i { color: var(--accent); font-size: .85rem; flex-shrink: 0; }
   .cert:hover { border-color: var(--line-2); color: var(--txt); }
+  .cert-hl { color: var(--txt); border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+    background: color-mix(in srgb, var(--accent) 6%, transparent); }
+  .cert-hl:hover { border-color: color-mix(in srgb, var(--accent) 48%, transparent); }
+  .cert-src { font-family: 'JetBrains Mono'; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--txt-mut); margin: 0 0 12px; display: flex; align-items: center; gap: 10px; }
+  .cert-src::before { content:''; width: 18px; height: 1px; background: var(--line-2); }
+  .cert-src.two { margin-top: 26px; }
 
   /* ---------- PROJECTS ---------- */
   .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
@@ -298,10 +305,32 @@
     .btn { flex: 1; justify-content: center; }
   }
 
+  /* ---------- HERO GLOW ---------- */
+  #hero .wrap { position: relative; z-index: 1; }
+  .hero-glow { position: absolute; top: 14%; left: -6%; width: 520px; height: 520px; border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--accent) 22%, transparent), transparent 66%);
+    filter: blur(46px); pointer-events: none; z-index: 0; opacity: .55; }
+  @media (max-width: 600px) { .hero-glow { width: 340px; height: 340px; filter: blur(36px); opacity: .45; } }
+
+  /* ---------- CARD SPOTLIGHT (cursor-following) ---------- */
+  .proj, .skill-card { --mx: 50%; --my: 50%; }
+  .proj > *, .skill-card > * { position: relative; z-index: 1; }
+  .proj::after, .skill-card::after {
+    content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 0;
+    background: radial-gradient(340px circle at var(--mx) var(--my),
+      color-mix(in srgb, var(--accent) 13%, transparent), transparent 60%);
+    opacity: 0; transition: opacity .3s var(--ease); }
+  .proj:hover::after, .skill-card:hover::after { opacity: 1; }
+
+  /* ---------- FOCUS VISIBLE (a11y) ---------- */
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition-duration: .01ms !important; }
     .reveal { opacity: 1; transform: none; }
     .caret { opacity: 1; }
+    .reveal { transition-delay: 0ms !important; }
   }
   </style>
 </head>
@@ -342,8 +371,8 @@
   <main>
     <!-- HERO -->
     <section id="hero">
+      <div class="hero-glow" aria-hidden="true"></div>
       <div class="wrap">
-        <div class="status">Disponível para novas oportunidades</div>
         <p class="greet">// olá, eu sou</p>
         <h1 class="hero-name">Guilherme Belinelo</h1>
         <h2 class="hero-role"><span id="typed"></span><span class="caret">_</span></h2>
@@ -438,8 +467,14 @@
         <div style="margin-top: 72px;">
           <div class="s-head reveal" style="margin-bottom: 30px;">
             <span class="s-label">Certificações</span>
-            <h2 class="s-title" style="font-size: clamp(1.4rem,2.6vw,1.9rem);">Cursos Complementares <span style="color:var(--txt-dim);font-weight:400;font-size:.7em;">/ Senai</span></h2>
+            <h2 class="s-title" style="font-size: clamp(1.4rem,2.6vw,1.9rem);">Cursos Complementares</h2>
           </div>
+          <div class="cert-src reveal">BluePex</div>
+          <div class="cert-grid" style="margin-bottom: 8px;">
+            <div class="cert cert-hl reveal"><i class="fas fa-shield-halved"></i><span>BluePex Certified Cybersecurity Framework Professional</span></div>
+            <div class="cert cert-hl reveal"><i class="fas fa-network-wired"></i><span>BluePex Essentials | Certificação em Redes</span></div>
+          </div>
+          <div class="cert-src two reveal">Senai</div>
           <div class="cert-grid">
             <div class="cert reveal"><i class="fas fa-check"></i><span>Microsoft Power BI</span></div>
             <div class="cert reveal"><i class="fas fa-check"></i><span>Lógica de Programação</span></div>
@@ -463,7 +498,7 @@
         <div class="s-head reveal">
           <span class="s-label">03 — Portfólio</span>
           <h2 class="s-title">Projetos desenvolvidos</h2>
-          <p class="s-sub">Soluções reais construídas em ambiente corporativo e acadêmico — do backend ao mobile.</p>
+          <p class="s-sub">Soluções reais construídas em ambiente corporativo e acadêmico.</p>
         </div>
 
         <div class="proj-grid">
@@ -660,6 +695,7 @@
   <div class="toast" id="toast"><i class="fas fa-check-circle"></i> E-mail copiado!</div>
 
   <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
   <script>
   (function () {
     'use strict';
@@ -731,6 +767,34 @@
       });
     });
     document.getElementById('toTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // motion preference
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const cards = document.querySelectorAll('.proj, .skill-card');
+
+    // spotlight que segue o cursor (glow mínimo na cor da seção)
+    cards.forEach(card => {
+      card.addEventListener('pointermove', (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width) * 100 + '%');
+        card.style.setProperty('--my', ((e.clientY - r.top) / r.height) * 100 + '%');
+      });
+    });
+
+    // tilt 3D sutil (vanilla-tilt) só nos cards de projeto — movimento permitido e ponteiro fino
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (!reduce && finePointer && window.VanillaTilt) {
+      VanillaTilt.init(document.querySelectorAll('.proj'), {
+        max: 4, speed: 400, scale: 1.01, perspective: 1000, glare: false, gyroscope: false
+      });
+    }
+
+    // reveal escalonado por grid
+    document.querySelectorAll('.proj-grid, .skill-grid, .cert-grid').forEach(grid => {
+      Array.from(grid.children).forEach((el, i) => {
+        if (el.classList.contains('reveal')) el.style.transitionDelay = (i % 6) * 55 + 'ms';
+      });
+    });
   })();
   </script>
 </body>
