@@ -1,0 +1,252 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: #0a0a0b;
+    --surface: #101012;
+    --surface-2: #141417;
+    --line: rgba(255, 255, 255, 0.08);
+    --line-2: rgba(255, 255, 255, 0.14);
+
+    --txt: #ededee;
+    --txt-soft: #b9babd;
+    --txt-mut: #7c7d82;
+    --txt-dim: #4d4e54;
+
+    /* accent base — verde. Cada seção sobrescreve (verde -> azul). */
+    --accent: #4ade80;
+    --accent-2: #3b82f6;
+
+    --r: 14px;
+    --nav-h: 72px;
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ---- accent dinâmico por seção: degradê verde -> azul ---- */
+  #hero {
+    --accent: #4ade80;
+    --accent-2: #34d399;
+  }
+  #sobre {
+    --accent: #34d399;
+    --accent-2: #2dd4bf;
+  }
+  #trajetoria {
+    --accent: #2dd4bf;
+    --accent-2: #22c3d6;
+  }
+  #projetos {
+    --accent: #22c3d6;
+    --accent-2: #38bdf8;
+  }
+  #skills {
+    --accent: #38bdf8;
+    --accent-2: #3b82f6;
+  }
+  #contato {
+    --accent: #3b82f6;
+    --accent-2: #6366f1;
+  }
+
+  @property --beam-angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+  }
+
+  * {
+    border-color: var(--line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--txt);
+    font-family: var(--font-sans), sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body.no-scroll {
+    overflow: hidden;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display), sans-serif;
+    color: var(--txt);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: #0a0a0b;
+  }
+
+  ::-webkit-scrollbar {
+    width: 9px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1d1d20;
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2a2a2e;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+  @media (max-width: 600px) {
+    .wrap {
+      padding: 0 20px;
+    }
+  }
+
+  /* hero name — sheen animado (verde -> texto) */
+  .text-sheen {
+    background: linear-gradient(
+      100deg,
+      var(--txt) 32%,
+      color-mix(in srgb, var(--accent) 62%, var(--txt)) 50%,
+      var(--txt) 68%
+    );
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: name-sheen 6.5s var(--ease) infinite;
+  }
+
+  /* linha degradê verde->azul reutilizável */
+  .grad-line {
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  }
+  .text-grad {
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* card com spotlight que segue o cursor (glow na cor da seção) */
+  .card-glow {
+    position: relative;
+  }
+  .card-glow > * {
+    position: relative;
+    z-index: 1;
+  }
+  .card-glow::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(
+      340px circle at var(--mx, 50%) var(--my, 50%),
+      color-mix(in srgb, var(--accent) 14%, transparent),
+      transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.3s var(--ease);
+  }
+  .card-glow:hover::after {
+    opacity: 1;
+  }
+
+  /* border beam — luz correndo pela borda no hover */
+  .beam {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.3s var(--ease);
+    background: conic-gradient(
+      from var(--beam-angle),
+      transparent 0%,
+      var(--accent) 9%,
+      color-mix(in srgb, var(--accent) 40%, transparent) 16%,
+      transparent 24%
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+  }
+  .card-glow:hover .beam {
+    opacity: 0.95;
+    animation: beam-spin 3s linear infinite;
+  }
+}
+
+@keyframes name-sheen {
+  0% {
+    background-position: 125% 0;
+  }
+  100% {
+    background-position: -25% 0;
+  }
+}
+
+@keyframes beam-spin {
+  to {
+    --beam-angle: 360deg;
+  }
+}
+
+@layer utilities {
+  .mono {
+    font-family: var(--font-mono), monospace;
+  }
+  /* textura de grão sutil sobre o fundo */
+  .grain::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
