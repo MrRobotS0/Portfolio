@@ -154,31 +154,13 @@
     color: transparent;
   }
 
-  /* card com spotlight que segue o cursor (glow na cor da seção) */
+  /* posicionamento de conteúdo em cards (z-index acima de efeitos de fundo) */
   .card-glow {
     position: relative;
   }
   .card-glow > * {
     position: relative;
     z-index: 1;
-  }
-  .card-glow::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    z-index: 0;
-    background: radial-gradient(
-      340px circle at var(--mx, 50%) var(--my, 50%),
-      color-mix(in srgb, var(--accent) 14%, transparent),
-      transparent 60%
-    );
-    opacity: 0;
-    transition: opacity 0.3s var(--ease);
-  }
-  .card-glow:hover::after {
-    opacity: 1;
   }
 
   /* border beam — luz correndo pela borda no hover */
@@ -206,6 +188,41 @@
   .card-glow:hover .beam {
     opacity: 0.95;
     animation: beam-spin 3s linear infinite;
+  }
+
+  /* ---------- SPOTLIGHT / GLOW CARD ---------- */
+  /* Holofote de BORDA que segue o cursor (sem blob de fundo).
+     Máscara exclude/xor — a mesma receita comprovada do border-beam. */
+  [data-glow] {
+    --border-size: calc(var(--border, 1.5) * 1px);
+    --spotlight-size: calc(var(--size, 260) * 1px);
+    --hue: calc(var(--base, 140) + (var(--xp, 0) * var(--spread, 110)));
+    position: relative;
+    border: 1px solid var(--line);
+  }
+  [data-glow]::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: var(--border-size);
+    background: radial-gradient(
+      var(--spotlight-size) var(--spotlight-size) at
+      calc(var(--x, -999) * 1px) calc(var(--y, -999) * 1px),
+      hsl(var(--hue) calc(var(--saturation, 80) * 1%) 62% / 0.95),
+      transparent 68%
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s var(--ease);
+    pointer-events: none;
+    z-index: 0;
+  }
+  [data-glow]:hover::before {
+    opacity: 1;
   }
 }
 

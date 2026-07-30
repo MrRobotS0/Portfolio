@@ -16,50 +16,67 @@ function TimelineColumn({
 }) {
   return (
     <Reveal>
-      <h3 className="font-display mb-6 flex items-center gap-2.5 text-[1.15rem] font-semibold text-txt-soft">
-        <Icon size={16} className="text-accent" />
+      <h3 className="font-display mb-7 flex items-center gap-2.5 text-[1.15rem] font-semibold text-txt-soft">
+        <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-line bg-surface text-accent">
+          <Icon size={15} />
+        </span>
         {heading}
       </h3>
-      {items.map((item, i) => (
-        <div
-          key={i}
-          className="relative border-l border-line pb-7 last:pb-0"
-          style={{ paddingLeft: "26px" }}
-        >
-          <span
-            className={cnDot(item.current)}
-            style={{ position: "absolute", left: "-5px", top: "5px" }}
-          />
-          <div
-            className={
-              "mono text-[0.76rem] " + (item.current ? "text-accent" : "text-txt-mut")
-            }
-          >
-            {item.date}
-          </div>
-          <h4 className="font-display mb-1.5 mt-[7px] flex flex-wrap items-center gap-2.5 text-[1.05rem] font-semibold">
-            {item.title}
-            {item.chip ? (
-              <span className="mono rounded-full border px-2 py-0.5 text-[0.58rem] font-medium tracking-[0.04em] text-accent" style={{ borderColor: "color-mix(in srgb, var(--accent) 32%, transparent)" }}>
-                {item.chip}
-              </span>
-            ) : null}
-          </h4>
-          <div className="mb-2 flex items-center gap-2 text-[0.88rem] font-medium text-txt-soft">
-            <WhereIcon size={13} className="text-txt-dim" />
-            {item.where}
-          </div>
-          <p className="text-[0.88rem] leading-[1.6] text-txt-mut">{item.desc}</p>
-        </div>
-      ))}
-    </Reveal>
-  );
-}
 
-function cnDot(current?: boolean) {
-  return (
-    "h-[9px] w-[9px] rounded-full " +
-    (current ? "bg-accent" : "bg-txt-dim")
+      <div className="relative">
+        {/* linha vertical em degradê verde -> azul */}
+        <span
+          aria-hidden
+          className="grad-line absolute bottom-3 left-[7px] top-2 w-px opacity-40"
+        />
+
+        {items.map((item, i) => (
+          <div key={i} className="relative pb-7 pl-8 last:pb-0">
+            {/* dot */}
+            <span
+              aria-hidden
+              className={
+                "absolute left-0 top-1.5 flex h-[15px] w-[15px] items-center justify-center rounded-full " +
+                (item.current ? "bg-accent" : "border border-line-2 bg-surface")
+              }
+              style={
+                item.current
+                  ? { boxShadow: "0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent)" }
+                  : undefined
+              }
+            >
+              {item.current ? (
+                <span className="h-[15px] w-[15px] animate-ping rounded-full bg-accent opacity-60" />
+              ) : (
+                <span className="h-1 w-1 rounded-full bg-txt-dim" />
+              )}
+            </span>
+
+            <div className="rounded-xl border border-line bg-surface/50 p-4 transition-colors hover:border-line-2">
+              <div className={"mono text-[0.76rem] " + (item.current ? "text-accent" : "text-txt-mut")}>
+                {item.date}
+              </div>
+              <h4 className="font-display mb-1.5 mt-1.5 flex flex-wrap items-center gap-2.5 text-[1.05rem] font-semibold">
+                {item.title}
+                {item.chip ? (
+                  <span
+                    className="mono rounded-full border px-2 py-0.5 text-[0.58rem] font-medium tracking-[0.04em] text-accent"
+                    style={{ borderColor: "color-mix(in srgb, var(--accent) 32%, transparent)" }}
+                  >
+                    {item.chip}
+                  </span>
+                ) : null}
+              </h4>
+              <div className="mb-2 flex items-center gap-2 text-[0.88rem] font-medium text-txt-soft">
+                <WhereIcon size={13} className="text-txt-dim" />
+                {item.where}
+              </div>
+              <p className="text-[0.88rem] leading-[1.6] text-txt-mut">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Reveal>
   );
 }
 
@@ -76,10 +93,7 @@ export function Timeline() {
 
         {/* CERTIFICAÇÕES */}
         <div className="mt-[72px]">
-          <SectionHeading
-            label="Certificações"
-            title="Cursos Complementares"
-          />
+          <SectionHeading label="Certificações" title="Cursos Complementares" />
 
           {certGroups.map((group, gi) => (
             <div key={group.source} className={gi > 0 ? "mt-6" : undefined}>
@@ -102,10 +116,8 @@ export function Timeline() {
                       style={
                         group.highlight
                           ? {
-                              borderColor:
-                                "color-mix(in srgb, var(--accent) 30%, transparent)",
-                              background:
-                                "color-mix(in srgb, var(--accent) 6%, transparent)",
+                              borderColor: "color-mix(in srgb, var(--accent) 30%, transparent)",
+                              background: "color-mix(in srgb, var(--accent) 6%, transparent)",
                             }
                           : undefined
                       }

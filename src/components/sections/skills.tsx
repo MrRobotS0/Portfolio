@@ -2,24 +2,21 @@ import { Code2, Server, Database, type LucideIcon } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/ui/reveal";
 import { TiltCard } from "@/components/ui/tilt-card";
-import { Marquee } from "@/components/ui/marquee";
-import { skillGroups, marqueeStack } from "@/data/skills";
+import OrbitingTechGlobe from "@/components/ui/orbiting-circles-02";
+import { skillGroups } from "@/data/skills";
 
 const ICONS: Record<string, LucideIcon> = { Code2, Server, Database };
 
 export function Skills() {
-  const half = Math.ceil(marqueeStack.length / 2);
-
   return (
     <section id="skills" className="relative py-20 md:py-[110px]">
       <div className="wrap">
         <SectionHeading label="04 — Stack" title="Habilidades & Ferramentas" />
       </div>
 
-      {/* marquee full-bleed */}
-      <Reveal className="mb-14 flex flex-col gap-4">
-        <Marquee items={marqueeStack.slice(0, half)} />
-        <Marquee items={marqueeStack.slice(half)} reverse />
+      {/* orbe orbital com as tecnologias */}
+      <Reveal className="mb-4 md:mb-8">
+        <OrbitingTechGlobe />
       </Reveal>
 
       <div className="wrap">

@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/ui/reveal";
-import { TiltCard } from "@/components/ui/tilt-card";
+import { GlowCard } from "@/components/ui/spotlight-card";
 import { projects } from "@/data/projects";
 import { cn } from "@/lib/utils";
 
@@ -65,7 +65,11 @@ export function Projects() {
                   p.featured && "md:col-span-2 lg:col-span-2"
                 )}
               >
-                <TiltCard href={p.href} beam className="h-full p-[26px]">
+                <GlowCard
+                  href={p.href}
+                  glowColor="accent"
+                  className="group h-full p-[26px]"
+                >
                   {p.featured ? (
                     <Icon
                       aria-hidden
@@ -73,7 +77,7 @@ export function Projects() {
                       className="pointer-events-none absolute -bottom-4 -right-3 z-0 h-[150px] w-[150px] text-accent opacity-[0.06]"
                     />
                   ) : null}
-                  <div className="relative z-10 flex h-full flex-col">
+                  <div className="relative z-10 flex h-full flex-1 flex-col">
                   <div className="flex items-center justify-between" style={{ marginBottom: "18px" }}>
                     <div className="flex h-[42px] w-[42px] items-center justify-center rounded-[11px] border border-line text-accent transition-colors group-hover:border-[color-mix(in_srgb,var(--accent)_35%,transparent)]">
                       <Icon size={18} />
@@ -133,7 +137,7 @@ export function Projects() {
                     ))}
                   </div>
                   </div>
-                </TiltCard>
+                </GlowCard>
               </Reveal>
             );
           })}
