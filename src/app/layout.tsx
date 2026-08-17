@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const display = Space_Grotesk({
@@ -23,13 +24,11 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 
-const SITE_URL = "https://belinelo.dev";
-
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Guilherme Belinelo — Full-Stack Developer",
-  description:
-    "Portfólio de Guilherme Belinelo — Desenvolvedor Full-Stack e Analista de Sistemas. C#/.NET, PHP, React, Python e bancos de dados relacionais.",
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  alternates: { canonical: "/" },
   keywords: [
     "Guilherme Belinelo",
     "Desenvolvedor Full-Stack",
@@ -42,19 +41,23 @@ export const metadata: Metadata = {
     "Python",
   ],
   authors: [{ name: "Guilherme Belinelo" }],
-  icons: { icon: "/logo.png" },
+  creator: "Guilherme Belinelo",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
   openGraph: {
-    title: "Guilherme Belinelo — Full-Stack Developer",
-    description: "Desenvolvedor Full-Stack & Analista de Sistemas.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     type: "website",
     locale: "pt_BR",
     url: SITE_URL,
-    siteName: "Belinelo.dev",
+    siteName: SITE_NAME,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Guilherme Belinelo — Full-Stack Developer",
-    description: "Desenvolvedor Full-Stack & Analista de Sistemas.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
   },
 };
 
