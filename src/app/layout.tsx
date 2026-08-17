@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -79,7 +80,10 @@ export default function RootLayout({
       className={`${display.variable} ${sans.variable} ${mono.variable} dark`}
       suppressHydrationWarning
     >
-      <body className="grain">{children}</body>
+      <body className="grain">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
