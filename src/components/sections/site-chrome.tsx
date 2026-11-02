@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Github, Linkedin, Mail, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -97,16 +96,8 @@ export function SiteChrome() {
         <div className="wrap flex items-center justify-between">
           <a
             href="#hero"
-            className="font-display flex items-center gap-3 text-base font-semibold text-txt"
+            className="font-display flex items-center text-base font-semibold text-txt"
           >
-            <Image
-              src="/logo.png"
-              alt="Belinelo.dev"
-              width={32}
-              height={32}
-              className="h-8 w-8 rounded-[9px]"
-              priority
-            />
             <span>
               Belinelo<span className="text-accent">.dev</span>
             </span>

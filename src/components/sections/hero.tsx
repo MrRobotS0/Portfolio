@@ -36,15 +36,8 @@ export function Hero() {
 
       <div className="wrap relative z-[1] grid grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_1fr] lg:gap-4">
         <div className="relative z-[2]">
-          <div style={delay(0.15)} className="hero-in mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-surface/60 py-1.5 pl-2.5 pr-3.5 text-[0.78rem] text-txt-soft">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
-            </span>
-            Disponível para novos projetos
-          </div>
 
-          <p style={delay(0.25)} className="hero-in mono mb-4 text-[0.92rem] text-accent">
+          <p style={delay(0.15)} className="hero-in mono mb-4 text-[0.92rem] text-accent">
             {"// olá, eu sou"}
           </p>
 
