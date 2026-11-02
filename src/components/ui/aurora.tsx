@@ -2,7 +2,8 @@ import { cn } from "@/lib/utils";
 
 /**
  * Fundo Aurora — blobs de luz animados na cor da seção (--accent / --accent-2).
- * Usa apenas transform/opacity + blur (performático). Respeita reduced-motion via CSS global.
+ * Só transform animado (compositor). Sem filter: blur — o degradê radial já
+ * é suave, e blur em blob animado custa uma passada de GPU por frame. Respeita reduced-motion via CSS global.
  */
 export function Aurora({ className }: { className?: string }) {
   return (
@@ -15,7 +16,7 @@ export function Aurora({ className }: { className?: string }) {
     >
       {/* blob principal — verde/accent */}
       <div
-        className="animate-aurora absolute left-[-6%] top-[10%] h-[520px] w-[520px] rounded-full blur-[60px]"
+        className="animate-aurora absolute left-[-6%] top-[10%] h-[520px] w-[520px] rounded-full will-change-transform"
         style={{
           background:
             "radial-gradient(circle, color-mix(in srgb, var(--accent) 30%, transparent), transparent 66%)",
@@ -24,7 +25,7 @@ export function Aurora({ className }: { className?: string }) {
       />
       {/* blob secundário — azul/accent-2 */}
       <div
-        className="animate-aurora absolute right-[-8%] top-[38%] h-[460px] w-[460px] rounded-full blur-[60px] [animation-delay:-6s] [animation-duration:22s]"
+        className="animate-aurora absolute right-[-8%] top-[38%] h-[460px] w-[460px] rounded-full will-change-transform [animation-delay:-6s] [animation-duration:22s]"
         style={{
           background:
             "radial-gradient(circle, color-mix(in srgb, var(--accent-2) 26%, transparent), transparent 66%)",
@@ -33,7 +34,7 @@ export function Aurora({ className }: { className?: string }) {
       />
       {/* brilho central sutil */}
       <div
-        className="animate-aurora absolute left-1/2 top-1/2 h-[360px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[80px] [animation-delay:-11s] [animation-duration:26s]"
+        className="animate-aurora absolute left-1/2 top-1/2 h-[360px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full will-change-transform [animation-delay:-11s] [animation-duration:26s]"
         style={{
           background:
             "radial-gradient(circle, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%)",

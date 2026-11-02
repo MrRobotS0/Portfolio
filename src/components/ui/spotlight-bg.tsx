@@ -23,7 +23,7 @@ export function SpotlightBg({ className }: { className?: string }) {
       />
       {/* brilho de realce bem sutil no centro-topo */}
       <div
-        className="absolute left-1/2 top-0 h-[420px] w-[820px] -translate-x-1/2 -translate-y-1/3 rounded-full blur-[90px]"
+        className="absolute left-1/2 top-0 h-[420px] w-[820px] -translate-x-1/2 -translate-y-1/3 rounded-full"
         style={{
           background:
             "radial-gradient(circle, color-mix(in srgb, var(--accent) 14%, transparent), transparent 68%)",

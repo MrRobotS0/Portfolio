@@ -68,7 +68,7 @@ export function Projects() {
                 <GlowCard
                   href={p.href}
                   glowColor="accent"
-                  className="group h-full p-[26px]"
+                  className="group h-full p-[22px] sm:p-[26px]"
                 >
                   {p.featured ? (
                     <Icon

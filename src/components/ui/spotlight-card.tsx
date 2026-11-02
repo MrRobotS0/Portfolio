@@ -49,9 +49,8 @@ const GlowCard: React.FC<GlowCardProps> = ({
     "--border": "1.5",
     "--size": "260",
     "--saturation": "75",
-    backgroundColor: "hsl(240 6% 6.7% / 0.92)",
+    backgroundColor: "var(--surface)",
     position: "relative",
-    touchAction: "none",
   } as React.CSSProperties;
 
   const common = {
@@ -59,7 +58,7 @@ const GlowCard: React.FC<GlowCardProps> = ({
     "data-glow": true,
     onPointerMove: syncPointer,
     style,
-    className: `relative flex flex-col rounded-[14px] backdrop-blur-[3px] ${className}`,
+    className: `relative flex flex-col rounded-[14px] transition-transform duration-300 ease-out hover:-translate-y-1 ${className}`,
   };
 
   if (href) {

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import type { IconType } from "react-icons";
 import {
   SiReact,
@@ -34,7 +34,7 @@ interface Orbit {
 
 const orbits: Orbit[] = [
   {
-    size: "w-[20rem] h-[20rem] md:w-[29rem] md:h-[29rem]",
+    size: "w-[17rem] h-[17rem] sm:w-[20rem] sm:h-[20rem] md:w-[29rem] md:h-[29rem]",
     duration: 34,
     icons: [
       { Icon: SiReact, label: "React" },
@@ -44,7 +44,7 @@ const orbits: Orbit[] = [
     ],
   },
   {
-    size: "w-[28rem] h-[28rem] md:w-[40rem] md:h-[40rem]",
+    size: "w-[24rem] h-[24rem] sm:w-[28rem] sm:h-[28rem] md:w-[40rem] md:h-[40rem]",
     duration: 46,
     icons: [
       { Icon: SiSharp, label: "C#" },
@@ -55,7 +55,7 @@ const orbits: Orbit[] = [
     ],
   },
   {
-    size: "w-[36rem] h-[36rem] md:w-[51rem] md:h-[51rem]",
+    size: "w-[31rem] h-[31rem] sm:w-[36rem] sm:h-[36rem] md:w-[51rem] md:h-[51rem]",
     duration: 58,
     icons: [
       { Icon: SiPython, label: "Python" },
@@ -69,8 +69,24 @@ const orbits: Orbit[] = [
 ];
 
 export default function OrbitingTechGlobe() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [running, setRunning] = useState(false);
+
+  // 30 animações infinitas não precisam girar enquanto a seção está fora da tela
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([entry]) => setRunning(entry.isIntersecting));
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <div className="relative flex h-[21rem] w-full justify-center overflow-hidden md:h-[29rem]">
+    <div
+      ref={ref}
+      className="relative flex h-[19rem] w-full justify-center overflow-hidden sm:h-[21rem] md:h-[29rem]"
+      style={{ "--orbit-state": running ? "running" : "paused" } as React.CSSProperties}
+    >
       <style>{`
         @keyframes orbit-cw {
           from { transform: rotate(var(--start-angle)) }
@@ -117,6 +133,7 @@ export default function OrbitingTechGlobe() {
                     {
                       "--start-angle": `${angle}deg`,
                       animation: `${orbitAnim} ${orbit.duration}s linear infinite`,
+                      animationPlayState: "var(--orbit-state)",
                     } as React.CSSProperties
                   }
                 >
@@ -126,18 +143,19 @@ export default function OrbitingTechGlobe() {
                       {
                         "--counter-offset": `${-angle}deg`,
                         animation: `${counterAnim} ${orbit.duration}s linear infinite`,
+                        animationPlayState: "var(--orbit-state)",
                       } as React.CSSProperties
                     }
                   >
-                    <span className="mono whitespace-nowrap rounded bg-bg/70 px-1.5 text-[0.6rem] leading-none text-txt-mut backdrop-blur-sm">
+                    <span className="mono whitespace-nowrap rounded bg-bg/90 px-1.5 py-0.5 text-[0.6rem] leading-none text-txt-mut">
                       {label}
                     </span>
                     <div
-                      className="group relative z-10 flex items-center justify-center rounded-full border border-line bg-surface p-2.5 text-txt-soft transition-colors duration-300 hover:border-line-2 hover:text-txt md:p-3"
+                      className="group relative z-10 flex items-center justify-center rounded-full border border-line bg-surface p-2 text-txt-soft sm:p-2.5 transition-colors duration-300 hover:border-line-2 hover:text-txt md:p-3"
                       title={label}
                       aria-label={label}
                     >
-                      <Icon className="h-5 w-5 md:h-7 md:w-7" />
+                      <Icon className="h-4 w-4 sm:h-5 sm:w-5 md:h-7 md:w-7" />
                     </div>
                   </div>
                 </div>

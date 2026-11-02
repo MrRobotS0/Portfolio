@@ -30,7 +30,6 @@ export const projects: Project[] = [
     tags: ["Flutter", "Azure", "ASP.NET API", "C#"],
     badge: "Acadêmico",
     icon: "ThermometerSnowflake",
-    href: "https://github.com/Sonegodev/termosense",
   },
   {
     idx: "03",
